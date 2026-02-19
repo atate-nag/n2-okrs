@@ -1,0 +1,152 @@
+{
+  "bus": [
+    {
+      "id": "n2",
+      "name": "N2 Group",
+      "objectives": [
+        {
+          "id": "o1",
+          "text": "Group-level alignment on targets, plans, OKRs",
+          "krs": [
+            {
+              "id": "kr1",
+              "desc": "All BUs produce aligned targets by start of financial year FY26-27",
+              "owner": "Adrian T",
+              "conf": "50%",
+              "prog": "0%"
+            }
+          ]
+        },
+        {
+          "id": "o2",
+          "text": "e1 GTM definition and progress",
+          "krs": [
+            {
+              "id": "kr2",
+              "desc": "VSMS (HCLS) produces 5 managed service qualified leads and 1 pilot secured",
+              "owner": "Jake",
+              "conf": "50%",
+              "prog": "0%"
+            }
+          ]
+        },
+        {
+          "id": "o3",
+          "text": "Innovation: increase coordination and opportunity development across all BUs",
+          "krs": [
+            {
+              "id": "kr3",
+              "desc": "At least 3 inter-BU ideas tested and 1 inter-BU discovery pilot secured",
+              "owner": "Ian",
+              "conf": "50%",
+              "prog": "0%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bioteam",
+      "name": "BioTeam",
+      "objectives": [
+        {
+          "id": "o4",
+          "text": "Align BioTeam Core (C2) BD, consulting and PM arms",
+          "krs": [
+            {
+              "id": "kr4",
+              "desc": "Close $1,125m of new business",
+              "owner": "Jennifer W",
+              "conf": "50%",
+              "prog": "8%"
+            },
+            {
+              "id": "kr5",
+              "desc": "Each Catalyst team concludes with clear recommendation of forward path",
+              "owner": "Michelle",
+              "conf": "50%",
+              "prog": "20%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bismarck",
+      "name": "Bismarck",
+      "objectives": [
+        {
+          "id": "o5",
+          "text": "Grow X-ISS Managed Service Business (C2)",
+          "krs": [
+            {
+              "id": "kr6",
+              "desc": "Secure total revenue of $900k",
+              "owner": "Deepak",
+              "conf": "55%",
+              "prog": "15%"
+            }
+          ]
+        },
+        {
+          "id": "o6",
+          "text": "Stabilise and focus Professional Services Business (C2)",
+          "krs": [
+            {
+              "id": "kr7",
+              "desc": "Close £200k of new PS business",
+              "owner": "Matt S",
+              "conf": "50%",
+              "prog": "0%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stac",
+      "name": "STAC",
+      "objectives": [
+        {
+          "id": "o7",
+          "text": "Align STAC growth plans and financial / operational structures",
+          "krs": [
+            {
+              "id": "kr8",
+              "desc": "Complete C1 proposal by February 26th, review and recommendations by March 14th",
+              "owner": "Jack",
+              "conf": "60%",
+              "prog": "40%"
+            },
+            {
+              "id": "kr9",
+              "desc": "Close audit revenue of $350k",
+              "owner": "Jack",
+              "conf": "50%",
+              "prog": "0%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nag",
+      "name": "nAG",
+      "objectives": [
+        {
+          "id": "o8",
+          "text": "Retain customers and revenue while pursuing product exploration and optimisations",
+          "krs": [
+            {
+              "id": "kr10",
+              "desc": "Combined product revenue of £1.65m",
+              "owner": "Adrian S",
+              "conf": "50%",
+              "prog": "0%"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
