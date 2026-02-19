@@ -29,6 +29,14 @@
   .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px 60px; }
   .loading { text-align: center; padding: 60px; color: var(--text-light); }
   
+  .setup-box { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 16px; margin-bottom: 24px; font-size: 13px; }
+  .setup-box h3 { color: #1565c0; margin-bottom: 8px; font-size: 14px; }
+  .setup-box p { margin: 6px 0; line-height: 1.5; }
+  .setup-box input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; margin: 8px 0; font-family: monospace; font-size: 12px; }
+  .setup-box button { background: var(--navy); color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px; }
+  .setup-box button:hover { background: #2a3f6a; }
+  .setup-box .secondary { background: #e0e0e0; color: #333; }
+  
   .bu-section { margin-bottom: 28px; border-radius: 12px; overflow: hidden; background: var(--white); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
   .bu-header { display: flex; align-items: center; gap: 16px; padding: 16px 24px; }
   .bu-header img { height: 32px; max-width: 130px; object-fit: contain; }
@@ -85,11 +93,7 @@
   .save-status.saved { color: var(--green); background: var(--green-bg); }
   .save-status.saving { color: var(--amber); background: var(--amber-bg); }
   .save-status.error { color: var(--red); background: var(--red-bg); }
-  
-  .setup-box { background: #fffde7; border: 1px solid #ffd54f; border-radius: 8px; padding: 16px; margin-bottom: 24px; }
-  .setup-box h3 { color: #f57f17; margin-bottom: 8px; font-size: 14px; }
-  .setup-box p { font-size: 13px; margin: 4px 0; }
-  .setup-box button { background: var(--navy); color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-top: 8px; }
+  .save-status.local { color: var(--blue); background: #e3f2fd; }
 </style>
 </head>
 <body>
@@ -102,17 +106,22 @@
 </div>
 <div class="container">
   <div id="setup-box" class="setup-box" style="display:none;">
-    <h3>⚡ First-time setup</h3>
-    <p>Click below to create your cloud storage. This only needs to be done once.</p>
-    <button onclick="createBlob()">Create Cloud Storage</button>
+    <h3>🔧 GitHub Storage Setup (one-time, 2 min)</h3>
+    <p>To save changes to GitHub, you need a Personal Access Token:</p>
+    <p>1. Go to <a href="https://github.com/settings/tokens/new" target="_blank">GitHub → Settings → Tokens → New token (classic)</a></p>
+    <p>2. Name it "OKR Dashboard", select <strong>repo</strong> scope, click Generate</p>
+    <p>3. Copy the token and paste below:</p>
+    <input type="password" id="github-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+    <p>4. Enter your repo details (e.g., <code>yourusername/n2-okrs</code>):</p>
+    <input type="text" id="github-repo" placeholder="username/repo-name">
+    <br>
+    <button onclick="saveGitHubConfig()">Save & Connect</button>
+    <button class="secondary" onclick="document.getElementById('setup-box').style.display='none'">Skip (local only)</button>
+    <p style="margin-top:12px;font-size:11px;color:#666;">Token is stored in your browser only, never sent anywhere except GitHub.</p>
   </div>
   <div id="app"><div class="loading">Loading...</div></div>
 </div>
 <script>
-// jsonblob.com API
-const JSONBLOB_API = 'https://jsonblob.com/api/jsonBlob';
-let BLOB_ID = localStorage.getItem('n2_jsonblob_id') || null;
-
 const LOGOS = {
   n2: "data:image/png;base64,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",
   bioteam: "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20xmlns%3Axlink%3D%22http%3A//www.w3.org/1999/xlink%22%20id%3D%22Layer_1%22%20x%3D%220px%22%20y%3D%220px%22%20viewBox%3D%220%200%202540%202000%22%20style%3D%22enable-background%3Anew%200%200%202540%202000%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cstyle%20type%3D%22text/css%22%3E%09.st0%7Bfill%3A%23FFFFFF%3B%7D%09.st1%7Bfill%3A%23263B8C%3B%7D%09.st2%7Bfill%3A%23BAC9CE%3B%7D%09.st3%7Bfill%3A%232AC9E6%3B%7D%09.st4%7Bfill%3A%237097C7%3B%7D%3C/style%3E%3Cg%3E%09%3Cg%3E%09%09%3Crect%20x%3D%2213.8%22%20y%3D%22435.8%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%2213.8%22%20y%3D%22435.8%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%2213.8%22%20y%3D%22610.9%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%2213.8%22%20y%3D%22610.9%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%2213.8%22%20y%3D%22693.4%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%2213.8%22%20y%3D%22693.4%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%2213.8%22%20y%3D%22920%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%2213.8%22%20y%3D%22920.1%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22260.6%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22260.6%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22435.8%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22435.8%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22518.2%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22518.2%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22662.5%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22662.5%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22951%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22951%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22126.7%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%22518.7%22%20y%3D%22126.7%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%22126.7%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%22126.7%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%22312.1%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%22312.1%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%22744.9%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%22744.9%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%22868.5%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%22868.5%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%223%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221054.4%22%20y%3D%223%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22209.1%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22209.1%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22466.7%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22466.7%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22641.9%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22641.9%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22951%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22951%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22126.7%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%221569.6%22%20y%3D%22126.7%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%222053.9%22%20y%3D%22569.7%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%222053.9%22%20y%3D%22569.7%22%20class%3D%22st2%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%222053.9%22%20y%3D%22714%22%20class%3D%22st1%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%222053.9%22%20y%3D%22796.4%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%222053.9%22%20y%3D%22796.4%22%20class%3D%22st3%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%222053.9%22%20y%3D%22951%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%09%3Crect%20x%3D%222053.9%22%20y%3D%22951%22%20class%3D%22st4%22%20width%3D%22412.1%22%20height%3D%2251.5%22%3E%3C/rect%3E%09%3C/g%3E%09%3Cg%3E%09%09%3Cpath%20class%3D%22st1%22%20d%3D%22M205.6%2C1198.9c46.3%2C0%2C82.6%2C10%2C108.7%2C30c26.1%2C20%2C39.2%2C50.1%2C39.2%2C90.1c0%2C19.7-6.3%2C37.3-18.7%2C52.9%20%20%20c-12.5%2C15.5-29%2C27.1-49.5%2C34.6c26.6%2C5.7%2C47.7%2C18.8%2C63.1%2C39.3c15.4%2C20.5%2C23.2%2C44.4%2C23.2%2C71.6c0%2C40.7-13.2%2C71.7-39.6%2C93.1%20%20%20c-26.4%2C21.5-62.2%2C32.2-107.3%2C32.2H11.1v-38.4l49.7-8.5v-349.7l-49.7-8.5v-38.7h49.7H205.6z%20M120.9%2C1387.6h100.3%20%20%20c21.5-0.6%2C39-7%2C52.3-19.2c13.3-12.2%2C20-29.1%2C20-50.6c0-24-7.5-41.9-22.6-53.8c-15-11.9-36.8-17.8-65.2-17.8h-84.8V1387.6z%20%20%20%20M120.9%2C1434.5v161.3h103.7c27.4%2C0%2C48.7-6.7%2C63.9-20.3c15.1-13.5%2C22.7-32.7%2C22.7-57.5c0-26-6.4-46.4-19.1-61.3%20%20%20c-12.7-14.8-32.2-22.3-58.4-22.3H120.9z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st1%22%20d%3D%22M435.4%2C1604.3l49.7-8.5v-235.7l-49.7-8.5v-38.7h109.7v282.9l49.7%2C8.5v38.4H435.4V1604.3z%20M545.1%2C1228.5h-60.1%20%20%20v-61.3h60.1V1228.5z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st1%22%20d%3D%22M648.3%2C1474.8c0-48.8%2C13.2-89%2C39.6-120.6c26.4-31.6%2C62.3-47.4%2C107.6-47.4c45.5%2C0%2C81.5%2C15.8%2C108.1%2C47.3%20%20%20c26.5%2C31.5%2C39.8%2C71.7%2C39.8%2C120.7v6.7c0%2C49.2-13.2%2C89.4-39.6%2C120.7c-26.4%2C31.3-62.3%2C46.9-107.6%2C46.9c-45.7%2C0-81.8-15.7-108.2-47.1%20%20%20c-26.4-31.4-39.6-71.6-39.6-120.6V1474.8z%20M708.4%2C1481.5c0%2C35%2C7.4%2C63.8%2C22.1%2C86.6c14.7%2C22.8%2C36.6%2C34.1%2C65.7%2C34.1%20%20%20c28.5%2C0%2C50.1-11.4%2C64.9-34.1c14.8-22.8%2C22.3-51.6%2C22.3-86.6v-6.7c0-34.5-7.4-63.3-22.3-86.3c-14.8-23-36.7-34.4-65.5-34.4%20%20%20c-28.9%2C0-50.6%2C11.5-65.2%2C34.4c-14.6%2C23-22%2C51.7-22%2C86.3V1481.5z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st1%22%20d%3D%22M1291.4%2C1198.9v96.5h-51.2l-4.6-49.2h-98.5v349.7l49.7%2C8.5v38.4h-159.4v-38.4l49.7-8.5v-349.7h-98.8%20%20%20l-4.3%2C49.2h-51.5v-96.5H1291.4z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st1%22%20d%3D%22M1423.6%2C1649.2c-45.9%2C0-82.5-15.3-109.6-45.9c-27.1-30.6-40.7-70.3-40.7-119v-13.4c0-46.9%2C14-86%2C41.9-117.2%20%20%20c27.9-31.2%2C61-46.8%2C99.2-46.8c44.3%2C0%2C77.9%2C13.4%2C100.7%2C40.2c22.9%2C26.8%2C34.3%2C62.6%2C34.3%2C107.3v37.5h-214l-0.9%2C1.5%20%20%20c0.6%2C31.7%2C8.6%2C57.8%2C24.1%2C78.2c15.4%2C20.4%2C37.1%2C30.6%2C64.9%2C30.6c20.3%2C0%2C38.2-2.9%2C53.5-8.7c15.3-5.8%2C28.6-13.8%2C39.8-23.9l23.5%2C39%20%20%20c-11.8%2C11.4-27.4%2C21-46.8%2C28.8C1474.1%2C1645.3%2C1450.8%2C1649.2%2C1423.6%2C1649.2z%20M1414.5%2C1354.1c-20.1%2C0-37.3%2C8.5-51.5%2C25.5%20%20%20c-14.2%2C17-23%2C38.3-26.2%2C63.9l0.6%2C1.5h152.1v-7.9c0-23.6-6.3-43.3-18.9-59.1C1457.9%2C1362%2C1439.2%2C1354.1%2C1414.5%2C1354.1z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st1%22%20d%3D%22M1832.6%2C1642.8c-1.8-8.9-3.3-17-4.3-24.1c-1-7.1-1.7-14.2-2.1-21.3c-11.6%2C14.8-26.1%2C27.2-43.4%2C37%20%20%20c-17.4%2C9.9-35.9%2C14.8-55.6%2C14.8c-34.4%2C0-60.5-8.4-78.4-25.1c-17.9-16.8-26.8-40.4-26.8-70.9c0-31.3%2C12.7-55.4%2C38-72.4%20%20%20c25.3-17%2C60-25.5%2C104.1-25.5h61.9v-38.4c0-19.3-6.1-34.6-18.3-45.9c-12.2-11.3-29.2-16.9-50.9-16.9c-15%2C0-28.3%2C1.9-39.8%2C5.8%20%20%20c-11.5%2C3.9-20.8%2C9.1-27.9%2C15.8l-6.4%2C34.8h-46.3v-64c15-12%2C33.2-21.6%2C54.6-28.8s44.5-10.8%2C69.5-10.8c37.4%2C0%2C67.7%2C9.6%2C90.8%2C28.7%20%20%20c23.2%2C19.1%2C34.8%2C46.4%2C34.8%2C82v158.8c0%2C4.3%2C0.1%2C8.4%2C0.2%2C12.5c0.1%2C4.1%2C0.4%2C8.1%2C0.8%2C12.2l24.4%2C3.4v38.4H1832.6z%20M1736%2C1598.9%20%20%20c19.9%2C0%2C38.1-4.8%2C54.6-14.3c16.5-9.6%2C28.2-21%2C35.4-34.4v-54.3h-64c-24.6%2C0-44%2C5.7-58.4%2C17.1c-14.3%2C11.4-21.5%2C25.2-21.5%2C41.5%20%20%20c0%2C14.4%2C4.5%2C25.5%2C13.4%2C33.1C1704.4%2C1595%2C1717.9%2C1598.9%2C1736%2C1598.9z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st1%22%20d%3D%22M1975.6%2C1604.3l49.7-8.5v-235.7l-49.7-8.5v-38.7h103.7l4%2C43c10.6-15.6%2C24.2-27.7%2C40.9-36.3%20%20%20c16.7-8.5%2C36-12.8%2C57.9-12.8c21.9%2C0%2C40.8%2C5.1%2C56.5%2C15.2c15.8%2C10.2%2C27.6%2C25.4%2C35.5%2C45.7c10.4-18.7%2C24.1-33.5%2C41.2-44.5%20%20%20c17.1-11%2C37-16.5%2C59.8-16.5c33.7%2C0%2C60.4%2C11.5%2C79.9%2C34.6c19.5%2C23.1%2C29.3%2C57.8%2C29.3%2C104.1v150.3l49.7%2C8.5v38.4H2374v-38.4l49.7-8.5%20%20%20v-150.9c0-32.5-5.6-55.5-16.8-69c-11.2-13.5-27.7-20.3-49.7-20.3c-20.9%2C0-37.8%2C7.4-50.5%2C22.1c-12.7%2C14.7-20.1%2C33.3-22.1%2C55.6%20%20%20v162.5l49.7%2C8.5v38.4H2175v-38.4l49.7-8.5v-150.9c0-30.9-5.7-53.5-17.2-67.8c-11.5-14.3-28.1-21.5-49.8-21.5%20%20%20c-18.3%2C0-33.3%2C3.8-45.1%2C11.3c-11.8%2C7.5-20.8%2C18.1-27.1%2C31.7v197.2l49.7%2C8.5v38.4h-159.4V1604.3z%22%3E%3C/path%3E%09%3C/g%3E%09%3Cg%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M138.1%2C1941H53l-19.1%2C53.2H6.2L83.8%2C1791h23.4l77.7%2C203.2h-27.5L138.1%2C1941z%20M61.1%2C1919.1h69.1l-34.6-95%20%20%20L61.1%2C1919.1z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M271.5%2C1975.9c9.2%2C0%2C17.3-2.8%2C24.1-8.4c6.9-5.6%2C10.7-12.6%2C11.4-20.9h24.4c-0.5%2C8.7-3.4%2C16.9-8.9%2C24.7%20%20%20c-5.5%2C7.8-12.8%2C14-22%2C18.7c-9.2%2C4.6-18.9%2C7-29.1%2C7c-20.6%2C0-36.9-6.9-49-20.6c-12.1-13.7-18.2-32.5-18.2-56.3v-4.3%20%20%20c0-14.7%2C2.7-27.8%2C8.1-39.2c5.4-11.4%2C13.1-20.3%2C23.2-26.7s22-9.5%2C35.8-9.5c16.9%2C0%2C31%2C5.1%2C42.2%2C15.2c11.2%2C10.1%2C17.2%2C23.3%2C17.9%2C39.5%20%20%20h-24.4c-0.8-9.8-4.4-17.8-11.1-24.1c-6.7-6.3-14.9-9.4-24.6-9.4c-13.1%2C0-23.3%2C4.7-30.5%2C14.2c-7.2%2C9.5-10.8%2C23.1-10.8%2C41v4.9%20%20%20c0%2C17.4%2C3.6%2C30.8%2C10.7%2C40.2C247.9%2C1971.2%2C258.2%2C1975.9%2C271.5%2C1975.9z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M427.9%2C1975.9c9.2%2C0%2C17.3-2.8%2C24.1-8.4c6.9-5.6%2C10.7-12.6%2C11.4-20.9h24.4c-0.5%2C8.7-3.4%2C16.9-8.9%2C24.7%20%20%20c-5.5%2C7.8-12.8%2C14-22%2C18.7c-9.2%2C4.6-18.9%2C7-29.1%2C7c-20.6%2C0-36.9-6.9-49-20.6c-12.1-13.7-18.2-32.5-18.2-56.3v-4.3%20%20%20c0-14.7%2C2.7-27.8%2C8.1-39.2c5.4-11.4%2C13.1-20.3%2C23.2-26.7s22-9.5%2C35.8-9.5c16.9%2C0%2C31%2C5.1%2C42.2%2C15.2c11.2%2C10.1%2C17.2%2C23.3%2C17.9%2C39.5%20%20%20h-24.4c-0.8-9.8-4.4-17.8-11.1-24.1c-6.7-6.3-14.9-9.4-24.6-9.4c-13.1%2C0-23.3%2C4.7-30.5%2C14.2c-7.2%2C9.5-10.8%2C23.1-10.8%2C41v4.9%20%20%20c0%2C17.4%2C3.6%2C30.8%2C10.7%2C40.2C404.3%2C1971.2%2C414.5%2C1975.9%2C427.9%2C1975.9z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M586.1%2C1997c-20.5%2C0-37.1-6.7-50-20.2c-12.8-13.4-19.3-31.4-19.3-53.9v-4.7c0-15%2C2.9-28.4%2C8.6-40.1%20%20%20c5.7-11.8%2C13.7-21%2C24-27.6c10.3-6.6%2C21.4-10%2C33.4-10c19.6%2C0%2C34.9%2C6.5%2C45.8%2C19.4c10.9%2C12.9%2C16.3%2C31.5%2C16.3%2C55.5v10.7H542.7%20%20%20c0.4%2C14.9%2C4.7%2C26.9%2C13%2C36.1c8.3%2C9.2%2C18.9%2C13.7%2C31.8%2C13.7c9.1%2C0%2C16.8-1.9%2C23.2-5.6c6.3-3.7%2C11.9-8.7%2C16.6-14.8l15.8%2C12.3%20%20%20C630.3%2C1987.2%2C611.4%2C1997%2C586.1%2C1997z%20M582.9%2C1861.6c-10.4%2C0-19.2%2C3.8-26.2%2C11.4c-7.1%2C7.6-11.4%2C18.2-13.1%2C31.9h75.6v-2%20%20%20c-0.7-13.1-4.3-23.3-10.6-30.5S593.6%2C1861.6%2C582.9%2C1861.6z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M709.2%2C1994.2h-25.8v-214.4h25.8V1994.2z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M818.2%2C1997c-20.5%2C0-37.1-6.7-50-20.2c-12.8-13.4-19.3-31.4-19.3-53.9v-4.7c0-15%2C2.9-28.4%2C8.6-40.1%20%20%20c5.7-11.8%2C13.7-21%2C24-27.6c10.3-6.6%2C21.4-10%2C33.4-10c19.6%2C0%2C34.9%2C6.5%2C45.8%2C19.4c10.9%2C12.9%2C16.3%2C31.5%2C16.3%2C55.5v10.7H774.8%20%20%20c0.4%2C14.9%2C4.7%2C26.9%2C13%2C36.1c8.3%2C9.2%2C18.9%2C13.7%2C31.8%2C13.7c9.1%2C0%2C16.8-1.9%2C23.2-5.6c6.3-3.7%2C11.9-8.7%2C16.6-14.8l15.8%2C12.3%20%20%20C862.4%2C1987.2%2C843.5%2C1997%2C818.2%2C1997z%20M814.9%2C1861.6c-10.4%2C0-19.2%2C3.8-26.2%2C11.4c-7.1%2C7.6-11.4%2C18.2-13.1%2C31.9h75.6v-2%20%20%20c-0.7-13.1-4.3-23.3-10.6-30.5C834.3%2C1865.2%2C825.7%2C1861.6%2C814.9%2C1861.6z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M987.1%2C1866.3c-3.9-0.6-8.1-1-12.7-1c-16.9%2C0-28.4%2C7.2-34.5%2C21.6v107.2h-25.8v-151h25.1l0.4%2C17.4%20%20%20c8.5-13.5%2C20.5-20.2%2C36-20.2c5%2C0%2C8.8%2C0.7%2C11.4%2C1.9V1866.3z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M1109.7%2C1994.2c-1.5-3-2.7-8.3-3.6-15.9c-12%2C12.5-26.3%2C18.7-43%2C18.7c-14.9%2C0-27.1-4.2-36.6-12.6%20%20%20c-9.5-8.4-14.3-19.1-14.3-32c0-15.7%2C6-27.9%2C17.9-36.6c12-8.7%2C28.8-13%2C50.5-13h25.1v-11.9c0-9-2.7-16.2-8.1-21.6%20%20%20c-5.4-5.3-13.4-8-23.9-8c-9.2%2C0-16.9%2C2.3-23.2%2C7c-6.2%2C4.6-9.3%2C10.3-9.3%2C16.9h-26c0-7.5%2C2.7-14.8%2C8-21.8c5.4-7%2C12.6-12.6%2C21.8-16.7%20%20%20c9.2-4.1%2C19.2-6.1%2C30.2-6.1c17.4%2C0%2C31%2C4.3%2C40.9%2C13c9.9%2C8.7%2C15%2C20.7%2C15.3%2C35.9v69.5c0%2C13.9%2C1.8%2C24.9%2C5.3%2C33.1v2.2H1109.7z%20%20%20%20M1066.9%2C1974.5c8.1%2C0%2C15.8-2.1%2C23-6.3c7.3-4.2%2C12.5-9.6%2C15.8-16.3v-31h-20.2c-31.6%2C0-47.5%2C9.2-47.5%2C27.8c0%2C8.1%2C2.7%2C14.4%2C8.1%2C19%20%20%20C1051.4%2C1972.2%2C1058.4%2C1974.5%2C1066.9%2C1974.5z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M1212.1%2C1806.6v36.6h28.2v20h-28.2v93.7c0%2C6.1%2C1.3%2C10.6%2C3.8%2C13.6c2.5%2C3%2C6.8%2C4.5%2C12.8%2C4.5%20%20%20c3%2C0%2C7.1-0.6%2C12.3-1.7v20.8c-6.8%2C1.9-13.4%2C2.8-19.8%2C2.8c-11.5%2C0-20.2-3.5-26.1-10.5c-5.9-7-8.8-16.9-8.8-29.7v-93.6h-27.5v-20%20%20%20h27.5v-36.6H1212.1z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M1333.6%2C1997c-20.5%2C0-37.1-6.7-50-20.2c-12.8-13.4-19.3-31.4-19.3-53.9v-4.7c0-15%2C2.9-28.4%2C8.6-40.1%20%20%20c5.7-11.8%2C13.7-21%2C24-27.6c10.3-6.6%2C21.4-10%2C33.4-10c19.6%2C0%2C34.9%2C6.5%2C45.8%2C19.4c10.9%2C12.9%2C16.3%2C31.5%2C16.3%2C55.5v10.7h-102.3%20%20%20c0.4%2C14.9%2C4.7%2C26.9%2C13%2C36.1c8.3%2C9.2%2C18.9%2C13.7%2C31.8%2C13.7c9.1%2C0%2C16.8-1.9%2C23.2-5.6c6.3-3.7%2C11.9-8.7%2C16.6-14.8l15.8%2C12.3%20%20%20C1377.9%2C1987.2%2C1358.9%2C1997%2C1333.6%2C1997z%20M1330.4%2C1861.6c-10.4%2C0-19.2%2C3.8-26.2%2C11.4c-7.1%2C7.6-11.4%2C18.2-13.1%2C31.9h75.6v-2%20%20%20c-0.7-13.1-4.3-23.3-10.6-30.5S1341.2%2C1861.6%2C1330.4%2C1861.6z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M1571.3%2C1903.6c-23-6.6-39.7-14.7-50.2-24.3c-10.5-9.6-15.7-21.5-15.7-35.7c0-16%2C6.4-29.2%2C19.2-39.7%20%20%20c12.8-10.5%2C29.4-15.7%2C49.9-15.7c14%2C0%2C26.4%2C2.7%2C37.3%2C8.1c10.9%2C5.4%2C19.4%2C12.8%2C25.4%2C22.3c6%2C9.5%2C9%2C19.9%2C9%2C31.1h-26.9%20%20%20c0-12.3-3.9-22-11.7-29.1c-7.8-7.1-18.8-10.6-33.1-10.6c-13.2%2C0-23.5%2C2.9-30.9%2C8.7c-7.4%2C5.8-11.1%2C13.9-11.1%2C24.3%20%20%20c0%2C8.3%2C3.5%2C15.3%2C10.5%2C21c7%2C5.7%2C19%2C11%2C35.9%2C15.7s30.1%2C10%2C39.6%2C15.7c9.5%2C5.7%2C16.6%2C12.4%2C21.2%2C20c4.6%2C7.6%2C6.9%2C16.6%2C6.9%2C26.9%20%20%20c0%2C16.5-6.4%2C29.7-19.3%2C39.6c-12.8%2C9.9-30%2C14.9-51.5%2C14.9c-13.9%2C0-27-2.7-39.1-8c-12.1-5.4-21.4-12.7-28-22%20%20%20c-6.6-9.3-9.8-19.9-9.8-31.7h26.9c0%2C12.3%2C4.5%2C22%2C13.6%2C29.1c9.1%2C7.1%2C21.2%2C10.7%2C36.4%2C10.7c14.1%2C0%2C25-2.9%2C32.5-8.6%20%20%20c7.5-5.8%2C11.3-13.6%2C11.3-23.6c0-10-3.5-17.7-10.5-23.1C1602.3%2C1914.3%2C1589.6%2C1908.9%2C1571.3%2C1903.6z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M1745.6%2C1975.9c9.2%2C0%2C17.3-2.8%2C24.1-8.4c6.9-5.6%2C10.7-12.6%2C11.4-20.9h24.4c-0.5%2C8.7-3.4%2C16.9-8.9%2C24.7%20%20%20c-5.5%2C7.8-12.8%2C14-22%2C18.7c-9.2%2C4.6-18.9%2C7-29.1%2C7c-20.6%2C0-36.9-6.9-49-20.6c-12.1-13.7-18.2-32.5-18.2-56.3v-4.3%20%20%20c0-14.7%2C2.7-27.8%2C8.1-39.2c5.4-11.4%2C13.1-20.3%2C23.2-26.7c10.1-6.3%2C22-9.5%2C35.8-9.5c16.9%2C0%2C31%2C5.1%2C42.2%2C15.2%20%20%20c11.2%2C10.1%2C17.2%2C23.3%2C17.9%2C39.5h-24.4c-0.8-9.8-4.4-17.8-11.1-24.1c-6.7-6.3-14.9-9.4-24.6-9.4c-13.1%2C0-23.3%2C4.7-30.5%2C14.2%20%20%20c-7.2%2C9.5-10.8%2C23.1-10.8%2C41v4.9c0%2C17.4%2C3.6%2C30.8%2C10.7%2C40.2C1722%2C1971.2%2C1732.2%2C1975.9%2C1745.6%2C1975.9z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M1840.4%2C1803.1c0-4.2%2C1.3-7.7%2C3.8-10.6c2.6-2.9%2C6.4-4.3%2C11.4-4.3s8.8%2C1.4%2C11.4%2C4.3c2.6%2C2.9%2C3.9%2C6.4%2C3.9%2C10.6%20%20%20c0%2C4.2-1.3%2C7.7-3.9%2C10.5c-2.6%2C2.8-6.4%2C4.2-11.4%2C4.2s-8.8-1.4-11.4-4.2C1841.7%2C1810.8%2C1840.4%2C1807.3%2C1840.4%2C1803.1z%20M1868.3%2C1994.2%20%20%20h-25.8v-151h25.8V1994.2z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M1976.3%2C1997c-20.5%2C0-37.1-6.7-50-20.2c-12.8-13.4-19.3-31.4-19.3-53.9v-4.7c0-15%2C2.9-28.4%2C8.6-40.1%20%20%20c5.7-11.8%2C13.7-21%2C24-27.6c10.3-6.6%2C21.4-10%2C33.4-10c19.6%2C0%2C34.9%2C6.5%2C45.8%2C19.4c10.9%2C12.9%2C16.3%2C31.5%2C16.3%2C55.5v10.7h-102.3%20%20%20c0.4%2C14.9%2C4.7%2C26.9%2C13%2C36.1c8.3%2C9.2%2C18.9%2C13.7%2C31.8%2C13.7c9.1%2C0%2C16.8-1.9%2C23.2-5.6c6.3-3.7%2C11.9-8.7%2C16.6-14.8l15.8%2C12.3%20%20%20C2020.6%2C1987.2%2C2001.6%2C1997%2C1976.3%2C1997z%20M1973.1%2C1861.6c-10.4%2C0-19.2%2C3.8-26.2%2C11.4c-7.1%2C7.6-11.4%2C18.2-13.1%2C31.9h75.6v-2%20%20%20c-0.7-13.1-4.3-23.3-10.6-30.5C1992.5%2C1865.2%2C1983.9%2C1861.6%2C1973.1%2C1861.6z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M2096.7%2C1843.2l0.8%2C19c11.5-14.5%2C26.6-21.8%2C45.2-21.8c31.9%2C0%2C48%2C18%2C48.3%2C54v99.8h-25.8v-99.9%20%20%20c-0.1-10.9-2.6-18.9-7.5-24.1c-4.9-5.2-12.5-7.8-22.8-7.8c-8.4%2C0-15.7%2C2.2-22.1%2C6.7c-6.3%2C4.5-11.3%2C10.3-14.8%2C17.6v107.6h-25.8%20%20%20v-151H2096.7z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M2296.1%2C1975.9c9.2%2C0%2C17.3-2.8%2C24.1-8.4c6.9-5.6%2C10.7-12.6%2C11.4-20.9h24.4c-0.5%2C8.7-3.4%2C16.9-8.9%2C24.7%20%20%20c-5.5%2C7.8-12.8%2C14-22%2C18.7c-9.2%2C4.6-18.9%2C7-29.1%2C7c-20.6%2C0-36.9-6.9-49-20.6c-12.1-13.7-18.2-32.5-18.2-56.3v-4.3%20%20%20c0-14.7%2C2.7-27.8%2C8.1-39.2c5.4-11.4%2C13.1-20.3%2C23.2-26.7s22-9.5%2C35.8-9.5c16.9%2C0%2C31%2C5.1%2C42.2%2C15.2c11.2%2C10.1%2C17.2%2C23.3%2C17.9%2C39.5%20%20%20h-24.4c-0.8-9.8-4.4-17.8-11.1-24.1c-6.7-6.3-14.9-9.4-24.6-9.4c-13.1%2C0-23.3%2C4.7-30.5%2C14.2c-7.2%2C9.5-10.8%2C23.1-10.8%2C41v4.9%20%20%20c0%2C17.4%2C3.6%2C30.8%2C10.7%2C40.2C2272.6%2C1971.2%2C2282.8%2C1975.9%2C2296.1%2C1975.9z%22%3E%3C/path%3E%09%09%3Cpath%20class%3D%22st4%22%20d%3D%22M2454.3%2C1997c-20.5%2C0-37.1-6.7-50-20.2c-12.8-13.4-19.3-31.4-19.3-53.9v-4.7c0-15%2C2.9-28.4%2C8.6-40.1%20%20%20c5.7-11.8%2C13.7-21%2C24-27.6c10.3-6.6%2C21.4-10%2C33.4-10c19.6%2C0%2C34.9%2C6.5%2C45.8%2C19.4c10.9%2C12.9%2C16.3%2C31.5%2C16.3%2C55.5v10.7h-102.3%20%20%20c0.4%2C14.9%2C4.7%2C26.9%2C13%2C36.1c8.3%2C9.2%2C18.9%2C13.7%2C31.8%2C13.7c9.1%2C0%2C16.8-1.9%2C23.2-5.6c6.3-3.7%2C11.9-8.7%2C16.6-14.8l15.8%2C12.3%20%20%20C2498.6%2C1987.2%2C2479.6%2C1997%2C2454.3%2C1997z%20M2451.1%2C1861.6c-10.4%2C0-19.2%2C3.8-26.2%2C11.4c-7.1%2C7.6-11.4%2C18.2-13.1%2C31.9h75.6v-2%20%20%20c-0.7-13.1-4.3-23.3-10.6-30.5C2470.5%2C1865.2%2C2461.9%2C1861.6%2C2451.1%2C1861.6z%22%3E%3C/path%3E%09%3C/g%3E%3C/g%3E%3C/svg%3E",
@@ -126,81 +135,113 @@ const DEFAULT_DATA = {"bus":[{"id":"n2","name":"N2 Group","objectives":[{"id":"o
 
 let data = null;
 let saveTimeout = null;
+let githubToken = localStorage.getItem('n2_github_token');
+let githubRepo = localStorage.getItem('n2_github_repo');
+let fileSha = null;
 
 async function init() {
-  if (!BLOB_ID) {
-    // No blob yet - show setup
+  // Load local data first
+  const local = localStorage.getItem('n2_okrs_data');
+  data = local ? JSON.parse(local) : JSON.parse(JSON.stringify(DEFAULT_DATA));
+  
+  if (!githubToken || !githubRepo) {
     document.getElementById('setup-box').style.display = 'block';
-    data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-    render();
+  } else {
+    // Try to load from GitHub
+    await loadFromGitHub();
+  }
+  render();
+}
+
+function saveGitHubConfig() {
+  const token = document.getElementById('github-token').value.trim();
+  const repo = document.getElementById('github-repo').value.trim();
+  if (!token || !repo) { alert('Please enter both token and repo'); return; }
+  
+  githubToken = token;
+  githubRepo = repo;
+  localStorage.setItem('n2_github_token', token);
+  localStorage.setItem('n2_github_repo', repo);
+  document.getElementById('setup-box').style.display = 'none';
+  
+  // Save current data to GitHub
+  saveToGitHub(true);
+  render();
+}
+
+async function loadFromGitHub() {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${githubRepo}/contents/data.json`, {
+      headers: { 'Authorization': `token ${githubToken}` }
+    });
+    if (res.ok) {
+      const file = await res.json();
+      fileSha = file.sha;
+      data = JSON.parse(atob(file.content));
+      localStorage.setItem('n2_okrs_data', JSON.stringify(data));
+    }
+  } catch (e) {
+    console.log('No existing data.json, will create on first save');
+  }
+}
+
+async function saveToGitHub(immediate = false) {
+  localStorage.setItem('n2_okrs_data', JSON.stringify(data));
+  
+  if (!githubToken || !githubRepo) {
+    updateSaveStatus('local');
     return;
   }
   
-  try {
-    const res = await fetch(JSONBLOB_API + '/' + BLOB_ID);
-    if (!res.ok) throw new Error('Failed to load');
-    data = await res.json();
-    render();
-  } catch (e) {
-    console.error('Load error:', e);
-    // If blob doesn't exist anymore, clear and start fresh
-    localStorage.removeItem('n2_jsonblob_id');
-    BLOB_ID = null;
-    document.getElementById('setup-box').style.display = 'block';
-    data = JSON.parse(JSON.stringify(DEFAULT_DATA));
-    render();
-  }
-}
-
-async function createBlob() {
-  try {
-    const res = await fetch(JSONBLOB_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data || DEFAULT_DATA)
-    });
-    if (!res.ok) throw new Error('Failed to create');
-    
-    // Get blob ID from Location header or URL
-    const location = res.headers.get('Location') || res.url;
-    BLOB_ID = location.split('/').pop();
-    localStorage.setItem('n2_jsonblob_id', BLOB_ID);
-    
-    document.getElementById('setup-box').style.display = 'none';
-    console.log('Created blob:', BLOB_ID);
-    alert('Cloud storage created! Blob ID: ' + BLOB_ID + '\n\nShare this ID with others who need to edit.');
-    render();
-  } catch (e) {
-    console.error('Create error:', e);
-    alert('Failed to create storage: ' + e.message);
-  }
-}
-
-async function save() {
-  if (!BLOB_ID) return;
   clearTimeout(saveTimeout);
   updateSaveStatus('saving');
-  saveTimeout = setTimeout(async () => {
+  
+  const doSave = async () => {
     try {
-      const res = await fetch(JSONBLOB_API + '/' + BLOB_ID, {
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+      const body = {
+        message: 'Update OKRs ' + new Date().toISOString().slice(0,16),
+        content: content
+      };
+      if (fileSha) body.sha = fileSha;
+      
+      const res = await fetch(`https://api.github.com/repos/${githubRepo}/contents/data.json`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        headers: {
+          'Authorization': `token ${githubToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
       });
-      if (!res.ok) throw new Error('Save failed: ' + res.status);
-      updateSaveStatus('saved');
+      
+      if (res.ok) {
+        const result = await res.json();
+        fileSha = result.content.sha;
+        updateSaveStatus('saved');
+      } else {
+        throw new Error('Save failed: ' + res.status);
+      }
     } catch (e) {
-      console.error('Save error:', e);
+      console.error('GitHub save error:', e);
       updateSaveStatus('error');
     }
-  }, 600);
+  };
+  
+  if (immediate) {
+    await doSave();
+  } else {
+    saveTimeout = setTimeout(doSave, 1000);
+  }
 }
 
 function updateSaveStatus(s) {
   const el = document.getElementById('save-status');
   if (!el) return;
   el.className = 'save-status ' + s;
-  el.textContent = s === 'saved' ? '☁️ Saved' : s === 'saving' ? '⏳ Saving...' : '✕ Error';
+  if (s === 'saved') el.textContent = '☁️ Saved to GitHub';
+  else if (s === 'saving') el.textContent = '⏳ Saving...';
+  else if (s === 'error') el.textContent = '✕ Save error';
+  else if (s === 'local') el.textContent = '💾 Local only';
 }
 
 function uid() { return 'id_' + Math.random().toString(36).substr(2, 9); }
@@ -244,7 +285,7 @@ function render() {
     <div class="legend-item"><div class="legend-dot amber"></div> 40–69%</div>
     <div class="legend-item"><div class="legend-dot red"></div> 1–39%</div>
     <div class="legend-item"><div class="legend-dot grey"></div> 0%</div>
-    <span id="save-status" class="save-status ${BLOB_ID ? 'saved' : 'error'}" onclick="init()">${BLOB_ID ? '☁️ Saved' : '⚠️ Not connected'}</span>
+    <span id="save-status" class="save-status ${githubToken ? 'saved' : 'local'}" onclick="document.getElementById('setup-box').style.display='block'">${githubToken ? '☁️ Saved to GitHub' : '💾 Local only (click to setup)'}</span>
   </div>`;
   attachListeners();
 }
@@ -272,7 +313,7 @@ function handleEdit(e) {
       if (field === 'kr-owner') kr.owner = el.innerText.trim();
     }
   }
-  save();
+  saveToGitHub();
 }
 
 function handleMetricEdit(e) {
@@ -283,34 +324,34 @@ function handleMetricEdit(e) {
   if (field === 'kr-conf') kr.conf = el.value;
   if (field === 'kr-prog') kr.prog = el.value;
   el.className = getTLClass(el.value);
-  save();
+  saveToGitHub();
 }
 
 function addObjective(buId) {
   const bu = data.bus.find(b => b.id === buId); if (!bu) return;
   bu.objectives.push({ id: uid(), text: 'New objective', krs: [{ id: uid(), desc: 'New key result', owner: 'Owner', conf: '50%', prog: '0%' }] });
-  save(); render();
+  saveToGitHub(); render();
 }
 
 function addKR(buId, objId) {
   const bu = data.bus.find(b => b.id === buId); if (!bu) return;
   const obj = bu.objectives.find(o => o.id === objId); if (!obj) return;
   obj.krs.push({ id: uid(), desc: 'New key result', owner: 'Owner', conf: '50%', prog: '0%' });
-  save(); render();
+  saveToGitHub(); render();
 }
 
 function deleteObj(buId, objId) {
   if (!confirm('Delete this objective and all its KRs?')) return;
   const bu = data.bus.find(b => b.id === buId); if (!bu) return;
   bu.objectives = bu.objectives.filter(o => o.id !== objId);
-  save(); render();
+  saveToGitHub(); render();
 }
 
 function deleteKR(buId, objId, krId) {
   const bu = data.bus.find(b => b.id === buId); if (!bu) return;
   const obj = bu.objectives.find(o => o.id === objId); if (!obj) return;
   obj.krs = obj.krs.filter(k => k.id !== krId);
-  save(); render();
+  saveToGitHub(); render();
 }
 
 init();
