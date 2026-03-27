@@ -122,8 +122,8 @@
               "id": "kr9",
               "desc": "Close audit revenue of $350k",
               "owner": "Jack",
-              "conf": "50%",
-              "prog": "7"
+              "conf": "30",
+              "prog": "10"
             }
           ]
         }
