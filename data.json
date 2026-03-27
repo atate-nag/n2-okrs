@@ -94,7 +94,7 @@
           "krs": [
             {
               "id": "kr7",
-              "desc": "Close £200k of new PS business",
+              "desc": "Close Â£200k of new PS business",
               "owner": "Matt S",
               "conf": "55",
               "prog": "65"
@@ -139,9 +139,9 @@
           "krs": [
             {
               "id": "kr10",
-              "desc": "Combined product revenue of £1.65m",
+              "desc": "Combined product revenue of Â£1.65m",
               "owner": "Adrian S",
-              "conf": "50%",
+              "conf": "100",
               "prog": "103"
             }
           ]
