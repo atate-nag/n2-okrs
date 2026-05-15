@@ -200,7 +200,7 @@ function switchTab(tab) {
 // --- GitHub API ---
 async function ghFetch(path) {
   const res = await fetch(`${API}/repos/${REPO}/contents/${path}`, {
-    headers: { Authorization: `token ${TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+    headers: { Authorization: `Bearer ${TOKEN}`, Accept: 'application/vnd.github.v3+json' }
   });
   if (!res.ok) return null;
   const j = await res.json();
@@ -213,7 +213,7 @@ async function ghSave(path, data, sha) {
   if (sha) body.sha = sha;
   const res = await fetch(`${API}/repos/${REPO}/contents/${path}`, {
     method: 'PUT',
-    headers: { Authorization: `token ${TOKEN}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    headers: { Authorization: `Bearer ${TOKEN}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
   if (!res.ok) throw new Error(`Save failed: ${res.status}`);
