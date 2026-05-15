@@ -53,7 +53,8 @@
   .targets-table th { background:#E8EDF5; padding:12px 16px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--navy); text-align:left; border-bottom:2px solid #d0d8e8; }
   .targets-table td { padding:14px 16px; font-size:14px; border-bottom:1px solid #f0f0f0; vertical-align:top; }
   .targets-table tr:last-child td { border-bottom:none; }
-  .targets-table .goal-cell { font-weight:700; color:var(--navy); white-space:nowrap; width:100px; font-size:15px; letter-spacing:0.2px; }
+  .targets-table .goal-cell { font-weight:700; color:var(--navy); white-space:nowrap; width:160px; font-size:15px; letter-spacing:0.2px; }
+  .targets-table .goal-cell img { height:24px; max-width:80px; vertical-align:middle; margin-right:10px; background:#fff; padding:2px 4px; border-radius:4px; }
   .targets-table .target-cell { color:var(--text); min-width:200px; font-size:18px; font-weight:600; line-height:1.35; }
   .targets-table .e1-cell { width:70px; text-align:center; font-size:16px; font-weight:600; color:var(--navy); }
   .targets-table .e1-cell:empty::after { content:"—"; color:#ddd; font-weight:400; }
@@ -236,7 +237,9 @@ function buildBuTable(rows) {
     <th>Business Unit</th><th>Revenue</th><th>EBITDA</th><th>E1</th>
     <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead><tbody>`;
   rows.forEach(r => {
-    h += `<tr><td class="goal-cell">${r.bu}</td>
+    const tid = r.id.split('-')[0];
+    const logo = LOGOS[tid] ? `<img src="${LOGOS[tid]}" alt="${r.bu}">` : '';
+    h += `<tr><td class="goal-cell">${logo}${r.bu}</td>
       <td class="target-cell">${r.revenue || '0'}</td>
       <td class="target-cell">${r.ebitda || '0'}</td>
       <td class="e1-cell">${r.e1 || ''}</td>
