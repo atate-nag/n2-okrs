@@ -55,6 +55,8 @@
   .targets-table tr:last-child td { border-bottom:none; }
   .targets-table .goal-cell { font-weight:700; color:var(--navy); white-space:nowrap; width:100px; font-size:15px; letter-spacing:0.2px; }
   .targets-table .target-cell { color:var(--text); min-width:200px; font-size:18px; font-weight:600; line-height:1.35; }
+  .targets-table .e1-cell { width:70px; text-align:center; font-size:16px; font-weight:600; color:var(--navy); }
+  .targets-table .e1-cell:empty::after { content:"—"; color:#ddd; font-weight:400; }
   .targets-table .q-cell { width:120px; min-width:100px; color:var(--text); }
   .targets-table .q-cell:empty::after { content:"—"; color:#ddd; }
 
@@ -217,12 +219,12 @@ function renderTargets(d) {
 
 function buildTable(rows, labelKey, labelHeader) {
   let h = `<table class="targets-table"><thead><tr>
-    <th>${labelHeader}</th><th>FY26-27 Target</th><th>FY30-31 Objective</th>
+    <th>${labelHeader}</th><th>FY26-27 Target</th><th>E1</th>
     <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead><tbody>`;
   rows.forEach(r => {
     h += `<tr><td class="goal-cell">${r[labelKey]}</td>
       <td class="target-cell">${r.fy2627}</td>
-      <td class="target-cell" style="font-size:12px;color:var(--text-light)">${r.fy3031}</td>
+      <td class="e1-cell">${r.e1 || ''}</td>
       <td class="q-cell">${r.q1}</td><td class="q-cell">${r.q2}</td>
       <td class="q-cell">${r.q3}</td><td class="q-cell">${r.q4}</td></tr>`;
   });
