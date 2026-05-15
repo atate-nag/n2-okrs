@@ -51,15 +51,24 @@
   .tab-content.active { display:block; }
 
   /* Targets table */
-  .section-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-light); margin:24px 0 10px 4px; }
+  .section-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-light); margin:28px 0 12px 4px; }
   .section-label:first-child { margin-top:0; }
-  .targets-table { width:100%; border-collapse:separate; border-spacing:0; background:var(--white); border-radius:10px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06); margin-bottom:24px; }
-  .targets-table th { background:#E8EDF5; padding:10px 14px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--navy); text-align:left; border-bottom:2px solid #d0d8e8; }
-  .targets-table td { padding:10px 14px; font-size:13px; border-bottom:1px solid #f0f0f0; vertical-align:top; }
+  .targets-table { width:100%; border-collapse:separate; border-spacing:0; background:var(--white); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06), 0 6px 16px rgba(27,42,74,0.05); margin-bottom:28px; }
+  .targets-table th { background:#E8EDF5; padding:12px 16px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--navy); text-align:left; border-bottom:2px solid #d0d8e8; }
+  .targets-table td { padding:14px 16px; font-size:14px; border-bottom:1px solid #f0f0f0; vertical-align:top; }
   .targets-table tr:last-child td { border-bottom:none; }
-  .targets-table .goal-cell { font-weight:700; color:var(--navy); white-space:nowrap; width:80px; }
-  .targets-table .target-cell { color:var(--text-mid); min-width:180px; }
+  .targets-table .goal-cell { font-weight:700; color:var(--navy); white-space:nowrap; width:100px; font-size:15px; letter-spacing:0.2px; }
+  .targets-table .target-cell { color:var(--text); min-width:200px; font-size:18px; font-weight:600; line-height:1.35; }
   .targets-table .q-cell { width:120px; min-width:100px; }
+
+  .cycle-strip { background:#fff; border-bottom:1px solid #e0e0e0; padding:14px 48px 14px; }
+  .cycle-info { display:flex; align-items:baseline; gap:14px; margin-bottom:8px; }
+  .cycle-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-light); }
+  .cycle-progress-text { font-size:13px; color:var(--text-mid); }
+  .cycle-progress-text strong { font-weight:700; color:var(--navy); font-size:15px; }
+  .cycle-meta { margin-left:auto; font-size:12px; color:var(--text-mid); font-family:'JetBrains Mono',monospace; }
+  .cycle-bar { height:6px; background:#E8EDF5; border-radius:3px; overflow:hidden; }
+  .cycle-bar-fill { height:100%; background:linear-gradient(90deg, var(--blue), #6FA8E8); border-radius:3px; transition:width 0.4s ease; }
   .targets-table .q-cell[contenteditable="true"] { background:#FAFBFF; border:1px dashed #d0d8e8; border-radius:4px; padding:8px 10px; cursor:text; outline:none; }
   .targets-table .q-cell[contenteditable="true"]:focus { border-color:var(--blue); background:#fff; box-shadow:0 0 0 2px rgba(59,125,216,0.15); }
   .targets-table .q-cell[contenteditable="true"]:empty::before { content:attr(data-placeholder); color:#ccc; font-style:italic; }
@@ -75,12 +84,12 @@
   .bu-section[data-bu="bioteam"] .bu-header { border-left:5px solid var(--bt-teal); background:var(--bt-teal-bg); }
   .bu-section[data-bu="bismarck"] .bu-header { border-left:5px solid var(--bis-purple); background:var(--bis-purple-bg); }
   .bu-section[data-bu="stac"] .bu-header { border-left:5px solid var(--stac-orange); background:var(--stac-orange-bg); }
-  .bu-section[data-bu="nag"] .bu-header { border-left:5px solid var(--nag-blue); background:var(--nag-blue-bg); }
+  .bu-section[data-bu^="nag"] .bu-header { border-left:5px solid var(--nag-blue); background:var(--nag-blue-bg); }
   .bu-section[data-bu="n2"] .bu-name { color:var(--navy); }
   .bu-section[data-bu="bioteam"] .bu-name { color:var(--bt-teal); }
   .bu-section[data-bu="bismarck"] .bu-name { color:var(--bis-purple); }
   .bu-section[data-bu="stac"] .bu-name { color:var(--stac-orange); }
-  .bu-section[data-bu="nag"] .bu-name { color:var(--nag-blue); }
+  .bu-section[data-bu^="nag"] .bu-name { color:var(--nag-blue); }
   .obj-block { border-top:1px solid #f0f0f0; }
   .objective { padding:12px 24px 4px 34px; font-size:14px; font-weight:600; }
   .kr-row { display:flex; align-items:center; padding:8px 24px 8px 34px; gap:12px; }
@@ -135,6 +144,15 @@
       <div class="subtitle">FY 2026–27</div>
     </div>
     <div class="sync-status" id="sync-status">⏳ Loading...</div>
+  </div>
+
+  <div class="cycle-strip">
+    <div class="cycle-info">
+      <span class="cycle-label">Quarterly OKR cycle</span>
+      <span class="cycle-progress-text">End of week <strong>1</strong> of <strong>13</strong></span>
+      <span class="cycle-meta">Q1 · FY 2026–27</span>
+    </div>
+    <div class="cycle-bar"><div class="cycle-bar-fill" style="width:7.7%"></div></div>
   </div>
 
   <div class="tab-bar">
@@ -305,9 +323,10 @@ function renderOkrs() {
   const d = okrsData;
   let h = '';
   d.bus.forEach((bu, bi) => {
+    const tid = bu.id.replace(/^nag-.*/, 'nag');
     h += `<div class="bu-section" data-bu="${bu.id}">
       <div class="bu-header">
-        <img src="${LOGOS[bu.id]}" alt="${bu.name}" style="${LOGO_STYLES[bu.id]}">
+        <img src="${LOGOS[tid]}" alt="${bu.name}" style="${LOGO_STYLES[tid]}">
         <div class="bu-name">${bu.name}</div>
         <div class="col-labels"><div class="col-label">Confidence</div><div class="col-label">Progress</div></div>
       </div>`;
