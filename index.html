@@ -211,22 +211,37 @@ async function init() {
 
 function renderTargets(d) {
   let h = '<div class="section-label">Group-level Goals</div>';
-  h += buildTable(d.group_goals, 'goal', 'Goal');
+  h += buildGroupTable(d.group_goals);
   h += '<div class="section-label">Business Unit Targets</div>';
-  h += buildTable(d.bu_targets, 'bu', 'Business Unit');
+  h += buildBuTable(d.bu_targets);
   document.getElementById('tab-targets').innerHTML = h;
 }
 
-function buildTable(rows, labelKey, labelHeader) {
+function buildGroupTable(rows) {
   let h = `<table class="targets-table"><thead><tr>
-    <th>${labelHeader}</th><th>FY26-27 Target</th><th>E1</th>
+    <th>Goal</th><th>FY26-27 Target</th>
     <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead><tbody>`;
   rows.forEach(r => {
-    h += `<tr><td class="goal-cell">${r[labelKey]}</td>
-      <td class="target-cell">${r.fy2627}</td>
+    h += `<tr><td class="goal-cell">${r.goal}</td>
+      <td class="target-cell">${r.fy2627 || ''}</td>
+      <td class="q-cell">${r.q1 || ''}</td><td class="q-cell">${r.q2 || ''}</td>
+      <td class="q-cell">${r.q3 || ''}</td><td class="q-cell">${r.q4 || ''}</td></tr>`;
+  });
+  h += '</tbody></table>';
+  return h;
+}
+
+function buildBuTable(rows) {
+  let h = `<table class="targets-table"><thead><tr>
+    <th>Business Unit</th><th>Revenue</th><th>EBITDA</th><th>E1</th>
+    <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead><tbody>`;
+  rows.forEach(r => {
+    h += `<tr><td class="goal-cell">${r.bu}</td>
+      <td class="target-cell">${r.revenue || '0'}</td>
+      <td class="target-cell">${r.ebitda || '0'}</td>
       <td class="e1-cell">${r.e1 || ''}</td>
-      <td class="q-cell">${r.q1}</td><td class="q-cell">${r.q2}</td>
-      <td class="q-cell">${r.q3}</td><td class="q-cell">${r.q4}</td></tr>`;
+      <td class="q-cell">${r.q1 || ''}</td><td class="q-cell">${r.q2 || ''}</td>
+      <td class="q-cell">${r.q3 || ''}</td><td class="q-cell">${r.q4 || ''}</td></tr>`;
   });
   h += '</tbody></table>';
   return h;

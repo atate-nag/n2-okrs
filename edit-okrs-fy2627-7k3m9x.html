@@ -271,33 +271,50 @@ function scheduleSave() {
 function renderTargets() {
   const d = targetsData;
   let h = '<div class="section-label">Group-level Goals</div>';
-  h += buildTargetTable(d.group_goals, 'goal', 'Goal');
+  h += buildGroupTable(d.group_goals);
   h += '<div class="section-label">Business Unit Targets</div>';
-  h += buildTargetTable(d.bu_targets, 'bu', 'Business Unit');
+  h += buildBuTable(d.bu_targets);
   document.getElementById('tab-targets').innerHTML = h;
 }
 
-function buildTargetTable(rows, labelKey, labelHeader) {
+function editableQ(section, idx, field, val) {
+  return `<td class="q-cell" contenteditable="true" data-placeholder="—"
+      data-section="${section}" data-idx="${idx}" data-field="${field}"
+      onblur="onTargetEdit(this)">${val || ''}</td>`;
+}
+
+function buildGroupTable(rows) {
   let h = `<table class="targets-table"><thead><tr>
-    <th>${labelHeader}</th><th>FY26-27 Target</th><th>E1</th>
+    <th>Goal</th><th>FY26-27 Target</th>
     <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead><tbody>`;
   rows.forEach((r, i) => {
     h += `<tr>
-      <td class="goal-cell">${r[labelKey]}</td>
-      <td class="target-cell">${r.fy2627}</td>
+      <td class="goal-cell">${r.goal}</td>
+      <td class="target-cell">${r.fy2627 || ''}</td>
+      ${editableQ('group_goals', i, 'q1', r.q1)}
+      ${editableQ('group_goals', i, 'q2', r.q2)}
+      ${editableQ('group_goals', i, 'q3', r.q3)}
+      ${editableQ('group_goals', i, 'q4', r.q4)}
+    </tr>`;
+  });
+  h += '</tbody></table>';
+  return h;
+}
+
+function buildBuTable(rows) {
+  let h = `<table class="targets-table"><thead><tr>
+    <th>Business Unit</th><th>Revenue</th><th>EBITDA</th><th>E1</th>
+    <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead><tbody>`;
+  rows.forEach((r, i) => {
+    h += `<tr>
+      <td class="goal-cell">${r.bu}</td>
+      <td class="target-cell">${r.revenue || '0'}</td>
+      <td class="target-cell">${r.ebitda || '0'}</td>
       <td class="e1-cell">${r.e1 || ''}</td>
-      <td class="q-cell" contenteditable="true" data-placeholder="—"
-          data-section="${labelKey === 'goal' ? 'group_goals' : 'bu_targets'}" data-idx="${i}" data-field="q1"
-          onblur="onTargetEdit(this)">${r.q1}</td>
-      <td class="q-cell" contenteditable="true" data-placeholder="—"
-          data-section="${labelKey === 'goal' ? 'group_goals' : 'bu_targets'}" data-idx="${i}" data-field="q2"
-          onblur="onTargetEdit(this)">${r.q2}</td>
-      <td class="q-cell" contenteditable="true" data-placeholder="—"
-          data-section="${labelKey === 'goal' ? 'group_goals' : 'bu_targets'}" data-idx="${i}" data-field="q3"
-          onblur="onTargetEdit(this)">${r.q3}</td>
-      <td class="q-cell" contenteditable="true" data-placeholder="—"
-          data-section="${labelKey === 'goal' ? 'group_goals' : 'bu_targets'}" data-idx="${i}" data-field="q4"
-          onblur="onTargetEdit(this)">${r.q4}</td>
+      ${editableQ('bu_targets', i, 'q1', r.q1)}
+      ${editableQ('bu_targets', i, 'q2', r.q2)}
+      ${editableQ('bu_targets', i, 'q3', r.q3)}
+      ${editableQ('bu_targets', i, 'q4', r.q4)}
     </tr>`;
   });
   h += '</tbody></table>';
