@@ -1,0 +1,15 @@
+{
+  "group_goals": [
+    {"id":"group","goal":"Group","fy2627":"£2M EBITDA over 6 BUs","fy3031":"£8.0M EBITDA over 10 BUs","q1":"","q2":"","q3":"","q4":""},
+    {"id":"c2","goal":"C2","fy2627":"£2M EBITDA","fy3031":"£3.6M EBITDA","q1":"","q2":"","q3":"","q4":""},
+    {"id":"a1","goal":"A1","fy2627":"Arrange debt facility for target deals, fill funnel","fy3031":"£3.1M EBITDA","q1":"","q2":"","q3":"","q4":""},
+    {"id":"c1","goal":"C1","fy2627":"4 E1","fy3031":"£1.26 EBITDA","q1":"","q2":"","q3":"","q4":""}
+  ],
+  "bu_targets": [
+    {"id":"bioteam","bu":"BioTeam","fy2627":"C2 ≥ £400k","fy3031":"C2 ≥£1.0M, 3 E1","q1":"","q2":"","q3":"","q4":""},
+    {"id":"stac","bu":"STAC","fy2627":"C2 ≥£400k + 1 E1","fy3031":"C2 ≥£0.9M, 2 E1","q1":"","q2":"","q3":"","q4":""},
+    {"id":"nag-eod","bu":"nAG-EOD","fy2627":"C2-revenue ≥ £4M","fy3031":"C2-revenue ≥ £6.5M","q1":"","q2":"","q3":"","q4":""},
+    {"id":"xiss","bu":"X-ISS","fy2627":"C2 ≥£400k","fy3031":"C2 ≥£900k, 2 E1","q1":"","q2":"","q3":"","q4":""},
+    {"id":"nag-p","bu":"nAG-p","fy2627":"£1.9M EBITDA + 3 E1","fy3031":"£1.36M EBITDA + 7/year","q1":"","q2":"","q3":"","q4":""}
+  ]
+}

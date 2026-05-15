@@ -1,0 +1,9 @@
+{
+  "bus": [
+    {"id":"n2","name":"N2 Group","objectives":[{"text":"New objective","krs":[{"desc":"Key result","owner":"Owner","conf":"0%","prog":"0%"}]}]},
+    {"id":"bioteam","name":"BioTeam","objectives":[{"text":"New objective","krs":[{"desc":"Key result","owner":"Owner","conf":"0%","prog":"0%"}]}]},
+    {"id":"bismarck","name":"X-ISS","objectives":[{"text":"New objective","krs":[{"desc":"Key result","owner":"Owner","conf":"0%","prog":"0%"}]}]},
+    {"id":"stac","name":"STAC","objectives":[{"text":"New objective","krs":[{"desc":"Key result","owner":"Owner","conf":"0%","prog":"0%"}]}]},
+    {"id":"nag","name":"nAG","objectives":[{"text":"New objective","krs":[{"desc":"Key result","owner":"Owner","conf":"0%","prog":"0%"}]}]}
+  ]
+}
