@@ -152,10 +152,10 @@
   <div class="cycle-strip">
     <div class="cycle-info">
       <span class="cycle-label">Quarterly OKR cycle</span>
-      <span class="cycle-progress-text">End of week <strong>1</strong> of <strong>13</strong></span>
-      <span class="cycle-meta">Q1 · FY 2026–27</span>
+      <span class="cycle-progress-text">End of week <strong id="cycle-week">1</strong> of <strong id="cycle-total">13</strong></span>
+      <span class="cycle-meta" id="cycle-meta">Q1 · FY 2026–27</span>
     </div>
-    <div class="cycle-bar"><div class="cycle-bar-fill" style="width:7.7%"></div></div>
+    <div class="cycle-bar"><div class="cycle-bar-fill" id="cycle-bar-fill" style="width:7.7%"></div></div>
   </div>
 
   <div class="tab-bar">
@@ -201,6 +201,19 @@ function checkPin() {
     document.getElementById('pin-input').focus();
   }
 }
+// --- OKR cycle strip: edit CYCLE each quarter; week + bar are computed from today ---
+const CYCLE = { start: '2026-05-11', weeks: 13, label: 'Q1 · FY 2026–27' };
+function renderCycle() {
+  const start = new Date(CYCLE.start + 'T00:00:00');
+  const daysSince = Math.floor((Date.now() - start.getTime()) / 86400000);
+  const week = Math.min(CYCLE.weeks, Math.max(1, Math.floor(daysSince / 7) + 1));
+  document.getElementById('cycle-week').textContent = week;
+  document.getElementById('cycle-total').textContent = CYCLE.weeks;
+  document.getElementById('cycle-meta').textContent = CYCLE.label;
+  document.getElementById('cycle-bar-fill').style.width = (week / CYCLE.weeks * 100).toFixed(1) + '%';
+}
+renderCycle();
+
 document.getElementById('pin-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
 
 if (sessionStorage.getItem('n2pin') === '1') {
