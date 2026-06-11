@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1:1 Hub — Direct Reports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F1E8; --paper2:#EFEADC; --card:#FBF9F3; --ink:#2A2620; --muted:#776F62;
+  --line:#DCD4C4; --line2:#C9C0AD; --gold:#B0832F; --goldbg:#F6ECD4; --goldline:#E4CE97;
+  --blue:#3A6B8A; --amber:#B07A24; --red:#A6492F; --green:#4F7340; --grey:#8A8174;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.5}
+.app{display:flex;min-height:100vh}
+
+/* ---- sidebar ---- */
+.side{width:248px;flex:0 0 248px;background:var(--paper2);border-right:1px solid var(--line2);
+  position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 0}
+.brand{padding:0 20px 16px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.brand h1{font-family:Fraunces,serif;font-weight:600;font-size:19px;margin:0;letter-spacing:-.01em}
+.brand p{margin:3px 0 0;font-size:11.5px;color:var(--muted);font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em}
+.plist{list-style:none;margin:0;padding:6px 10px}
+.pitem{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer;margin-bottom:2px;border:1px solid transparent}
+.pitem:hover{background:#EAE3D2}
+.pitem.active{background:var(--card);border-color:var(--line2);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.dot{width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:grid;place-items:center;
+  font-family:Fraunces,serif;font-weight:600;font-size:13px;color:#fff}
+.pmeta{min-width:0}
+.pmeta .nm{font-weight:600;font-size:13.5px;line-height:1.2}
+.pmeta .rl{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cur{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.sidefoot{padding:14px 20px;border-top:1px solid var(--line);margin-top:8px;font-size:11px;color:var(--muted)}
+.sidefoot button{margin:3px 4px 0 0}
+
+/* ---- main ---- */
+.main{flex:1;min-width:0;padding:30px 38px 80px;max-width:1020px}
+.head{display:flex;align-items:flex-start;gap:16px;border-bottom:1px solid var(--line2);padding-bottom:18px;margin-bottom:6px}
+.head .dot{width:46px;height:46px;flex:0 0 46px;font-size:18px}
+.head h2{font-family:Fraunces,serif;font-weight:600;font-size:27px;margin:0;letter-spacing:-.015em}
+.head .sub{color:var(--muted);font-size:13px;margin-top:2px}
+.head .sub b{color:var(--ink);font-weight:600}
+.toolbar{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:330px}
+button{font-family:Inter,sans-serif;font-size:12px;background:var(--card);border:1px solid var(--line2);
+  color:var(--ink);border-radius:7px;padding:6px 11px;cursor:pointer;transition:.12s}
+button:hover{background:#fff;border-color:var(--gold)}
+button.ghost{background:transparent}
+.strip{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 26px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:8px 13px;min-width:74px}
+.tile.gold{background:var(--goldbg);border-color:var(--goldline)}
+.tile .n{font-family:Fraunces,serif;font-size:21px;font-weight:600;line-height:1}
+.tile .l{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:3px;font-family:"IBM Plex Mono",monospace}
+
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:2px;border-bottom:1px solid var(--line2);margin:18px 0 24px}
+.tab{background:transparent;border:none;border-bottom:2px solid transparent;border-radius:0;
+  padding:10px 15px;font-size:14px;color:var(--muted);font-weight:500;display:inline-flex;align-items:center;gap:8px}
+.tab:hover{color:var(--ink);background:transparent;border-bottom-color:var(--line2)}
+.tab.on{color:var(--ink);border-bottom-color:var(--gold);font-weight:600}
+.tcount{font-family:"IBM Plex Mono",monospace;font-size:11px;background:var(--paper2);border:1px solid var(--line);
+  border-radius:20px;padding:1px 7px;color:var(--muted);line-height:1.6}
+.tab.on .tcount{background:var(--goldbg);border-color:var(--goldline);color:var(--gold)}
+.panehd{display:flex;justify-content:flex-end;margin-bottom:14px}
+.pane{min-height:200px}
+
+.section{margin-bottom:34px}
+.sechd{display:flex;align-items:baseline;gap:10px;margin:0 0 13px}
+.secnum{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--gold);font-weight:500}
+.sechd h3{font-family:Fraunces,serif;font-weight:600;font-size:17px;margin:0;letter-spacing:-.01em}
+.sechd .add{margin-left:auto}
+
+/* bonus */
+.bonus{background:var(--goldbg);border:1px solid var(--goldline);border-radius:12px;padding:6px 16px 14px}
+.brow{padding:12px 0;border-bottom:1px dashed var(--goldline)}
+.brow:last-child{border-bottom:none}
+.brow .label{font-weight:600;font-size:14.5px}
+.brow .target{background:#fff;border:1px solid var(--goldline);border-radius:6px;padding:6px 10px;margin:6px 0;font-size:13px;font-family:"IBM Plex Mono",monospace}
+.brow .note{font-size:12.5px;color:var(--muted);margin-top:4px}
+.metarow{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:6px;font-size:12px;color:var(--muted)}
+.metarow .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;margin-right:4px}
+
+/* priorities */
+.lane{margin-bottom:18px}
+.lanehd{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px}
+.lanehd .bar{width:18px;height:3px;border-radius:2px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 14px;position:relative}
+.card .ctitle{font-weight:600;font-size:14px;padding-right:46px}
+.card .cdetail{font-size:12.5px;color:#5d564b;margin-top:5px}
+.card .corner{position:absolute;top:9px;right:9px;display:flex;gap:3px;opacity:0;transition:.12s}
+.card:hover .corner{opacity:1}
+.icon{width:22px;height:22px;border-radius:6px;border:1px solid var(--line2);background:#fff;cursor:pointer;
+  font-size:11px;line-height:1;display:grid;place-items:center;color:var(--muted)}
+.icon:hover{color:var(--ink);border-color:var(--gold)}
+
+/* themes */
+.themes{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.theme{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 14px}
+.theme .th{font-weight:600;font-size:13.5px}
+.theme .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:8px}
+.theme .tx{font-size:12.5px;color:#5d564b;margin-top:2px}
+
+/* log */
+.log{border-left:2px solid var(--line2);padding-left:0;margin-left:4px}
+.logrow{padding:11px 0 11px 18px;border-bottom:1px solid var(--line);position:relative}
+.logrow:before{content:"";position:absolute;left:-5px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid var(--paper)}
+.logrow.silent:before{background:var(--line2)}
+.logrow.silent{opacity:.6}
+.logdate{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--gold)}
+.logrow.silent .logdate{color:var(--muted)}
+.logtext{font-size:12.5px;margin-top:3px;white-space:pre-wrap}
+
+/* shared bits */
+.badge{font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:2px 7px;border-radius:20px;border:1px solid;cursor:pointer}
+.b-open{color:var(--grey);border-color:var(--line2);background:#fff}
+.b-prog{color:var(--blue);border-color:#bcd2df;background:#eef5f9}
+.b-block{color:var(--red);border-color:#e2bcb0;background:#faeee9}
+.b-mon{color:var(--amber);border-color:#e6cf9d;background:#fbf2dd}
+.b-done{color:var(--green);border-color:#bcd3b0;background:#eef4e9}
+[contenteditable]{outline:none;border-radius:4px}
+[contenteditable]:hover{background:#fff8e9}
+[contenteditable]:focus{background:#fff;box-shadow:0 0 0 2px var(--goldline)}
+select{font-family:"IBM Plex Mono",monospace;font-size:11px;border:1px solid var(--line2);border-radius:6px;
+  background:#fff;color:var(--ink);padding:2px 4px;cursor:pointer}
+.muted{color:var(--muted)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;
+  padding:10px 18px;border-radius:9px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:50}
+.toast.show{opacity:1}
+.mtoggle{display:none}
+@media(max-width:860px){
+  .side{position:fixed;left:0;top:0;z-index:40;transform:translateX(-100%);transition:.2s}
+  .side.open{transform:none}
+  .main{padding:18px 16px 70px}
+  .mtoggle{display:inline-block;position:fixed;top:12px;left:12px;z-index:45}
+  .toolbar{max-width:none}
+}
+@media print{
+  .side,.toolbar,.corner,.add,.sidefoot,.mtoggle{display:none!important}
+  .main{max-width:none;padding:0}
+  .card,.theme,.bonus{break-inside:avoid}
+}
+
+/* ---- PIN overlay ---- */
+#pin-overlay{position:fixed;inset:0;background:var(--paper);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;}
+#pin-overlay.hidden{display:none;}
+#pin-overlay h2{font-family:Fraunces,serif;font-weight:500;font-size:22px;color:var(--ink);margin:0;letter-spacing:-.01em;}
+#pin-overlay .sub{color:var(--muted);font-size:13px;margin-top:-10px;}
+#pin-overlay input{font-family:'IBM Plex Mono',monospace;font-size:22px;text-align:center;letter-spacing:8px;width:220px;padding:12px;border:1px solid var(--line2);border-radius:8px;background:var(--card);color:var(--ink);outline:none;}
+#pin-overlay input:focus{border-color:var(--gold);}
+#pin-overlay .pin-error{color:var(--red);font-size:13px;min-height:18px;}
+#pin-overlay button{padding:9px 28px;border:none;border-radius:8px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;}
+</style>
+</head>
+<body>
+
+<div id="pin-overlay">
+  <h2>1:1 Hub</h2>
+  <div class="sub">Enter PIN</div>
+  <input type="password" id="pin-input" maxlength="6" placeholder="······" autofocus>
+  <div class="pin-error" id="pin-error"></div>
+  <button onclick="checkPin()">Enter</button>
+</div>
+
+<button class="mtoggle" onclick="document.querySelector('.side').classList.toggle('open')">☰ People</button>
+<div class="app">
+  <nav class="side">
+    <div class="brand">
+      <h1>1:1 Hub</h1>
+      <p>Direct reports · n² Group</p>
+    </div>
+    <ul class="plist" id="plist"></ul>
+    <div class="sidefoot">
+      <div id="stamp"></div>
+      <button class="ghost" onclick="exportAll()">Export all</button>
+      <button class="ghost" onclick="document.getElementById('imp').click()">Import</button>
+      <input id="imp" type="file" accept="application/json" style="display:none" onchange="importJSON(event)">
+    </div>
+  </nav>
+  <main class="main" id="main"></main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ PIN GATE + SUPABASE ============ */
+const SLT_PIN = '358469';
+const SUPABASE_URL = 'https://hsmdmcpmeqdowiwutlhb.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhzbWRtY3BtZXFkb3dpd3V0bGhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwNzM0NDYsImV4cCI6MjA4OTY0OTQ0Nn0.ZfZDiTGxaeo9YNZ1EGwJ5r0NzPYmbgJu6iezEmDO_dg';
+const ROW_KEY = 'slt-1to1';
+const SB_HEADERS = { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' };
+
+async function sbFetch(){
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/dashboard_data?key=eq.${ROW_KEY}&select=data,updated_at`, { headers: SB_HEADERS });
+  if (!r.ok) throw new Error('fetch ' + r.status);
+  const rows = await r.json();
+  return rows.length ? rows[0] : null;
+}
+let saveTimer = null;
+async function sbSave(){
+  try{
+    const body = JSON.stringify({ data: DATA, updated_at: DATA.updatedAt });
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/dashboard_data?key=eq.${ROW_KEY}`, {
+      method: 'PATCH', headers: { ...SB_HEADERS, Prefer: 'return=minimal' }, body
+    });
+    if (!r.ok) throw new Error('save ' + r.status);
+  } catch(e){
+    console.warn(e);
+    if (typeof toast === 'function') toast('Save failed — cached locally');
+  }
+}
+
+function checkPin(){
+  if (document.getElementById('pin-input').value === SLT_PIN) {
+    sessionStorage.setItem('sltpin', '1');
+    document.getElementById('pin-overlay').classList.add('hidden');
+    initApp();
+  } else {
+    document.getElementById('pin-error').textContent = 'Incorrect PIN';
+    document.getElementById('pin-input').value = '';
+    document.getElementById('pin-input').focus();
+  }
+}
+document.getElementById('pin-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
+
+/* ============ SEED DATA (rebuilt from this project's per-person threads) ============ */
+const ACCENT={ian:"#3A6B8A",jake:"#7A5C8A",scales:"#4F7340",jack:"#A6492F",jen:"#B0832F",deepak:"#2E6E6E"};
+const SEED={
+ version:"unified-v1", updatedBy:"", updatedAt:"",
+ people:[
+ /* ---------------- IAN WILSON ---------------- */
+ {id:"ian",name:"Ian Wilson",role:"nAG Product — BU lead",email:"ian.wilson@n2grp.com",cur:"£",
+  bonus:[
+   {label:"Ian — 35% bonus",target:"EBITDA £1.9m + 3 × E1 proposals",owner:"Ian / Darren",due:"Monthly review",status:"prog",note:"P&L lands ~£1.9m but excludes intercompany recharges & the UVA/Arkham charge — validate with Darren (Apr actuals); may be overestimated."},
+   {label:"Joe — 15% (Director of R&D)",target:"~70/20/10, majority on the 3 E1s; other two TBD",owner:"Ian / HR",due:"Load to HiBob",status:"prog",note:"Title approved 9 Jun. Relocating to Germany Jan + 3-mo unpaid leave Oct–Dec — weigh Q4 coverage."},
+   {label:"Mikey — 15% max",target:"~70/20/10, majority on the 3 E1s",owner:"Ian / HR",due:"Load to HiBob",status:"prog",note:"Weight the priority E1 goal hardest — last year equal weighting let a 0% cost only a third."},
+   {label:"All bonused staff",target:"Goals weighted in HiBob; E1 weighted heaviest",owner:"Ian / Karen",due:"In progress",status:"prog",note:"End ad-hoc goal-setting; weightings on every plan."},
+   {label:"BU-wide EBITDA gate",target:"Sufficient accrued group EBITDA",owner:"Ian / Darren",due:"—",status:"mon",note:"Be far more precise on the EBITDA gate than last year."},
+   {label:"Pay-rise framing",target:"Performance-based, not cost-of-living",owner:"Ian",due:"—",status:"prog",note:"Drop all cost-of-living language; tie rises to company + job performance."}
+  ],
+  items:[
+   {type:"goal",title:"3 E1 proposals — #1 overarching goal",detail:"The three E1s must be good ones; Jake heads-up before they advance. Majority of Joe & Mikey bonus weighting sits here.",owner:"Ian",date:"9 Jun",status:"prog"},
+   {type:"goal",title:"FY26/27 EBITDA — £1.9m",detail:"Validate basis with Darren; excludes intercompany recharges + UVA/Arkham charge — may be overestimated.",owner:"Ian / Darren",date:"9 Jun",status:"mon"},
+   {type:"action",title:"Validate £1.9m P&L basis with Darren",detail:"Darren has April actuals; HR/IT/Sales-Ops/Finance recharges + UVA/Arkham could move it materially.",owner:"Ian / Darren",date:"9 Jun",status:"open"},
+   {type:"action",title:"Load Joe & Mikey targets into HiBob",detail:"~70/20/10, majority on the 3 E1s.",owner:"Ian / HR",date:"9 Jun",status:"prog"},
+   {type:"action",title:"Recalculate revenue-protection OKR",detail:"Cancellation window closes ~60 days out — recalc.",owner:"Ian",date:"9 Jun",status:"open"},
+   {type:"watch",title:"Joe relocation & unpaid leave",detail:"Germany relocation Jan + 3-mo unpaid travel break Oct–Dec. No precedent; only justified to retain him; Marcus unproven, cover likely falls on Ian. Weigh Q4 target impact.",owner:"Ian",date:"9 Jun",status:"mon"},
+   {type:"watch",title:"Malcolm / Fortran compiler succession",detail:"Landscape succession at Thursday's summer social.",owner:"Ian",date:"9 Jun",status:"open"},
+   {type:"watch",title:"Security — sandbox API-key incident",detail:"~$250 ChatGPT credits taken via an injection attack on a sandbox server that restarted its service after reboot (exposed the API key via the Python executor). Shut down; Joe & Marcus on report + remediation; alerts now routed to Ian's personal email for weekend cover.",owner:"Joe / Marcus",date:"9 Jun",status:"prog"},
+   {type:"disc",title:"Pipeline innovation ideas",detail:"Genomics & medical transcription are innovation ideas inside the pipeline — the old standalone 'commercial expansion' theme was removed.",owner:"Ian",date:"9 Jun",status:"open"}
+  ],
+  themes:[
+   {theme:"Financial visibility & recharges",good:"Clear, defensible P&L basis for the BU",signal:"£1.9m basis (recharges & UVA/Arkham) being worked with Darren (9 Jun)",rating:"Needs focus"},
+   {theme:"Leadership transition & org structure",good:"Clean reporting lines, accountability, smooth NAG handover",signal:"NAG structure essentially done; new question is Joe's leave & relocation (9 Jun)",rating:"Developing"},
+   {theme:"Talent retention",good:"Retain key staff; resolve cross-border employment cleanly",signal:"Eddie/Canada now a done deal; key risk shifts to Joe. Malcolm succession live (9 Jun)",rating:"Needs focus"},
+   {theme:"Governance & board reporting",good:"Quarterly deep-dives, clear naming, strong board prep",signal:"Tracked via Adrian's dashboard ↔ Ian's BU dashboard in the 1:1s (9 Jun)",rating:"Developing"},
+   {theme:"Proposal quality & accountability",good:"Rigorous review prevents weak proposals advancing",signal:"The 3 E1s must be good ones — Jake heads-up before they advance (9 Jun)",rating:"Needs focus"}
+  ],
+  log:[
+   {date:"2026-06-09",text:"1:1 / dashboard review — pruned the tracker. E1 proposals promoted to the #1 goal; NAG org structure, bonus sign-off and Eddie/Canada closed out. Joe dropped relocation (Germany, Jan) + a 3-mo unpaid break (Oct–Dec) 10 mins before the call; title → Director of R&D approved. Security incident on a sandbox server (~$250 credits via injection) shut down. P&L lands ~£1.9m but missing recharges + UVA/Arkham — validate with Darren."},
+   {date:"2026-05-12",text:"1:1 — Ian's bonus confirmed at £18,165 (55% score × 0.6 EBITDA gate × 35%). FY26/27 targets agreed: EBITDA £1.9m + 3 E1s, reviewed monthly. Flagged recharge of group costs into nAG-P P&L could move the £1.9m."},
+   {date:"2026-04-30",text:"PR review — bonus matrix restructured to fixed amounts; weightings on every plan; E1 weighted heaviest."},
+   {date:"2026-03-17",text:"First 1:1 of the cycle — BU priorities and retention map set."}
+  ]},
+ /* ---------------- JAKE KENNARD ---------------- */
+ {id:"jake",name:"Jake Kennard",role:"Innovation / E1 processing",email:"jake.kennard@n2grp.com",cur:"£",
+  bonus:[
+   {label:"FY EBITDA target — the bonus lever",target:"Hit FY EBITDA with disciplined, time-boxed growth spend",owner:"Jake / Adrian / Scales",due:"—",status:"mon",note:"This year's bonus is light; next year is the payout year. Align on the *how* of growth spend."}
+  ],
+  items:[
+   {type:"goal",title:"E1 processing — core mandate",detail:"3-month cycles; clear 'what good looks like' threshold; 50%/6-months where client speed limits. Risk: defining 'done', and not restarting the clock on assumption pivots.",owner:"Jake",date:"30 Apr",status:"prog"},
+   {type:"goal",title:"Exit Bioteam by August",detail:"Watch 'Bioteam creep'.",owner:"Jake",date:"August",status:"prog"},
+   {type:"action",title:"Growth-stream proposal for strategy meeting",detail:"Lead-investing-in-UK-startups + BioStack; one proposal each from Adrian and Jake.",owner:"Jake / Adrian",date:"—",status:"open"},
+   {type:"action",title:"Monthly EBITDA / goals dashboard (SLT)",detail:"Surface metrics to SLT each month.",owner:"Adrian",date:"—",status:"prog"},
+   {type:"action",title:"Lead gen — ROI test / rainmaker model",detail:"Apply an ROI test; consider the rainmaker model.",owner:"Jake",date:"—",status:"open"},
+   {type:"action",title:"CFO onboarding support",detail:"Darren started 1 May; month-end heading toward a week.",owner:"Jake",date:"1 May",status:"prog"},
+   {type:"watch",title:"Three PR risk areas",detail:"BU absorption; E1 'done' definition; strategy-change time sinks.",owner:"Jake",date:"30 Apr",status:"mon"}
+  ],
+  themes:[
+   {theme:"Direct catalyst for growth",good:"Be a direct catalyst for growth, not an overhead",signal:"PR direction (30 Apr): disciplined, time-boxed spend",rating:"Developing"},
+   {theme:"E1 throughput & rigour",good:"Predictable 3-month E1 cycles with clear done-criteria",signal:"Defining 'done' still a risk (30 Apr PR)",rating:"Needs focus"}
+  ],
+  log:[
+   {date:"2026-05-14",text:"1:1 — E1 cycle cadence and lead-gen ROI discussion."},
+   {date:"2026-04-30",text:"PR review — 'be a direct catalyst for growth'; EBITDA target is the bonus lever; exit Bioteam by August; manage the three risk areas."},
+   {date:"2026-03-26",text:"PR — E1-process and commercial-team themes set."},
+   {date:"2026-03-19",text:"1:1 — early-cycle priorities."}
+  ]},
+ /* ---------------- ADRIAN SCALES ---------------- */
+ {id:"scales",name:"Adrian Scales",role:"Interim finance / ops chief",email:"adrian.scales@n2grp.com",cur:"£",
+  bonus:[
+   {label:"Own salary & bonus",target:"?",owner:"Adrian Scales",due:"—",status:"open",note:"No figures appear in any transcript — placeholder. Add inline once known."}
+  ],
+  items:[
+   {type:"action",title:"Financial-reporting granularity",detail:"Increase MI / reporting detail across the group.",owner:"Adrian Scales",date:"—",status:"prog"},
+   {type:"action",title:"Bonus targets + Bob (HiBob) rollout",detail:"Load targets to Bob as the legal equivalent of letters.",owner:"Adrian Scales / Karen",date:"—",status:"prog"},
+   {type:"goal",title:"M&A target profiling",detail:"Profile acquisition targets.",owner:"Adrian Scales",date:"—",status:"prog"},
+   {type:"goal",title:"LTIP design",detail:"Design the long-term incentive plan.",owner:"Adrian Scales",date:"—",status:"prog"},
+   {type:"action",title:"Governance / general-counsel engagement",detail:"Engage GC; governance uplift.",owner:"Adrian Scales",date:"—",status:"prog"},
+   {type:"action",title:"R&D-tax overhaul",detail:"Overhaul the R&D tax approach.",owner:"Adrian Scales",date:"—",status:"prog"},
+   {type:"action",title:"Audit & earnout",detail:"Audit + earnout workstream.",owner:"Adrian Scales",date:"—",status:"prog"},
+   {type:"goal",title:"FY26 forecast",detail:"Build the FY26 forecast.",owner:"Adrian Scales",date:"—",status:"prog"},
+   {type:"watch",title:"Talos fundraising",detail:"Monitor.",owner:"Adrian Scales",date:"—",status:"mon"},
+   {type:"watch",title:"ECMWF terms",detail:"Monitor.",owner:"Adrian Scales",date:"—",status:"mon"},
+   {type:"watch",title:"BioTeam benefits",detail:"Monitor.",owner:"Adrian Scales",date:"—",status:"mon"},
+   {type:"action",title:"Pay-review round",detail:"Settled for this cycle.",owner:"Adrian Scales",date:"—",status:"done"}
+  ],
+  themes:[
+   {theme:"Operating above title",good:"Interim CFO/COO remit delivered well above grade",signal:"Both PRs confirm",rating:"Strength"},
+   {theme:"Ops & systems delivery",good:"Reliable systems / ops execution",signal:"Consistent",rating:"Strength"},
+   {theme:"SLT accountability backbone",good:"Becoming the accountability backbone of the SLT",signal:"PRs",rating:"Strength"},
+   {theme:"Key-person risk",good:"Reduce single-point dependence",signal:"Flagged as a development area",rating:"Needs focus"},
+   {theme:"Group governance / revenue headwinds",good:"Navigate group-level governance & revenue headwinds",signal:"PR development flag",rating:"Developing"}
+  ],
+  log:[
+   {date:"2026-06-08",text:"Finance sync — FY26 forecast and EBITDA validation."},
+   {date:"2026-05-11",text:"1:1 — silent / skipped (no content captured).",silent:true},
+   {date:"2026-04-20",text:"1:1 — silent / skipped (no content captured).",silent:true},
+   {date:"2026-03-19",text:"First 1:1 of the cycle — group finance priorities set."}
+  ]},
+ /* ---------------- JACK GIDDING ---------------- */
+ {id:"jack",name:"Jack Gidding",role:"STAC — MD",email:"jack.gidding@stacresearch.com",cur:"$",
+  bonus:[
+   {label:"Bonus documentation → Bob",target:"EBITDA-based tiers; upload to Bob as the legal equivalent of letters",owner:"Jack / Karen",due:"1 Jun",status:"prog",note:"Resolve David Whitney's base+commission plan as part of this."}
+  ],
+  items:[
+   {type:"goal",title:"STAC FY26/27",detail:"~$3.9M revenue / $500K EBITDA.",owner:"Jack",date:"—",status:"prog"},
+   {type:"goal",title:"Tier 3 vendor revenue",detail:"2 projects, +$50K by Q2; early engagement with Tier-3 vendors.",owner:"Jack / D. Whitney",date:"Q2",status:"prog"},
+   {type:"goal",title:"Membership retention",detail:"80% target; 8 renewals this quarter (2 need extra care); 6 new firms; +30% YoY sponsorship revenue.",owner:"Jack / J. Corcoran",date:"1 Jun",status:"prog"},
+   {type:"goal",title:"Summit / event revenue",detail:"+30% YoY; Chicago → New York, London, NPL mini-summit (9 Jul).",owner:"Jack / J. Corcoran",date:"1 Jun",status:"prog"},
+   {type:"goal",title:"Explore initiative (phased)",detail:"Q1 hypothesis → Q2 sponsor group → Q4 event.",owner:"Jack",date:"—",status:"open"},
+   {type:"action",title:"11 Jun alignment prep",detail:"Performance-vs-target deck; keep last cycle's structure; Adrian to send agenda ahead.",owner:"Jack",date:"11 Jun",status:"open"},
+   {type:"action",title:"David Whitney comp redesign",detail:"Base+commission aligned to the sales team; David refuses commission — mirror Matt's plan; resolve in bonus talks.",owner:"Jack",date:"1 Jun",status:"block"},
+   {type:"action",title:"Year-one detailed FY forecast",detail:"Non-linear yr1; straight-line yr2–4; use as a management tool, not just audit.",owner:"Jack",date:"—",status:"open"},
+   {type:"action",title:"Build tracking dashboards",detail:"Vendor research + events; feed metrics into alignment meetings & Adrian's shared dashboard.",owner:"Jack / Wendy",date:"12 May",status:"prog"},
+   {type:"action",title:"C2 stabilisation migrations",detail:"HubSpot, Xero, Drupal 7 upgrade, Asana→M365; cloud-cost cuts; negotiate vendor credits.",owner:"Jack",date:"18 Mar",status:"prog"},
+   {type:"action",title:"Hiring & capacity",detail:"Junior salesperson, contract Technical Delivery Manager, train Wendy on data, group controller onboarding.",owner:"Jack",date:"18 Mar",status:"prog"},
+   {type:"watch",title:"Key-person risk — Stuart's exit",detail:"Last day 5 Jun; confirm a clean, complete handover; no continuity gaps.",owner:"Jack",date:"5 Jun",status:"mon"},
+   {type:"watch",title:"Stack Insights continuity",detail:"Running product to protect post-Stuart.",owner:"Jack / Stuart",date:"23 Apr",status:"mon"},
+   {type:"watch",title:"David Whitney retention",detail:"Flat pay not incentivising; risk he seeks outside work — ties to the comp redesign.",owner:"Jack",date:"1 Jun",status:"mon"},
+   {type:"watch",title:"Forecasting / impairment",detail:"Keep a conservative forecast.",owner:"Jack",date:"4 Dec",status:"mon"},
+   {type:"disc",title:"BioStack E1",detail:"Cross-BU innovation with Jake & Ian; scalable benchmarks + small summer pilots.",owner:"Jack / Jake / Ian",date:"23 Apr",status:"open"},
+   {type:"disc",title:"Stack Insights E1 decision",detail:"Whether to formalise it as an E1.",owner:"Jack",date:"—",status:"open"},
+   {type:"disc",title:"Enabler / channel (WWT) model",detail:"Evaluate the enabler/channel model.",owner:"Jack",date:"—",status:"open"},
+   {type:"disc",title:"C2→C1 engine prioritisation",detail:"Sequence the engine work.",owner:"Jack",date:"—",status:"open"}
+  ],
+  themes:[
+   {theme:"Commercial execution",good:"Hit STAC revenue/EBITDA, retention and event targets",signal:"On track; Chicago events momentum strong",rating:"Developing"},
+   {theme:"Key-person & continuity risk",good:"Cover Stuart's exit cleanly; TDM to absorb delivery load",signal:"Live risk (1 Jun)",rating:"Needs focus"},
+   {theme:"Comp & incentives",good:"Resolve David's plan; load bonus to Bob",signal:"Blocked on David (1 Jun)",rating:"Needs focus"}
+  ],
+  log:[
+   {date:"2026-06-01",text:"PR — items deferred to actions (Bob upload, alignment prep, David comp, forecast, dashboards). Membership & events targets reaffirmed."},
+   {date:"2026-05-05",text:"PR — retention 'Welcome Back' and events programme reviewed."},
+   {date:"2026-03-31",text:"PR — STAC strategy, Tier-3 vendors and C2 migrations set."},
+   {date:"2026-05-12",text:"1:1 — financial/bonus model shared with Adrian (view-only, HR data protected); Xero transition ~10%."}
+  ]},
+ /* ---------------- JENNIFER WORTMAN ---------------- */
+ {id:"jen",name:"Jennifer Wortman",role:"BioTeam — lead",email:"jennifer@bioteam.net",cur:"$",
+  bonus:[
+   {label:"Jennifer — 30% bonus",target:"Progressive EBITDA buckets — pool fills once the EBITDA target is hit, with multipliers above",owner:"Jennifer / Adrian",due:"Interim scheme",status:"prog",note:"Confirmed 5 Jun PR. Longer-term consulting-model incentives baked in later."},
+   {label:"Michelle — 25% (VP)",target:"Performance-based",owner:"Jennifer",due:"—",status:"prog",note:""},
+   {label:"Wider-staff scheme",target:"Deferred",owner:"Jennifer",due:"—",status:"open",note:"Everyone else performance-based; wider scheme deferred this year."},
+   {label:"EBITDA target = bonus-pool trigger",target:"Hit EBITDA target (basis ~$5.3M / sub-$500k)",owner:"Jennifer",due:"—",status:"mon",note:"Adrian's framing: confidence matters more than the absolute. Verify the basis vs the live model."}
+  ],
+  items:[
+   {type:"goal",title:"AWS multiomics migration — lead priority",detail:"AWS-referred, ~year-long; port ~100 multiomics workflows to the cloud. Strong technical + strategic fit ('bread and butter') but capacity-constrained.",owner:"Jennifer",date:"5 Jun",status:"prog"},
+   {type:"action",title:"Resource the AWS project",detail:"John & Jacob are the workflow experts but committed → team around Ali (Claude Code adoption) + Brian (AI), with part-time senior science oversight. Protect margin first; NAG Services loan only as a last resort; any junior hire tied to the contract. Go very hard on AI automation.",owner:"Jennifer",date:"5 Jun",status:"prog"},
+   {type:"action",title:"Funded POC to scope AWS timeline",detail:"Scope with a funded POC before committing a timeline.",owner:"Jennifer",date:"—",status:"open"},
+   {type:"goal",title:"Revenue / EBITDA",detail:"April came in ~+$9k vs budget; the EBITDA target doubles as the bonus-pool trigger.",owner:"Jennifer",date:"—",status:"mon"},
+   {type:"action",title:"AI OKRs — value-spend map",detail:"Current-usage map done; next is the inverse time-/value-spend map so AI effort lands on the critical path. Currently behind.",owner:"Jennifer",date:"5 Jun",status:"prog"},
+   {type:"watch",title:"Contracts pipeline",detail:"Neogenomics signed & expanding; Sanofi RFI lost but warm (Michelle to run a lost-call); Emory scoping a large assessment; ECMWF milestone-based (20% on task 1).",owner:"Jennifer / Michelle",date:"5 Jun",status:"prog"},
+   {type:"disc",title:"BD ownership",detail:"Behavioural/cultural gap fixed through the grading system (principals/fellows owning a service line) + empowerment, not incentives or guidance — including willingness to move goalposts.",owner:"Jennifer / Adrian",date:"5 Jun",status:"open"}
+  ],
+  themes:[
+   {theme:"Business development",good:"Principals/fellows own service lines; empowered, accountable BD",signal:"Cultural gap; grading-system fix in train (5 Jun)",rating:"Needs focus"},
+   {theme:"Operating cadence & AI",good:"Tight cadence; AI effort on the critical path",signal:"AI value-map still behind (5 Jun)",rating:"Developing"}
+  ],
+  log:[
+   {date:"2026-06-05",text:"PR — bonus confirmed: Jennifer 30%, Michelle 25%, rest performance-based, progressive EBITDA buckets (interim). AWS multiomics migration is the lead priority; resourcing around Ali + Brian, margin-protected. Contracts: Neogenomics signed & expanding; Sanofi lost-but-warm; Emory & ECMWF live."},
+   {date:"2026-05-08",text:"1:1 — AWS opportunity scoping and AI-OKR mapping."},
+   {date:"2026-04-22",text:"1:1 — April actuals ~+$9k vs budget; revenue confidence discussion."}
+  ]},
+ /* ---------------- DEEPAK KHOSLA ---------------- */
+ {id:"deepak",name:"Deepak Khosla",role:"X-ISS — MD (Bismarck)",email:"dkhosla@x-iss.com",cur:"$",
+  bonus:[
+   {label:"Adjusted EBITDA",target:"≈ $450K (UK FY)",owner:"Deepak",due:"Board pack",status:"open",note:"Board-pack headline; still a placeholder until his revised number lands."},
+   {label:"Revenue ~$4M @ 15% net",target:"Driven by billable hours",owner:"Deepak",due:"—",status:"prog",note:""},
+   {label:"Earnout & leadership transition",target:"Earnout protected; move to part-time after Q1 next year",owner:"Deepak / Adrian",due:"Q1 next yr",status:"mon",note:"Confirm against the earnout agreement."},
+   {label:"Bonus scheme finalisation",target:"Differentiated technical / managed / professional-services schemes",owner:"Deepak / Adrian Scales",due:"—",status:"prog",note:""},
+   {label:"One-off bonus",target:"~£16K discrepancy",owner:"Deepak",due:"25 Mar",status:"done",note:"Resolved 25 Mar (logged in £ while the rest sits in $)."},
+   {label:"Pay review sign-off",target:"Performance-based model; $14K accrual shortfall; payroll audit",owner:"Deepak",due:"—",status:"prog",note:""}
+  ],
+  items:[
+   {type:"goal",title:"Utilisation OKRs",detail:"Delivery-focused billable utilisation targets.",owner:"Deepak",date:"—",status:"prog"},
+   {type:"goal",title:"Sales +30% & service-portfolio expansion",detail:"Grow sales 30%; widen the service portfolio.",owner:"Deepak",date:"—",status:"prog"},
+   {type:"action",title:"NAGS billable-hours sub-OKR",detail:"nAG Services billable-hours target.",owner:"Deepak",date:"—",status:"prog"},
+   {type:"action",title:"Dennis Runner hire — Senior Delivery Director",detail:"Senior delivery leadership hire.",owner:"Deepak",date:"—",status:"open"},
+   {type:"goal",title:"EMEA / E1",detail:"EMEA expansion / E1 proposal.",owner:"Deepak",date:"—",status:"open"},
+   {type:"action",title:"Strategy deck",detail:"Build the strategy deck.",owner:"Deepak",date:"—",status:"open"},
+   {type:"watch",title:"Churn / Bismarck integration",detail:"Monitor churn through the X-ISS ↔ nAG Services integration.",owner:"Deepak",date:"—",status:"mon"},
+   {type:"watch",title:"EOD value-prop clarity",detail:"Clarify the EOD value proposition.",owner:"Deepak",date:"—",status:"mon"},
+   {type:"watch",title:"Professional-services separation",detail:"Separate professional services cleanly.",owner:"Deepak",date:"—",status:"mon"},
+   {type:"watch",title:"Houston closure",detail:"Houston site closure.",owner:"Deepak",date:"—",status:"mon"},
+   {type:"watch",title:"Cognitive hiring tests",detail:"Introduce cognitive tests in hiring.",owner:"Deepak",date:"—",status:"open"},
+   {type:"watch",title:"MEA",detail:"Monitor.",owner:"Deepak",date:"—",status:"mon"},
+   {type:"disc",title:"Earnout expense definitions",detail:"Definitions agreed.",owner:"Deepak / Adrian",date:"—",status:"done"}
+  ],
+  themes:[
+   {theme:"Delivery & utilisation",good:"Billable-hours utilisation up across delivery",signal:"OKRs in flight",rating:"Developing"},
+   {theme:"Growth — sales & portfolio",good:"+30% sales; expand the service portfolio",signal:"In progress",rating:"Developing"},
+   {theme:"Bismarck integration",good:"Clean X-ISS ↔ nAG Services integration; manage churn",signal:"Monitoring",rating:"Needs focus"},
+   {theme:"Leadership transition",good:"Earnout protected; orderly move to part-time",signal:"After Q1 next year",rating:"Watch"},
+   {theme:"Comp & schemes",good:"Differentiated PS / managed / technical schemes; clean payroll",signal:"$14K accrual shortfall; payroll audit",rating:"Needs focus"}
+  ],
+  log:[
+   {date:"2026-05-14",text:"Pay review — performance-based model; $14K accrual shortfall and payroll audit flagged."},
+   {date:"2026-04-30",text:"PR — earnout/part-time terms and differentiated bonus schemes discussed."},
+   {date:"2026-04-02",text:"1:1 — silent / skipped (no content captured).",silent:true},
+   {date:"2026-03-25",text:"~£16K one-off bonus discrepancy resolved."}
+  ]}
+ ]
+};
+
+/* ============ STATE + STORAGE (graceful fallback) ============ */
+const KEY="team-1to1-hub-v1";
+let DATA, current=0, activeTab="priorities";
+function clone(o){return JSON.parse(JSON.stringify(o));}
+async function load(){
+  // URL hash wins (snapshot share), then Supabase, then localStorage cache, then seed
+  try{ if(location.hash.length>1){ const d=decodeState(location.hash.slice(1)); if(d&&d.people){return d;} } }catch(e){}
+  try{ const row = await sbFetch(); if(row && row.data && row.data.people) return row.data; }
+  catch(e){ console.warn('Supabase fetch failed, using local fallback:', e); }
+  try{ const s=localStorage.getItem(KEY); if(s){const d=JSON.parse(s); if(d&&d.people){return d;}} }catch(e){}
+  return clone(SEED);
+}
+function persist(){
+  DATA.updatedAt=new Date().toISOString();
+  try{ localStorage.setItem(KEY,JSON.stringify(DATA)); }catch(e){}
+  renderStamp();
+  // debounced Supabase save: rapid edits coalesce into one network round-trip
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{ saveTimer = null; sbSave(); }, 800);
+}
+function decodeState(b64){ return JSON.parse(decodeURIComponent(escape(atob(b64)))); }
+function encodeState(obj){ return btoa(unescape(encodeURIComponent(JSON.stringify(obj)))); }
+
+/* ============ HELPERS ============ */
+const ST={open:["Open","b-open"],prog:["In progress","b-prog"],block:["Blocked","b-block"],mon:["Monitoring","b-mon"],done:["Done","b-done"]};
+const STORDER=["open","prog","block","mon","done"];
+const LANES=[["goal","Goals","var(--green)"],["action","Actions","var(--blue)"],["watch","Watch","var(--amber)"],["disc","Discussion","var(--grey)"]];
+const TABS=[
+  ["priorities","Priorities",d=>d.items.length],
+  ["themes","PR themes",d=>d.themes.length],
+  ["bonus","Bonus & targets",d=>d.bonus.length],
+  ["log","1:1 log",d=>d.log.length]
+];
+function esc(s){return (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function initials(n){return n.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase();}
+function p(){return DATA.people[current];}
+
+/* ============ RENDER ============ */
+function renderStamp(){
+  const by=DATA.updatedBy?("by "+esc(DATA.updatedBy)+" "):"";
+  const at=DATA.updatedAt?new Date(DATA.updatedAt).toLocaleString():"—";
+  document.getElementById("stamp").innerHTML="Updated "+by+"<br>"+at;
+}
+function renderSide(){
+  document.getElementById("plist").innerHTML=DATA.people.map((pp,i)=>`
+    <li class="pitem ${i===current?'active':''}" onclick="select(${i})">
+      <span class="dot" style="background:${ACCENT[pp.id]||'#888'}">${initials(pp.name)}</span>
+      <span class="pmeta"><span class="nm">${esc(pp.name)}</span><span class="rl">${esc(pp.role)}</span></span>
+      <span class="cur">${esc(pp.cur)}</span>
+    </li>`).join("");
+}
+function statusSel(val,onch){
+  return `<select onchange="${onch}">`+STORDER.map(k=>`<option value="${k}" ${k===val?'selected':''}>${ST[k][0]}</option>`).join("")+`</select>`;
+}
+function badge(val){const s=ST[val]||ST.open;return `<span class="badge ${s[1]}">${s[0]}</span>`;}
+
+function render(){
+  const d=p();
+
+  const bonus=`
+      <div class="panehd"><button class="add" onclick="addBonus()">+ Add target</button></div>
+      <div class="bonus">
+        ${d.bonus.map((b,i)=>`
+          <div class="brow">
+            <div class="label" contenteditable onblur="setB(${i},'label',this)">${esc(b.label)}</div>
+            <div class="target" contenteditable onblur="setB(${i},'target',this)">${esc(b.target)}</div>
+            <div class="metarow">
+              <span><span class="k">Owner</span><span contenteditable onblur="setB(${i},'owner',this)">${esc(b.owner)}</span></span>
+              <span><span class="k">Due</span><span contenteditable onblur="setB(${i},'due',this)">${esc(b.due)}</span></span>
+              <span>${statusSel(b.status,`setB(${i},'status',{value:this.value})`)}</span>
+              <button class="icon" title="Delete" onclick="delB(${i})" style="margin-left:auto">✕</button>
+            </div>
+            ${b.note!==undefined?`<div class="note" contenteditable onblur="setB(${i},'note',this)">${esc(b.note)}</div>`:''}
+          </div>`).join("")}
+      </div>`;
+
+  const lanes=LANES.map(l=>{
+    const its=d.items.map((it,idx)=>({it,idx})).filter(o=>o.it.type===l[0]);
+    if(!its.length) return "";
+    return `<div class="lane">
+      <div class="lanehd"><span class="bar" style="background:${l[2]}"></span>${l[1]} · ${its.length}</div>
+      <div class="cards">
+        ${its.map(({it,idx})=>card(it,idx)).join("")}
+      </div></div>`;
+  }).join("");
+  const priorities=`
+      <div class="panehd"><button class="add" onclick="addItem()">+ Add priority</button></div>
+      ${lanes||'<p class="muted">No priorities yet.</p>'}`;
+
+  const themes=`
+      <div class="panehd"><button class="add" onclick="addTheme()">+ Add theme</button></div>
+      <div class="themes">
+        ${d.themes.map((t,i)=>`
+          <div class="theme">
+            <div class="th" contenteditable onblur="setT(${i},'theme',this)">${esc(t.theme)}
+              <button class="icon" title="Delete" onclick="delT(${i})" style="float:right">✕</button></div>
+            <div class="lbl">What good looks like</div>
+            <div class="tx" contenteditable onblur="setT(${i},'good',this)">${esc(t.good)}</div>
+            <div class="lbl">Live signal</div>
+            <div class="tx" contenteditable onblur="setT(${i},'signal',this)">${esc(t.signal)}</div>
+            <div class="lbl">Rating</div>
+            <div class="tx" contenteditable onblur="setT(${i},'rating',this)">${esc(t.rating)}</div>
+          </div>`).join("")}
+      </div>`;
+
+  const log=`
+      <div class="panehd"><button class="add" onclick="addLog()">+ Add entry</button></div>
+      <div class="log">
+        ${d.log.map((e,i)=>`
+          <div class="logrow ${e.silent?'silent':''}">
+            <div class="logdate" contenteditable onblur="setL(${i},'date',this)">${esc(e.date)}${e.silent?' · silent':''}</div>
+            <div class="logtext" contenteditable onblur="setL(${i},'text',this)">${esc(e.text)}</div>
+            <button class="icon" title="Delete" onclick="delL(${i})" style="position:absolute;top:10px;right:0">✕</button>
+          </div>`).join("")}
+      </div>`;
+
+  const panes={priorities,themes,bonus,log};
+  if(!panes[activeTab])activeTab="priorities";
+  const tabs=TABS.map(t=>`
+    <button class="tab ${activeTab===t[0]?'on':''}" onclick="setTab('${t[0]}')">
+      ${t[1]}<span class="tcount">${t[2](d)}</span></button>`).join("");
+
+  document.getElementById("main").innerHTML=`
+    <div class="head">
+      <span class="dot" style="background:${ACCENT[d.id]||'#888'}">${initials(d.name)}</span>
+      <div>
+        <h2 contenteditable onblur="setMeta('name',this)">${esc(d.name)}</h2>
+        <div class="sub"><b contenteditable onblur="setMeta('role',this)">${esc(d.role)}</b> ·
+          <span contenteditable onblur="setMeta('email',this)">${esc(d.email)}</span> ·
+          reporting currency <b contenteditable onblur="setMeta('cur',this)">${esc(d.cur)}</b></div>
+      </div>
+      <div class="toolbar">
+        <button onclick="shareLink()">Share link</button>
+        <button onclick="exportOne()">Export ${esc(d.name.split(' ')[0])}</button>
+        <button onclick="window.print()">Print</button>
+      </div>
+    </div>
+    <div class="tabs">${tabs}</div>
+    <div class="pane">${panes[activeTab]}</div>`;
+  renderSide();
+}
+function card(it,idx){
+  return `<div class="card">
+    <div class="corner">
+      <select class="icon" style="width:auto;padding:0 2px" title="Type" onchange="setI(${idx},'type',{value:this.value})">
+        ${LANES.map(l=>`<option value="${l[0]}" ${l[0]===it.type?'selected':''}>${l[1].replace(/s$/,'')}</option>`).join("")}
+      </select>
+      <button class="icon" title="Delete" onclick="delI(${idx})">✕</button>
+    </div>
+    <div class="ctitle" contenteditable onblur="setI(${idx},'title',this)">${esc(it.title)}</div>
+    <div class="cdetail" contenteditable onblur="setI(${idx},'detail',this)">${esc(it.detail)}</div>
+    <div class="metarow">
+      <span><span class="k">Owner</span><span contenteditable onblur="setI(${idx},'owner',this)">${esc(it.owner)}</span></span>
+      <span><span class="k">Due</span><span contenteditable onblur="setI(${idx},'date',this)">${esc(it.date)}</span></span>
+      <span>${statusSel(it.status,`setI(${idx},'status',{value:this.value})`)}</span>
+    </div>
+  </div>`;
+}
+
+/* ============ MUTATIONS ============ */
+function val(el){return el.value!==undefined?el.value:el.innerText.trim();}
+function setMeta(k,el){p()[k]=val(el);persist();if(k==='name'||k==='role'||k==='cur')renderSide();}
+function setB(i,k,el){p().bonus[i][k]=val(el);persist();if(k==='status')render();}
+function setI(i,k,el){p().items[i][k]=val(el);persist();if(k==='status'||k==='type')render();}
+function setT(i,k,el){p().themes[i][k]=val(el);persist();}
+function setL(i,k,el){let v=val(el);if(k==='date')v=v.replace(/ · silent$/,'');p().log[i][k]=v;persist();}
+function addBonus(){p().bonus.push({label:"New target",target:"",owner:"",due:"",status:"open",note:""});persist();render();}
+function addItem(){p().items.unshift({type:"action",title:"New priority",detail:"",owner:"",date:"",status:"open"});persist();render();}
+function addTheme(){p().themes.push({theme:"New theme",good:"",signal:"",rating:""});persist();render();}
+function addLog(){p().log.unshift({date:new Date().toISOString().slice(0,10),text:""});persist();render();}
+function delB(i){p().bonus.splice(i,1);persist();render();}
+function delI(i){p().items.splice(i,1);persist();render();}
+function delT(i){p().themes.splice(i,1);persist();render();}
+function delL(i){p().log.splice(i,1);persist();render();}
+function select(i){current=i;render();document.querySelector('.side').classList.remove('open');window.scrollTo(0,0);}
+function setTab(k){activeTab=k;render();window.scrollTo(0,0);}
+
+/* ============ IO ============ */
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1900);}
+function download(name,obj){
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();
+}
+function exportAll(){download("team-1to1-hub.json",DATA);toast("Exported all six");}
+function exportOne(){download((p().name.replace(/\s+/g,"-").toLowerCase())+"-tracker.json",p());toast("Exported "+p().name.split(" ")[0]);}
+function importJSON(ev){
+  const f=ev.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{try{
+    const d=JSON.parse(r.result);
+    if(d.people){DATA=d;current=0;}                       // full hub file
+    else if(d.id&&d.items){                               // single-person file
+      const idx=DATA.people.findIndex(x=>x.id===d.id);
+      if(idx>=0){DATA.people[idx]=d;current=idx;} else {DATA.people.push(d);current=DATA.people.length-1;}
+    } else {toast("Unrecognised file");return;}
+    persist();render();toast("Imported");
+  }catch(e){toast("Import failed — invalid JSON");}};
+  r.readAsText(f);ev.target.value="";
+}
+function shareLink(){
+  if(!DATA.updatedBy){const who=prompt("Your name (stamped on the link):","");if(who)DATA.updatedBy=who;}
+  persist();
+  const url=location.origin+location.pathname+"#"+encodeState(DATA);
+  navigator.clipboard.writeText(url).then(()=>toast("Share link copied"),()=>{prompt("Copy this link:",url);});
+}
+
+/* ============ BOOT ============ */
+async function initApp(){
+  DATA = await load();
+  if(!DATA.version) DATA.version = "unified-v1";
+  render(); renderStamp();
+}
+window.addEventListener("hashchange",()=>{try{const d=decodeState(location.hash.slice(1));if(d&&d.people){DATA=d;current=0;render();toast("Loaded from link");}}catch(e){}});
+if (sessionStorage.getItem('sltpin') === '1') {
+  document.getElementById('pin-overlay').classList.add('hidden');
+  initApp();
+}
+</script>
+</body>
+</html>
