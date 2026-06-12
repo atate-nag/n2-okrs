@@ -6,12 +6,12 @@
 <title>1:1 Hub — Direct Reports</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F4F1E8; --paper2:#EFEADC; --card:#FBF9F3; --ink:#2A2620; --muted:#776F62;
-  --line:#DCD4C4; --line2:#C9C0AD; --gold:#B0832F; --goldbg:#F6ECD4; --goldline:#E4CE97;
-  --blue:#3A6B8A; --amber:#B07A24; --red:#A6492F; --green:#4F7340; --grey:#8A8174;
+  --paper:#F7F8FB; --paper2:#EEF2F8; --card:#FFFFFF; --ink:#0F1419; --muted:#5B6573;
+  --line:#E4E9F0; --line2:#CFD7E2; --gold:#2563EB; --goldbg:#EBF1FE; --goldline:#BFD3F8;
+  --blue:#2563EB; --amber:#D97706; --red:#DC2626; --green:#10B981; --grey:#6B7280;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -22,14 +22,14 @@ body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-s
 .side{width:248px;flex:0 0 248px;background:var(--paper2);border-right:1px solid var(--line2);
   position:sticky;top:0;height:100vh;overflow-y:auto;padding:20px 0}
 .brand{padding:0 20px 16px;border-bottom:1px solid var(--line);margin-bottom:10px}
-.brand h1{font-family:Fraunces,serif;font-weight:600;font-size:19px;margin:0;letter-spacing:-.01em}
+.brand h1{font-family:'Space Grotesk',Inter,sans-serif;font-weight:600;font-size:19px;margin:0;letter-spacing:-.01em}
 .brand p{margin:3px 0 0;font-size:11.5px;color:var(--muted);font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em}
 .plist{list-style:none;margin:0;padding:6px 10px}
 .pitem{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer;margin-bottom:2px;border:1px solid transparent}
 .pitem:hover{background:#EAE3D2}
 .pitem.active{background:var(--card);border-color:var(--line2);box-shadow:0 1px 2px rgba(0,0,0,.04)}
 .dot{width:30px;height:30px;flex:0 0 30px;border-radius:50%;display:grid;place-items:center;
-  font-family:Fraunces,serif;font-weight:600;font-size:13px;color:#fff}
+  font-family:'Space Grotesk',Inter,sans-serif;font-weight:600;font-size:13px;color:#fff}
 .pmeta{min-width:0}
 .pmeta .nm{font-weight:600;font-size:13.5px;line-height:1.2}
 .pmeta .rl{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -41,7 +41,7 @@ body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-s
 .main{flex:1;min-width:0;padding:30px 38px 80px;max-width:1020px}
 .head{display:flex;align-items:flex-start;gap:16px;border-bottom:1px solid var(--line2);padding-bottom:18px;margin-bottom:6px}
 .head .dot{width:46px;height:46px;flex:0 0 46px;font-size:18px}
-.head h2{font-family:Fraunces,serif;font-weight:600;font-size:27px;margin:0;letter-spacing:-.015em}
+.head h2{font-family:'Space Grotesk',Inter,sans-serif;font-weight:600;font-size:27px;margin:0;letter-spacing:-.015em}
 .head .sub{color:var(--muted);font-size:13px;margin-top:2px}
 .head .sub b{color:var(--ink);font-weight:600}
 .toolbar{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;max-width:330px}
@@ -52,7 +52,7 @@ button.ghost{background:transparent}
 .strip{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 26px}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:8px 13px;min-width:74px}
 .tile.gold{background:var(--goldbg);border-color:var(--goldline)}
-.tile .n{font-family:Fraunces,serif;font-size:21px;font-weight:600;line-height:1}
+.tile .n{font-family:'Space Grotesk',Inter,sans-serif;font-size:21px;font-weight:600;line-height:1}
 .tile .l{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-top:3px;font-family:"IBM Plex Mono",monospace}
 
 /* tabs */
@@ -70,7 +70,7 @@ button.ghost{background:transparent}
 .section{margin-bottom:34px}
 .sechd{display:flex;align-items:baseline;gap:10px;margin:0 0 13px}
 .secnum{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--gold);font-weight:500}
-.sechd h3{font-family:Fraunces,serif;font-weight:600;font-size:17px;margin:0;letter-spacing:-.01em}
+.sechd h3{font-family:'Space Grotesk',Inter,sans-serif;font-weight:600;font-size:17px;margin:0;letter-spacing:-.01em}
 .sechd .add{margin-left:auto}
 
 /* bonus */
@@ -148,12 +148,67 @@ select{font-family:"IBM Plex Mono",monospace;font-size:11px;border:1px solid var
 /* ---- PIN overlay ---- */
 #pin-overlay{position:fixed;inset:0;background:var(--paper);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;}
 #pin-overlay.hidden{display:none;}
-#pin-overlay h2{font-family:Fraunces,serif;font-weight:500;font-size:22px;color:var(--ink);margin:0;letter-spacing:-.01em;}
+#pin-overlay h2{font-family:'Space Grotesk',Inter,sans-serif;font-weight:500;font-size:22px;color:var(--ink);margin:0;letter-spacing:-.01em;}
 #pin-overlay .sub{color:var(--muted);font-size:13px;margin-top:-10px;}
 #pin-overlay input{font-family:'IBM Plex Mono',monospace;font-size:22px;text-align:center;letter-spacing:8px;width:220px;padding:12px;border:1px solid var(--line2);border-radius:8px;background:var(--card);color:var(--ink);outline:none;}
 #pin-overlay input:focus{border-color:var(--gold);}
 #pin-overlay .pin-error{color:var(--red);font-size:13px;min-height:18px;}
 #pin-overlay button{padding:9px 28px;border:none;border-radius:8px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:500;cursor:pointer;font-family:inherit;}
+
+/* ---- chunkier + brighter overrides ---- */
+body{font-size:15px}
+.head h2{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.brand h1{font-size:21px;font-weight:700;letter-spacing:-.015em}
+.pitem{padding:11px 12px;border-radius:10px;border-width:2px;border-color:transparent}
+.pitem:hover{background:#E1E8F2}
+.pitem.active{background:var(--card);border-color:var(--line2);box-shadow:0 1px 3px rgba(15,20,25,.06)}
+.pmeta .nm{font-size:14.5px;font-weight:600}
+.card,.theme{border-width:2px;border-radius:14px;padding:16px 18px}
+.card .ctitle{font-size:14.5px}
+.bonus{border-width:2px;border-radius:14px;padding:10px 20px 18px}
+.brow{padding:14px 0}
+.brow .label{font-size:15.5px;font-weight:700}
+.brow .target{font-size:13px;padding:7px 11px;border-radius:8px;border-width:2px}
+button{padding:8px 14px;font-size:13px;border-width:2px;font-weight:500;border-radius:9px}
+.tab{padding:11px 16px;font-size:14.5px;font-weight:600;border-bottom-width:3px}
+.tab.on{font-weight:700}
+.badge{font-size:11.5px;padding:3px 10px;font-weight:600;border-width:2px}
+.tile{border-width:2px;border-radius:12px;padding:10px 14px}
+.tile .n{font-weight:700}
+.icon{width:24px;height:24px;border-width:2px}
+[contenteditable]:hover{background:var(--goldbg)}
+[contenteditable]:focus{background:#fff;box-shadow:0 0 0 2px var(--gold)}
+select{padding:4px 7px;font-size:12px;border-width:2px;border-radius:7px}
+
+/* ---- progress / confidence pills ---- */
+.kpi{display:inline-flex;align-items:center;gap:10px;margin-left:auto}
+.kpi .group{display:inline-flex;align-items:center;gap:5px}
+.kpi .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.metric{display:inline-block;min-width:54px;height:30px;line-height:30px;border-radius:8px;text-align:center;
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;padding:0 8px;border:2px solid transparent;cursor:text}
+.tl-green{background:#D1FAE5;color:#065F46;border-color:#A7F3D0}
+.tl-amber{background:#FEF3C7;color:#92400E;border-color:#FCD86E}
+.tl-red{background:#FEE2E2;color:#991B1B;border-color:#FCA5A5}
+.tl-grey{background:#F3F4F6;color:#6B7280;border-color:#E5E7EB}
+
+/* ---- manager-only inline member-PIN editor (header) ---- */
+.pin-field{display:inline-flex;align-items:center;gap:7px;margin-left:10px;padding:3px 10px;background:var(--goldbg);
+  border:2px solid var(--goldline);border-radius:8px;font-size:11.5px;color:var(--gold);vertical-align:middle}
+.pin-field .pf-label{font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.06em;font-size:10px;font-weight:600}
+.pin-field [contenteditable]{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:700;color:var(--ink);letter-spacing:1.5px;background:#fff;padding:1px 7px;border-radius:5px;min-width:70px;display:inline-block;text-align:center}
+
+/* ---- member view-only mode (set on body when a member PIN unlocks) ---- */
+body.viewonly [contenteditable]{pointer-events:none}
+body.viewonly [contenteditable]:hover,
+body.viewonly [contenteditable]:focus{background:transparent;box-shadow:none}
+body.viewonly .add,
+body.viewonly button.icon,
+body.viewonly .toolbar button,
+body.viewonly .pin-field,
+body.viewonly .sidefoot button,
+body.viewonly select{display:none!important}
+body.viewonly .side .plist{pointer-events:none}
+body.viewonly .metric{cursor:default}
 </style>
 </head>
 <body>
@@ -213,16 +268,30 @@ async function sbSave(){
   }
 }
 
-function checkPin(){
-  if (document.getElementById('pin-input').value === SLT_PIN) {
-    sessionStorage.setItem('sltpin', '1');
+async function checkPin(){
+  const v = document.getElementById('pin-input').value;
+  if (v === SLT_PIN) {
+    sessionStorage.setItem('sltpin', 'manager');
     document.getElementById('pin-overlay').classList.add('hidden');
     initApp();
-  } else {
-    document.getElementById('pin-error').textContent = 'Incorrect PIN';
-    document.getElementById('pin-input').value = '';
-    document.getElementById('pin-input').focus();
+    return;
   }
+  // Member PIN: needs data loaded to check person.pin values.
+  try{
+    const row = await sbFetch();
+    if (row && row.data && row.data.people) {
+      const match = row.data.people.find(pp => (pp.pin||'') && pp.pin === v);
+      if (match) {
+        sessionStorage.setItem('sltpin', 'member:' + match.id);
+        document.getElementById('pin-overlay').classList.add('hidden');
+        initApp(match.id);
+        return;
+      }
+    }
+  } catch(e){ console.warn(e); }
+  document.getElementById('pin-error').textContent = 'Incorrect PIN';
+  document.getElementById('pin-input').value = '';
+  document.getElementById('pin-input').focus();
 }
 document.getElementById('pin-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
 
@@ -292,7 +361,8 @@ const SEED={
  /* ---------------- ADRIAN SCALES ---------------- */
  {id:"scales",name:"Adrian Scales",role:"Interim finance / ops chief",email:"adrian.scales@n2grp.com",cur:"£",
   bonus:[
-   {label:"Own salary & bonus",target:"?",owner:"Adrian Scales",due:"—",status:"open",note:"No figures appear in any transcript — placeholder. Add inline once known."}
+   {label:"Group EBITDA",target:"£2M (50% weight)",owner:"Adrian Scales",due:"FY26–27",status:"prog",note:"",prog:"0%",conf:"50%"},
+   {label:"Strategic acquisition",target:"1 acquisition in Due Diligence (50% weight)",owner:"Adrian Scales",due:"FY26–27",status:"prog",note:"",prog:"0%",conf:"50%"}
   ],
   items:[
    {type:"action",title:"Financial-reporting granularity",detail:"Increase MI / reporting detail across the group.",owner:"Adrian Scales",date:"—",status:"prog"},
@@ -469,17 +539,23 @@ function renderStamp(){
   document.getElementById("stamp").innerHTML="Updated "+by+"<br>"+at;
 }
 function renderSide(){
-  document.getElementById("plist").innerHTML=DATA.people.map((pp,i)=>`
-    <li class="pitem ${i===current?'active':''}" onclick="select(${i})">
+  const memberMode = document.body.classList.contains('viewonly');
+  const list = memberMode ? [DATA.people[current]] : DATA.people;
+  document.getElementById("plist").innerHTML = list.map((pp,i)=>{
+    const idx = memberMode ? current : i;
+    const click = memberMode ? '' : `onclick="select(${idx})"`;
+    return `
+    <li class="pitem ${idx===current?'active':''}" ${click}>
       <span class="dot" style="background:${ACCENT[pp.id]||'#888'}">${initials(pp.name)}</span>
       <span class="pmeta"><span class="nm">${esc(pp.name)}</span><span class="rl">${esc(pp.role)}</span></span>
       <span class="cur">${esc(pp.cur)}</span>
-    </li>`).join("");
+    </li>`;}).join("");
 }
 function statusSel(val,onch){
   return `<select onchange="${onch}">`+STORDER.map(k=>`<option value="${k}" ${k===val?'selected':''}>${ST[k][0]}</option>`).join("")+`</select>`;
 }
 function badge(val){const s=ST[val]||ST.open;return `<span class="badge ${s[1]}">${s[0]}</span>`;}
+function tlClass(v){const n=parseFloat(String(v||'').replace('%','').trim());if(isNaN(n)||n<=0)return 'tl-grey';if(n<40)return 'tl-red';if(n<70)return 'tl-amber';return 'tl-green';}
 
 function render(){
   const d=p();
@@ -495,7 +571,11 @@ function render(){
               <span><span class="k">Owner</span><span contenteditable onblur="setB(${i},'owner',this)">${esc(b.owner)}</span></span>
               <span><span class="k">Due</span><span contenteditable onblur="setB(${i},'due',this)">${esc(b.due)}</span></span>
               <span>${statusSel(b.status,`setB(${i},'status',{value:this.value})`)}</span>
-              <button class="icon" title="Delete" onclick="delB(${i})" style="margin-left:auto">✕</button>
+              <span class="kpi">
+                <span class="group"><span class="k">Conf</span><span class="metric ${tlClass(b.conf)}" contenteditable onblur="setB(${i},'conf',this)">${esc(b.conf||'0%')}</span></span>
+                <span class="group"><span class="k">Prog</span><span class="metric ${tlClass(b.prog)}" contenteditable onblur="setB(${i},'prog',this)">${esc(b.prog||'0%')}</span></span>
+              </span>
+              <button class="icon" title="Delete" onclick="delB(${i})">✕</button>
             </div>
             ${b.note!==undefined?`<div class="note" contenteditable onblur="setB(${i},'note',this)">${esc(b.note)}</div>`:''}
           </div>`).join("")}
@@ -554,7 +634,12 @@ function render(){
         <h2 contenteditable onblur="setMeta('name',this)">${esc(d.name)}</h2>
         <div class="sub"><b contenteditable onblur="setMeta('role',this)">${esc(d.role)}</b> ·
           <span contenteditable onblur="setMeta('email',this)">${esc(d.email)}</span> ·
-          reporting currency <b contenteditable onblur="setMeta('cur',this)">${esc(d.cur)}</b></div>
+          reporting currency <b contenteditable onblur="setMeta('cur',this)">${esc(d.cur)}</b>
+          <span class="pin-field" title="Member PIN — share with this person to give them private access to their own page">
+            <span class="pf-label">Member PIN</span>
+            <span contenteditable onblur="setMeta('pin',this)">${esc(d.pin||'')}</span>
+          </span>
+        </div>
       </div>
       <div class="toolbar">
         <button onclick="shareLink()">Share link</button>
@@ -587,11 +672,11 @@ function card(it,idx){
 /* ============ MUTATIONS ============ */
 function val(el){return el.value!==undefined?el.value:el.innerText.trim();}
 function setMeta(k,el){p()[k]=val(el);persist();if(k==='name'||k==='role'||k==='cur')renderSide();}
-function setB(i,k,el){p().bonus[i][k]=val(el);persist();if(k==='status')render();}
+function setB(i,k,el){p().bonus[i][k]=val(el);persist();if(k==='status'||k==='prog'||k==='conf')render();}
 function setI(i,k,el){p().items[i][k]=val(el);persist();if(k==='status'||k==='type')render();}
 function setT(i,k,el){p().themes[i][k]=val(el);persist();}
 function setL(i,k,el){let v=val(el);if(k==='date')v=v.replace(/ · silent$/,'');p().log[i][k]=v;persist();}
-function addBonus(){p().bonus.push({label:"New target",target:"",owner:"",due:"",status:"open",note:""});persist();render();}
+function addBonus(){p().bonus.push({label:"New target",target:"",owner:"",due:"",status:"open",note:"",prog:"0%",conf:"50%"});persist();render();}
 function addItem(){p().items.unshift({type:"action",title:"New priority",detail:"",owner:"",date:"",status:"open"});persist();render();}
 function addTheme(){p().themes.push({theme:"New theme",good:"",signal:"",rating:""});persist();render();}
 function addLog(){p().log.unshift({date:new Date().toISOString().slice(0,10),text:""});persist();render();}
@@ -632,15 +717,25 @@ function shareLink(){
 }
 
 /* ============ BOOT ============ */
-async function initApp(){
+async function initApp(memberId){
   DATA = await load();
   if(!DATA.version) DATA.version = "unified-v1";
+  if (memberId) {
+    const idx = DATA.people.findIndex(pp => pp.id === memberId);
+    if (idx >= 0) { current = idx; document.body.classList.add('viewonly'); }
+  }
   render(); renderStamp();
 }
 window.addEventListener("hashchange",()=>{try{const d=decodeState(location.hash.slice(1));if(d&&d.people){DATA=d;current=0;render();toast("Loaded from link");}}catch(e){}});
-if (sessionStorage.getItem('sltpin') === '1') {
-  document.getElementById('pin-overlay').classList.add('hidden');
-  initApp();
+{
+  const session = sessionStorage.getItem('sltpin');
+  if (session === '1' || session === 'manager') {
+    document.getElementById('pin-overlay').classList.add('hidden');
+    initApp();
+  } else if (session && session.startsWith('member:')) {
+    document.getElementById('pin-overlay').classList.add('hidden');
+    initApp(session.slice(7));
+  }
 }
 </script>
 </body>

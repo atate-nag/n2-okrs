@@ -1,170 +1,8 @@
 {
-  "version": "unified-v1",
-  "updatedBy": "",
-  "updatedAt": "",
   "people": [
     {
       "id": "ian",
-      "name": "Ian Wilson",
-      "role": "nAG Product — BU lead",
-      "email": "ian.wilson@n2grp.com",
       "cur": "£",
-      "bonus": [
-        {
-          "label": "Ian — 35% bonus",
-          "target": "EBITDA £1.9m + 3 × E1 proposals",
-          "owner": "Ian / Darren",
-          "due": "Monthly review",
-          "status": "prog",
-          "note": "P&L lands ~£1.9m but excludes intercompany recharges & the UVA/Arkham charge — validate with Darren (Apr actuals); may be overestimated."
-        },
-        {
-          "label": "Joe — 15% (Director of R&D)",
-          "target": "~70/20/10, majority on the 3 E1s; other two TBD",
-          "owner": "Ian / HR",
-          "due": "Load to HiBob",
-          "status": "prog",
-          "note": "Title approved 9 Jun. Relocating to Germany Jan + 3-mo unpaid leave Oct–Dec — weigh Q4 coverage."
-        },
-        {
-          "label": "Mikey — 15% max",
-          "target": "~70/20/10, majority on the 3 E1s",
-          "owner": "Ian / HR",
-          "due": "Load to HiBob",
-          "status": "prog",
-          "note": "Weight the priority E1 goal hardest — last year equal weighting let a 0% cost only a third."
-        },
-        {
-          "label": "All bonused staff",
-          "target": "Goals weighted in HiBob; E1 weighted heaviest",
-          "owner": "Ian / Karen",
-          "due": "In progress",
-          "status": "prog",
-          "note": "End ad-hoc goal-setting; weightings on every plan."
-        },
-        {
-          "label": "BU-wide EBITDA gate",
-          "target": "Sufficient accrued group EBITDA",
-          "owner": "Ian / Darren",
-          "due": "—",
-          "status": "mon",
-          "note": "Be far more precise on the EBITDA gate than last year."
-        },
-        {
-          "label": "Pay-rise framing",
-          "target": "Performance-based, not cost-of-living",
-          "owner": "Ian",
-          "due": "—",
-          "status": "prog",
-          "note": "Drop all cost-of-living language; tie rises to company + job performance."
-        }
-      ],
-      "items": [
-        {
-          "type": "goal",
-          "title": "3 E1 proposals — #1 overarching goal",
-          "detail": "The three E1s must be good ones; Jake heads-up before they advance. Majority of Joe & Mikey bonus weighting sits here.",
-          "owner": "Ian",
-          "date": "9 Jun",
-          "status": "prog"
-        },
-        {
-          "type": "goal",
-          "title": "FY26/27 EBITDA — £1.9m",
-          "detail": "Validate basis with Darren; excludes intercompany recharges + UVA/Arkham charge — may be overestimated.",
-          "owner": "Ian / Darren",
-          "date": "9 Jun",
-          "status": "mon"
-        },
-        {
-          "type": "action",
-          "title": "Validate £1.9m P&L basis with Darren",
-          "detail": "Darren has April actuals; HR/IT/Sales-Ops/Finance recharges + UVA/Arkham could move it materially.",
-          "owner": "Ian / Darren",
-          "date": "9 Jun",
-          "status": "open"
-        },
-        {
-          "type": "action",
-          "title": "Load Joe & Mikey targets into HiBob",
-          "detail": "~70/20/10, majority on the 3 E1s.",
-          "owner": "Ian / HR",
-          "date": "9 Jun",
-          "status": "prog"
-        },
-        {
-          "type": "action",
-          "title": "Recalculate revenue-protection OKR",
-          "detail": "Cancellation window closes ~60 days out — recalc.",
-          "owner": "Ian",
-          "date": "9 Jun",
-          "status": "open"
-        },
-        {
-          "type": "watch",
-          "title": "Joe relocation & unpaid leave",
-          "detail": "Germany relocation Jan + 3-mo unpaid travel break Oct–Dec. No precedent; only justified to retain him; Marcus unproven, cover likely falls on Ian. Weigh Q4 target impact.",
-          "owner": "Ian",
-          "date": "9 Jun",
-          "status": "mon"
-        },
-        {
-          "type": "watch",
-          "title": "Malcolm / Fortran compiler succession",
-          "detail": "Landscape succession at Thursday's summer social.",
-          "owner": "Ian",
-          "date": "9 Jun",
-          "status": "open"
-        },
-        {
-          "type": "watch",
-          "title": "Security — sandbox API-key incident",
-          "detail": "~$250 ChatGPT credits taken via an injection attack on a sandbox server that restarted its service after reboot (exposed the API key via the Python executor). Shut down; Joe & Marcus on report + remediation; alerts now routed to Ian's personal email for weekend cover.",
-          "owner": "Joe / Marcus",
-          "date": "9 Jun",
-          "status": "prog"
-        },
-        {
-          "type": "disc",
-          "title": "Pipeline innovation ideas",
-          "detail": "Genomics & medical transcription are innovation ideas inside the pipeline — the old standalone 'commercial expansion' theme was removed.",
-          "owner": "Ian",
-          "date": "9 Jun",
-          "status": "open"
-        }
-      ],
-      "themes": [
-        {
-          "theme": "Financial visibility & recharges",
-          "good": "Clear, defensible P&L basis for the BU",
-          "signal": "£1.9m basis (recharges & UVA/Arkham) being worked with Darren (9 Jun)",
-          "rating": "Needs focus"
-        },
-        {
-          "theme": "Leadership transition & org structure",
-          "good": "Clean reporting lines, accountability, smooth NAG handover",
-          "signal": "NAG structure essentially done; new question is Joe's leave & relocation (9 Jun)",
-          "rating": "Developing"
-        },
-        {
-          "theme": "Talent retention",
-          "good": "Retain key staff; resolve cross-border employment cleanly",
-          "signal": "Eddie/Canada now a done deal; key risk shifts to Joe. Malcolm succession live (9 Jun)",
-          "rating": "Needs focus"
-        },
-        {
-          "theme": "Governance & board reporting",
-          "good": "Quarterly deep-dives, clear naming, strong board prep",
-          "signal": "Tracked via Adrian's dashboard ↔ Ian's BU dashboard in the 1:1s (9 Jun)",
-          "rating": "Developing"
-        },
-        {
-          "theme": "Proposal quality & accountability",
-          "good": "Rigorous review prevents weak proposals advancing",
-          "signal": "The 3 E1s must be good ones — Jake heads-up before they advance (9 Jun)",
-          "rating": "Needs focus"
-        }
-      ],
       "log": [
         {
           "date": "2026-06-09",
@@ -182,96 +20,183 @@
           "date": "2026-03-17",
           "text": "First 1:1 of the cycle — BU priorities and retention map set."
         }
-      ]
-    },
-    {
-      "id": "jake",
-      "name": "Jake Kennard",
-      "role": "Innovation / E1 processing",
-      "email": "jake.kennard@n2grp.com",
-      "cur": "£",
+      ],
+      "name": "Ian Wilson",
+      "role": "nAG Product — BU lead",
       "bonus": [
         {
-          "label": "FY EBITDA target — the bonus lever",
-          "target": "Hit FY EBITDA with disciplined, time-boxed growth spend",
-          "owner": "Jake / Adrian / Scales",
+          "due": "Monthly review",
+          "note": "P&L lands ~£1.9m but excludes intercompany recharges & the UVA/Arkham charge — validate with Darren (Apr actuals); may be overestimated.",
+          "label": "Ian — 35% bonus",
+          "owner": "Ian / Darren",
+          "status": "prog",
+          "target": "EBITDA £1.9m + 3 × E1 proposals",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "Load to HiBob",
+          "note": "Title approved 9 Jun. Relocating to Germany Jan + 3-mo unpaid leave Oct–Dec — weigh Q4 coverage.",
+          "label": "Joe — 15% (Director of R&D)",
+          "owner": "Ian / HR",
+          "status": "prog",
+          "target": "~70/20/10, majority on the 3 E1s; other two TBD",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "Load to HiBob",
+          "note": "Weight the priority E1 goal hardest — last year equal weighting let a 0% cost only a third.",
+          "label": "Mikey — 15% max",
+          "owner": "Ian / HR",
+          "status": "prog",
+          "target": "~70/20/10, majority on the 3 E1s",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "In progress",
+          "note": "End ad-hoc goal-setting; weightings on every plan.",
+          "label": "All bonused staff",
+          "owner": "Ian / Karen",
+          "status": "prog",
+          "target": "Goals weighted in HiBob; E1 weighted heaviest",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
           "due": "—",
+          "note": "Be far more precise on the EBITDA gate than last year.",
+          "label": "BU-wide EBITDA gate",
+          "owner": "Ian / Darren",
           "status": "mon",
-          "note": "This year's bonus is light; next year is the payout year. Align on the *how* of growth spend."
+          "target": "Sufficient accrued group EBITDA",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "—",
+          "note": "Drop all cost-of-living language; tie rises to company + job performance.",
+          "label": "Pay-rise framing",
+          "owner": "Ian",
+          "status": "prog",
+          "target": "Performance-based, not cost-of-living",
+          "prog": "0%",
+          "conf": "50%"
         }
       ],
+      "email": "ian.wilson@n2grp.com",
       "items": [
         {
+          "date": "9 Jun",
           "type": "goal",
-          "title": "E1 processing — core mandate",
-          "detail": "3-month cycles; clear 'what good looks like' threshold; 50%/6-months where client speed limits. Risk: defining 'done', and not restarting the clock on assumption pivots.",
-          "owner": "Jake",
-          "date": "30 Apr",
+          "owner": "Ian",
+          "title": "3 E1 proposals — #1 overarching goal",
+          "detail": "The three E1s must be good ones; Jake heads-up before they advance. Majority of Joe & Mikey bonus weighting sits here.",
           "status": "prog"
         },
         {
+          "date": "9 Jun",
           "type": "goal",
-          "title": "Exit Bioteam by August",
-          "detail": "Watch 'Bioteam creep'.",
-          "owner": "Jake",
-          "date": "August",
-          "status": "prog"
-        },
-        {
-          "type": "action",
-          "title": "Growth-stream proposal for strategy meeting",
-          "detail": "Lead-investing-in-UK-startups + BioStack; one proposal each from Adrian and Jake.",
-          "owner": "Jake / Adrian",
-          "date": "—",
-          "status": "open"
-        },
-        {
-          "type": "action",
-          "title": "Monthly EBITDA / goals dashboard (SLT)",
-          "detail": "Surface metrics to SLT each month.",
-          "owner": "Adrian",
-          "date": "—",
-          "status": "prog"
-        },
-        {
-          "type": "action",
-          "title": "Lead gen — ROI test / rainmaker model",
-          "detail": "Apply an ROI test; consider the rainmaker model.",
-          "owner": "Jake",
-          "date": "—",
-          "status": "open"
-        },
-        {
-          "type": "action",
-          "title": "CFO onboarding support",
-          "detail": "Darren started 1 May; month-end heading toward a week.",
-          "owner": "Jake",
-          "date": "1 May",
-          "status": "prog"
-        },
-        {
-          "type": "watch",
-          "title": "Three PR risk areas",
-          "detail": "BU absorption; E1 'done' definition; strategy-change time sinks.",
-          "owner": "Jake",
-          "date": "30 Apr",
+          "owner": "Ian / Darren",
+          "title": "FY26/27 EBITDA — £1.9m",
+          "detail": "Validate basis with Darren; excludes intercompany recharges + UVA/Arkham charge — may be overestimated.",
           "status": "mon"
+        },
+        {
+          "date": "9 Jun",
+          "type": "action",
+          "owner": "Ian / Darren",
+          "title": "Validate £1.9m P&L basis with Darren",
+          "detail": "Darren has April actuals; HR/IT/Sales-Ops/Finance recharges + UVA/Arkham could move it materially.",
+          "status": "open"
+        },
+        {
+          "date": "9 Jun",
+          "type": "action",
+          "owner": "Ian / HR",
+          "title": "Load Joe & Mikey targets into HiBob",
+          "detail": "~70/20/10, majority on the 3 E1s.",
+          "status": "prog"
+        },
+        {
+          "date": "9 Jun",
+          "type": "action",
+          "owner": "Ian",
+          "title": "Recalculate revenue-protection OKR",
+          "detail": "Cancellation window closes ~60 days out — recalc.",
+          "status": "open"
+        },
+        {
+          "date": "9 Jun",
+          "type": "watch",
+          "owner": "Ian",
+          "title": "Joe relocation & unpaid leave",
+          "detail": "Germany relocation Jan + 3-mo unpaid travel break Oct–Dec. No precedent; only justified to retain him; Marcus unproven, cover likely falls on Ian. Weigh Q4 target impact.",
+          "status": "mon"
+        },
+        {
+          "date": "9 Jun",
+          "type": "watch",
+          "owner": "Ian",
+          "title": "Malcolm / Fortran compiler succession",
+          "detail": "Landscape succession at Thursday's summer social.",
+          "status": "open"
+        },
+        {
+          "date": "9 Jun",
+          "type": "watch",
+          "owner": "Joe / Marcus",
+          "title": "Security — sandbox API-key incident",
+          "detail": "~$250 ChatGPT credits taken via an injection attack on a sandbox server that restarted its service after reboot (exposed the API key via the Python executor). Shut down; Joe & Marcus on report + remediation; alerts now routed to Ian's personal email for weekend cover.",
+          "status": "prog"
+        },
+        {
+          "date": "9 Jun",
+          "type": "disc",
+          "owner": "Ian",
+          "title": "Pipeline innovation ideas",
+          "detail": "Genomics & medical transcription are innovation ideas inside the pipeline — the old standalone 'commercial expansion' theme was removed.",
+          "status": "open"
         }
       ],
       "themes": [
         {
-          "theme": "Direct catalyst for growth",
-          "good": "Be a direct catalyst for growth, not an overhead",
-          "signal": "PR direction (30 Apr): disciplined, time-boxed spend",
-          "rating": "Developing"
+          "good": "Clear, defensible P&L basis for the BU",
+          "theme": "Financial visibility & recharges",
+          "rating": "Needs focus",
+          "signal": "£1.9m basis (recharges & UVA/Arkham) being worked with Darren (9 Jun)"
         },
         {
-          "theme": "E1 throughput & rigour",
-          "good": "Predictable 3-month E1 cycles with clear done-criteria",
-          "signal": "Defining 'done' still a risk (30 Apr PR)",
-          "rating": "Needs focus"
+          "good": "Clean reporting lines, accountability, smooth NAG handover",
+          "theme": "Leadership transition & org structure",
+          "rating": "Developing",
+          "signal": "NAG structure essentially done; new question is Joe's leave & relocation (9 Jun)"
+        },
+        {
+          "good": "Retain key staff; resolve cross-border employment cleanly",
+          "theme": "Talent retention",
+          "rating": "Needs focus",
+          "signal": "Eddie/Canada now a done deal; key risk shifts to Joe. Malcolm succession live (9 Jun)"
+        },
+        {
+          "good": "Quarterly deep-dives, clear naming, strong board prep",
+          "theme": "Governance & board reporting",
+          "rating": "Developing",
+          "signal": "Tracked via Adrian's dashboard ↔ Ian's BU dashboard in the 1:1s (9 Jun)"
+        },
+        {
+          "good": "Rigorous review prevents weak proposals advancing",
+          "theme": "Proposal quality & accountability",
+          "rating": "Needs focus",
+          "signal": "The 3 E1s must be good ones — Jake heads-up before they advance (9 Jun)"
         }
       ],
+      "pin": "406515"
+    },
+    {
+      "id": "jake",
+      "cur": "£",
       "log": [
         {
           "date": "2026-05-14",
@@ -289,154 +214,99 @@
           "date": "2026-03-19",
           "text": "1:1 — early-cycle priorities."
         }
-      ]
-    },
-    {
-      "id": "scales",
-      "name": "Adrian Scales",
-      "role": "Interim finance / ops chief",
-      "email": "adrian.scales@n2grp.com",
-      "cur": "£",
+      ],
+      "name": "Jake Kennard",
+      "role": "Innovation / E1 processing",
       "bonus": [
         {
-          "label": "Own salary & bonus",
-          "target": "?",
-          "owner": "Adrian Scales",
           "due": "—",
-          "status": "open",
-          "note": "No figures appear in any transcript — placeholder. Add inline once known."
+          "note": "This year's bonus is light; next year is the payout year. Align on the *how* of growth spend.",
+          "label": "FY EBITDA target — the bonus lever",
+          "owner": "Jake / Adrian / Scales",
+          "status": "mon",
+          "target": "Hit FY EBITDA with disciplined, time-boxed growth spend",
+          "prog": "0%",
+          "conf": "50%"
         }
       ],
+      "email": "jake.kennard@n2grp.com",
       "items": [
         {
-          "type": "action",
-          "title": "Financial-reporting granularity",
-          "detail": "Increase MI / reporting detail across the group.",
-          "owner": "Adrian Scales",
-          "date": "—",
-          "status": "prog"
-        },
-        {
-          "type": "action",
-          "title": "Bonus targets + Bob (HiBob) rollout",
-          "detail": "Load targets to Bob as the legal equivalent of letters.",
-          "owner": "Adrian Scales / Karen",
-          "date": "—",
-          "status": "prog"
-        },
-        {
+          "date": "30 Apr",
           "type": "goal",
-          "title": "M&A target profiling",
-          "detail": "Profile acquisition targets.",
-          "owner": "Adrian Scales",
-          "date": "—",
+          "owner": "Jake",
+          "title": "E1 processing — core mandate",
+          "detail": "3-month cycles; clear 'what good looks like' threshold; 50%/6-months where client speed limits. Risk: defining 'done', and not restarting the clock on assumption pivots.",
           "status": "prog"
         },
         {
+          "date": "August",
           "type": "goal",
-          "title": "LTIP design",
-          "detail": "Design the long-term incentive plan.",
-          "owner": "Adrian Scales",
-          "date": "—",
+          "owner": "Jake",
+          "title": "Exit Bioteam by August",
+          "detail": "Watch 'Bioteam creep'.",
           "status": "prog"
         },
         {
+          "date": "—",
           "type": "action",
-          "title": "Governance / general-counsel engagement",
-          "detail": "Engage GC; governance uplift.",
-          "owner": "Adrian Scales",
-          "date": "—",
-          "status": "prog"
+          "owner": "Jake / Adrian",
+          "title": "Growth-stream proposal for strategy meeting",
+          "detail": "Lead-investing-in-UK-startups + BioStack; one proposal each from Adrian and Jake.",
+          "status": "open"
         },
         {
+          "date": "—",
           "type": "action",
-          "title": "R&D-tax overhaul",
-          "detail": "Overhaul the R&D tax approach.",
-          "owner": "Adrian Scales",
-          "date": "—",
+          "owner": "Adrian",
+          "title": "Monthly EBITDA / goals dashboard (SLT)",
+          "detail": "Surface metrics to SLT each month.",
           "status": "prog"
         },
         {
+          "date": "—",
           "type": "action",
-          "title": "Audit & earnout",
-          "detail": "Audit + earnout workstream.",
-          "owner": "Adrian Scales",
-          "date": "—",
+          "owner": "Jake",
+          "title": "Lead gen — ROI test / rainmaker model",
+          "detail": "Apply an ROI test; consider the rainmaker model.",
+          "status": "open"
+        },
+        {
+          "date": "1 May",
+          "type": "action",
+          "owner": "Jake",
+          "title": "CFO onboarding support",
+          "detail": "Darren started 1 May; month-end heading toward a week.",
           "status": "prog"
         },
         {
-          "type": "goal",
-          "title": "FY26 forecast",
-          "detail": "Build the FY26 forecast.",
-          "owner": "Adrian Scales",
-          "date": "—",
-          "status": "prog"
-        },
-        {
+          "date": "30 Apr",
           "type": "watch",
-          "title": "Talos fundraising",
-          "detail": "Monitor.",
-          "owner": "Adrian Scales",
-          "date": "—",
+          "owner": "Jake",
+          "title": "Three PR risk areas",
+          "detail": "BU absorption; E1 'done' definition; strategy-change time sinks.",
           "status": "mon"
-        },
-        {
-          "type": "watch",
-          "title": "ECMWF terms",
-          "detail": "Monitor.",
-          "owner": "Adrian Scales",
-          "date": "—",
-          "status": "mon"
-        },
-        {
-          "type": "watch",
-          "title": "BioTeam benefits",
-          "detail": "Monitor.",
-          "owner": "Adrian Scales",
-          "date": "—",
-          "status": "mon"
-        },
-        {
-          "type": "action",
-          "title": "Pay-review round",
-          "detail": "Settled for this cycle.",
-          "owner": "Adrian Scales",
-          "date": "—",
-          "status": "done"
         }
       ],
       "themes": [
         {
-          "theme": "Operating above title",
-          "good": "Interim CFO/COO remit delivered well above grade",
-          "signal": "Both PRs confirm",
-          "rating": "Strength"
+          "good": "Be a direct catalyst for growth, not an overhead",
+          "theme": "Direct catalyst for growth",
+          "rating": "Developing",
+          "signal": "PR direction (30 Apr): disciplined, time-boxed spend"
         },
         {
-          "theme": "Ops & systems delivery",
-          "good": "Reliable systems / ops execution",
-          "signal": "Consistent",
-          "rating": "Strength"
-        },
-        {
-          "theme": "SLT accountability backbone",
-          "good": "Becoming the accountability backbone of the SLT",
-          "signal": "PRs",
-          "rating": "Strength"
-        },
-        {
-          "theme": "Key-person risk",
-          "good": "Reduce single-point dependence",
-          "signal": "Flagged as a development area",
-          "rating": "Needs focus"
-        },
-        {
-          "theme": "Group governance / revenue headwinds",
-          "good": "Navigate group-level governance & revenue headwinds",
-          "signal": "PR development flag",
-          "rating": "Developing"
+          "good": "Predictable 3-month E1 cycles with clear done-criteria",
+          "theme": "E1 throughput & rigour",
+          "rating": "Needs focus",
+          "signal": "Defining 'done' still a risk (30 Apr PR)"
         }
       ],
+      "pin": "139542"
+    },
+    {
+      "id": "scales",
+      "cur": "£",
       "log": [
         {
           "date": "2026-06-08",
@@ -456,198 +326,127 @@
           "date": "2026-03-19",
           "text": "First 1:1 of the cycle — group finance priorities set."
         }
-      ]
-    },
-    {
-      "id": "jack",
-      "name": "Jack Gidding",
-      "role": "STAC — MD",
-      "email": "jack.gidding@stacresearch.com",
-      "cur": "$",
+      ],
+      "name": "Adrian Scales",
+      "role": "Interim finance / ops chief",
       "bonus": [
         {
-          "label": "Bonus documentation → Bob",
-          "target": "EBITDA-based tiers; upload to Bob as the legal equivalent of letters",
-          "owner": "Jack / Karen",
-          "due": "1 Jun",
+          "label": "Group EBITDA",
+          "target": "£2M (50% weight)",
+          "owner": "Adrian Scales",
+          "due": "FY26–27",
           "status": "prog",
-          "note": "Resolve David Whitney's base+commission plan as part of this."
+          "note": "",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "label": "Strategic acquisition",
+          "target": "1 acquisition in Due Diligence (50% weight)",
+          "owner": "Adrian Scales",
+          "due": "FY26–27",
+          "status": "prog",
+          "note": "",
+          "prog": "0%",
+          "conf": "50%"
         }
       ],
+      "email": "adrian.scales@n2grp.com",
       "items": [
         {
-          "type": "goal",
-          "title": "STAC FY26/27",
-          "detail": "~$3.9M revenue / $500K EBITDA.",
-          "owner": "Jack",
           "date": "—",
+          "type": "action",
+          "owner": "Adrian Scales",
+          "title": "Financial-reporting granularity",
+          "detail": "Increase MI / reporting detail across the group.",
           "status": "prog"
         },
         {
-          "type": "goal",
-          "title": "Tier 3 vendor revenue",
-          "detail": "2 projects, +$50K by Q2; early engagement with Tier-3 vendors.",
-          "owner": "Jack / D. Whitney",
-          "date": "Q2",
-          "status": "prog"
-        },
-        {
-          "type": "goal",
-          "title": "Membership retention",
-          "detail": "80% target; 8 renewals this quarter (2 need extra care); 6 new firms; +30% YoY sponsorship revenue.",
-          "owner": "Jack / J. Corcoran",
-          "date": "1 Jun",
-          "status": "prog"
-        },
-        {
-          "type": "goal",
-          "title": "Summit / event revenue",
-          "detail": "+30% YoY; Chicago → New York, London, NPL mini-summit (9 Jul).",
-          "owner": "Jack / J. Corcoran",
-          "date": "1 Jun",
-          "status": "prog"
-        },
-        {
-          "type": "goal",
-          "title": "Explore initiative (phased)",
-          "detail": "Q1 hypothesis → Q2 sponsor group → Q4 event.",
-          "owner": "Jack",
           "date": "—",
-          "status": "open"
+          "type": "action",
+          "owner": "Adrian Scales / Karen",
+          "title": "Bonus targets + Bob (HiBob) rollout",
+          "detail": "Load targets to Bob as the legal equivalent of letters.",
+          "status": "prog"
         },
         {
-          "type": "action",
-          "title": "11 Jun alignment prep",
-          "detail": "Performance-vs-target deck; keep last cycle's structure; Adrian to send agenda ahead.",
-          "owner": "Jack",
-          "date": "11 Jun",
-          "status": "open"
-        },
-        {
-          "type": "action",
-          "title": "David Whitney comp redesign",
-          "detail": "Base+commission aligned to the sales team; David refuses commission — mirror Matt's plan; resolve in bonus talks.",
-          "owner": "Jack",
-          "date": "1 Jun",
-          "status": "block"
-        },
-        {
-          "type": "action",
-          "title": "Year-one detailed FY forecast",
-          "detail": "Non-linear yr1; straight-line yr2–4; use as a management tool, not just audit.",
-          "owner": "Jack",
           "date": "—",
-          "status": "open"
-        },
-        {
-          "type": "action",
-          "title": "Build tracking dashboards",
-          "detail": "Vendor research + events; feed metrics into alignment meetings & Adrian's shared dashboard.",
-          "owner": "Jack / Wendy",
-          "date": "12 May",
+          "type": "goal",
+          "owner": "Adrian Scales",
+          "title": "M&A target profiling",
+          "detail": "Profile acquisition targets.",
           "status": "prog"
         },
         {
+          "date": "—",
           "type": "action",
-          "title": "C2 stabilisation migrations",
-          "detail": "HubSpot, Xero, Drupal 7 upgrade, Asana→M365; cloud-cost cuts; negotiate vendor credits.",
-          "owner": "Jack",
-          "date": "18 Mar",
+          "owner": "Adrian Scales",
+          "title": "Governance / general-counsel engagement",
+          "detail": "Engage GC; governance uplift.",
           "status": "prog"
         },
         {
-          "type": "action",
-          "title": "Hiring & capacity",
-          "detail": "Junior salesperson, contract Technical Delivery Manager, train Wendy on data, group controller onboarding.",
-          "owner": "Jack",
-          "date": "18 Mar",
+          "date": "—",
+          "type": "goal",
+          "owner": "Adrian Scales",
+          "title": "FY26 forecast",
+          "detail": "Build the FY26 forecast.",
           "status": "prog"
         },
         {
+          "date": "—",
           "type": "watch",
-          "title": "Key-person risk — Stuart's exit",
-          "detail": "Last day 5 Jun; confirm a clean, complete handover; no continuity gaps.",
-          "owner": "Jack",
-          "date": "5 Jun",
+          "owner": "Adrian Scales",
+          "title": "Talos fundraising",
+          "detail": "Monitor.",
           "status": "mon"
         },
         {
-          "type": "watch",
-          "title": "Stack Insights continuity",
-          "detail": "Running product to protect post-Stuart.",
-          "owner": "Jack / Stuart",
-          "date": "23 Apr",
-          "status": "mon"
-        },
-        {
-          "type": "watch",
-          "title": "David Whitney retention",
-          "detail": "Flat pay not incentivising; risk he seeks outside work — ties to the comp redesign.",
-          "owner": "Jack",
-          "date": "1 Jun",
-          "status": "mon"
-        },
-        {
-          "type": "watch",
-          "title": "Forecasting / impairment",
-          "detail": "Keep a conservative forecast.",
-          "owner": "Jack",
-          "date": "4 Dec",
-          "status": "mon"
-        },
-        {
-          "type": "disc",
-          "title": "BioStack E1",
-          "detail": "Cross-BU innovation with Jake & Ian; scalable benchmarks + small summer pilots.",
-          "owner": "Jack / Jake / Ian",
-          "date": "23 Apr",
-          "status": "open"
-        },
-        {
-          "type": "disc",
-          "title": "Stack Insights E1 decision",
-          "detail": "Whether to formalise it as an E1.",
-          "owner": "Jack",
           "date": "—",
-          "status": "open"
-        },
-        {
-          "type": "disc",
-          "title": "Enabler / channel (WWT) model",
-          "detail": "Evaluate the enabler/channel model.",
-          "owner": "Jack",
-          "date": "—",
-          "status": "open"
-        },
-        {
-          "type": "disc",
-          "title": "C2→C1 engine prioritisation",
-          "detail": "Sequence the engine work.",
-          "owner": "Jack",
-          "date": "—",
-          "status": "open"
+          "type": "watch",
+          "owner": "Adrian Scales",
+          "title": "BioTeam benefits",
+          "detail": "Monitor.",
+          "status": "mon"
         }
       ],
       "themes": [
         {
-          "theme": "Commercial execution",
-          "good": "Hit STAC revenue/EBITDA, retention and event targets",
-          "signal": "On track; Chicago events momentum strong",
-          "rating": "Developing"
+          "good": "Interim CFO/COO remit delivered well above grade",
+          "theme": "Operating above title",
+          "rating": "Strength",
+          "signal": "Both PRs confirm"
         },
         {
-          "theme": "Key-person & continuity risk",
-          "good": "Cover Stuart's exit cleanly; TDM to absorb delivery load",
-          "signal": "Live risk (1 Jun)",
-          "rating": "Needs focus"
+          "good": "Reliable systems / ops execution",
+          "theme": "Ops & systems delivery",
+          "rating": "Strength",
+          "signal": "Consistent"
         },
         {
-          "theme": "Comp & incentives",
-          "good": "Resolve David's plan; load bonus to Bob",
-          "signal": "Blocked on David (1 Jun)",
-          "rating": "Needs focus"
+          "good": "Becoming the accountability backbone of the SLT",
+          "theme": "SLT accountability backbone",
+          "rating": "Strength",
+          "signal": "PRs"
+        },
+        {
+          "good": "Reduce single-point dependence",
+          "theme": "Key-person risk",
+          "rating": "Needs focus",
+          "signal": "Flagged as a development area"
+        },
+        {
+          "good": "Navigate group-level governance & revenue headwinds",
+          "theme": "Group governance / revenue headwinds",
+          "rating": "Developing",
+          "signal": "PR development flag"
         }
       ],
+      "pin": "234550"
+    },
+    {
+      "id": "jack",
+      "cur": "$",
       "log": [
         {
           "date": "2026-06-01",
@@ -665,120 +464,201 @@
           "date": "2026-05-12",
           "text": "1:1 — financial/bonus model shared with Adrian (view-only, HR data protected); Xero transition ~10%."
         }
-      ]
-    },
-    {
-      "id": "jen",
-      "name": "Jennifer Wortman",
-      "role": "BioTeam — lead",
-      "email": "jennifer@bioteam.net",
-      "cur": "$",
+      ],
+      "name": "Jack Gidding",
+      "role": "STAC — MD",
       "bonus": [
         {
-          "label": "Jennifer — 30% bonus",
-          "target": "Progressive EBITDA buckets — pool fills once the EBITDA target is hit, with multipliers above",
-          "owner": "Jennifer / Adrian",
-          "due": "Interim scheme",
+          "due": "1 Jun",
+          "note": "Resolve David Whitney's base+commission plan as part of this.",
+          "label": "Bonus documentation → Bob",
+          "owner": "Jack / Karen",
           "status": "prog",
-          "note": "Confirmed 5 Jun PR. Longer-term consulting-model incentives baked in later."
-        },
-        {
-          "label": "Michelle — 25% (VP)",
-          "target": "Performance-based",
-          "owner": "Jennifer",
-          "due": "—",
-          "status": "prog",
-          "note": ""
-        },
-        {
-          "label": "Wider-staff scheme",
-          "target": "Deferred",
-          "owner": "Jennifer",
-          "due": "—",
-          "status": "open",
-          "note": "Everyone else performance-based; wider scheme deferred this year."
-        },
-        {
-          "label": "EBITDA target = bonus-pool trigger",
-          "target": "Hit EBITDA target (basis ~$5.3M / sub-$500k)",
-          "owner": "Jennifer",
-          "due": "—",
-          "status": "mon",
-          "note": "Adrian's framing: confidence matters more than the absolute. Verify the basis vs the live model."
+          "target": "EBITDA-based tiers; upload to Bob as the legal equivalent of letters",
+          "prog": "0%",
+          "conf": "50%"
         }
       ],
+      "email": "jack.gidding@stacresearch.com",
       "items": [
         {
-          "type": "goal",
-          "title": "AWS multiomics migration — lead priority",
-          "detail": "AWS-referred, ~year-long; port ~100 multiomics workflows to the cloud. Strong technical + strategic fit ('bread and butter') but capacity-constrained.",
-          "owner": "Jennifer",
-          "date": "5 Jun",
-          "status": "prog"
-        },
-        {
-          "type": "action",
-          "title": "Resource the AWS project",
-          "detail": "John & Jacob are the workflow experts but committed → team around Ali (Claude Code adoption) + Brian (AI), with part-time senior science oversight. Protect margin first; NAG Services loan only as a last resort; any junior hire tied to the contract. Go very hard on AI automation.",
-          "owner": "Jennifer",
-          "date": "5 Jun",
-          "status": "prog"
-        },
-        {
-          "type": "action",
-          "title": "Funded POC to scope AWS timeline",
-          "detail": "Scope with a funded POC before committing a timeline.",
-          "owner": "Jennifer",
           "date": "—",
+          "type": "goal",
+          "owner": "Jack",
+          "title": "STAC FY26/27",
+          "detail": "~$3.9M revenue / $500K EBITDA.",
+          "status": "prog"
+        },
+        {
+          "date": "Q2",
+          "type": "goal",
+          "owner": "Jack / D. Whitney",
+          "title": "Tier 3 vendor revenue",
+          "detail": "2 projects, +$50K by Q2; early engagement with Tier-3 vendors.",
+          "status": "prog"
+        },
+        {
+          "date": "1 Jun",
+          "type": "goal",
+          "owner": "Jack / J. Corcoran",
+          "title": "Membership retention",
+          "detail": "80% target; 8 renewals this quarter (2 need extra care); 6 new firms; +30% YoY sponsorship revenue.",
+          "status": "prog"
+        },
+        {
+          "date": "1 Jun",
+          "type": "goal",
+          "owner": "Jack / J. Corcoran",
+          "title": "Summit / event revenue",
+          "detail": "+30% YoY; Chicago → New York, London, NPL mini-summit (9 Jul).",
+          "status": "prog"
+        },
+        {
+          "date": "—",
+          "type": "goal",
+          "owner": "Jack",
+          "title": "Explore initiative (phased)",
+          "detail": "Q1 hypothesis → Q2 sponsor group → Q4 event.",
           "status": "open"
         },
         {
-          "type": "goal",
-          "title": "Revenue / EBITDA",
-          "detail": "April came in ~+$9k vs budget; the EBITDA target doubles as the bonus-pool trigger.",
-          "owner": "Jennifer",
+          "date": "11 Jun",
+          "type": "action",
+          "owner": "Jack",
+          "title": "11 Jun alignment prep",
+          "detail": "Performance-vs-target deck; keep last cycle's structure; Adrian to send agenda ahead.",
+          "status": "open"
+        },
+        {
+          "date": "1 Jun",
+          "type": "action",
+          "owner": "Jack",
+          "title": "David Whitney comp redesign",
+          "detail": "Base+commission aligned to the sales team; David refuses commission — mirror Matt's plan; resolve in bonus talks.",
+          "status": "block"
+        },
+        {
           "date": "—",
+          "type": "action",
+          "owner": "Jack",
+          "title": "Year-one detailed FY forecast",
+          "detail": "Non-linear yr1; straight-line yr2–4; use as a management tool, not just audit.",
+          "status": "open"
+        },
+        {
+          "date": "12 May",
+          "type": "action",
+          "owner": "Jack / Wendy",
+          "title": "Build tracking dashboards",
+          "detail": "Vendor research + events; feed metrics into alignment meetings & Adrian's shared dashboard.",
+          "status": "prog"
+        },
+        {
+          "date": "18 Mar",
+          "type": "action",
+          "owner": "Jack",
+          "title": "C2 stabilisation migrations",
+          "detail": "HubSpot, Xero, Drupal 7 upgrade, Asana→M365; cloud-cost cuts; negotiate vendor credits.",
+          "status": "prog"
+        },
+        {
+          "date": "18 Mar",
+          "type": "action",
+          "owner": "Jack",
+          "title": "Hiring & capacity",
+          "detail": "Junior salesperson, contract Technical Delivery Manager, train Wendy on data, group controller onboarding.",
+          "status": "prog"
+        },
+        {
+          "date": "5 Jun",
+          "type": "watch",
+          "owner": "Jack",
+          "title": "Key-person risk — Stuart's exit",
+          "detail": "Last day 5 Jun; confirm a clean, complete handover; no continuity gaps.",
           "status": "mon"
         },
         {
-          "type": "action",
-          "title": "AI OKRs — value-spend map",
-          "detail": "Current-usage map done; next is the inverse time-/value-spend map so AI effort lands on the critical path. Currently behind.",
-          "owner": "Jennifer",
-          "date": "5 Jun",
-          "status": "prog"
-        },
-        {
+          "date": "23 Apr",
           "type": "watch",
-          "title": "Contracts pipeline",
-          "detail": "Neogenomics signed & expanding; Sanofi RFI lost but warm (Michelle to run a lost-call); Emory scoping a large assessment; ECMWF milestone-based (20% on task 1).",
-          "owner": "Jennifer / Michelle",
-          "date": "5 Jun",
-          "status": "prog"
+          "owner": "Jack / Stuart",
+          "title": "Stack Insights continuity",
+          "detail": "Running product to protect post-Stuart.",
+          "status": "mon"
         },
         {
+          "date": "1 Jun",
+          "type": "watch",
+          "owner": "Jack",
+          "title": "David Whitney retention",
+          "detail": "Flat pay not incentivising; risk he seeks outside work — ties to the comp redesign.",
+          "status": "mon"
+        },
+        {
+          "date": "4 Dec",
+          "type": "watch",
+          "owner": "Jack",
+          "title": "Forecasting / impairment",
+          "detail": "Keep a conservative forecast.",
+          "status": "mon"
+        },
+        {
+          "date": "23 Apr",
           "type": "disc",
-          "title": "BD ownership",
-          "detail": "Behavioural/cultural gap fixed through the grading system (principals/fellows owning a service line) + empowerment, not incentives or guidance — including willingness to move goalposts.",
-          "owner": "Jennifer / Adrian",
-          "date": "5 Jun",
+          "owner": "Jack / Jake / Ian",
+          "title": "BioStack E1",
+          "detail": "Cross-BU innovation with Jake & Ian; scalable benchmarks + small summer pilots.",
+          "status": "open"
+        },
+        {
+          "date": "—",
+          "type": "disc",
+          "owner": "Jack",
+          "title": "Stack Insights E1 decision",
+          "detail": "Whether to formalise it as an E1.",
+          "status": "open"
+        },
+        {
+          "date": "—",
+          "type": "disc",
+          "owner": "Jack",
+          "title": "Enabler / channel (WWT) model",
+          "detail": "Evaluate the enabler/channel model.",
+          "status": "open"
+        },
+        {
+          "date": "—",
+          "type": "disc",
+          "owner": "Jack",
+          "title": "C2→C1 engine prioritisation",
+          "detail": "Sequence the engine work.",
           "status": "open"
         }
       ],
       "themes": [
         {
-          "theme": "Business development",
-          "good": "Principals/fellows own service lines; empowered, accountable BD",
-          "signal": "Cultural gap; grading-system fix in train (5 Jun)",
-          "rating": "Needs focus"
+          "good": "Hit STAC revenue/EBITDA, retention and event targets",
+          "theme": "Commercial execution",
+          "rating": "Developing",
+          "signal": "On track; Chicago events momentum strong"
         },
         {
-          "theme": "Operating cadence & AI",
-          "good": "Tight cadence; AI effort on the critical path",
-          "signal": "AI value-map still behind (5 Jun)",
-          "rating": "Developing"
+          "good": "Cover Stuart's exit cleanly; TDM to absorb delivery load",
+          "theme": "Key-person & continuity risk",
+          "rating": "Needs focus",
+          "signal": "Live risk (1 Jun)"
+        },
+        {
+          "good": "Resolve David's plan; load bonus to Bob",
+          "theme": "Comp & incentives",
+          "rating": "Needs focus",
+          "signal": "Blocked on David (1 Jun)"
         }
       ],
+      "pin": "675094"
+    },
+    {
+      "id": "jen",
+      "cur": "$",
       "log": [
         {
           "date": "2026-06-05",
@@ -792,202 +672,129 @@
           "date": "2026-04-22",
           "text": "1:1 — April actuals ~+$9k vs budget; revenue confidence discussion."
         }
-      ]
-    },
-    {
-      "id": "deepak",
-      "name": "Deepak Khosla",
-      "role": "X-ISS — MD (Bismarck)",
-      "email": "dkhosla@x-iss.com",
-      "cur": "$",
+      ],
+      "name": "Jennifer Wortman",
+      "role": "BioTeam — lead",
       "bonus": [
         {
-          "label": "Adjusted EBITDA",
-          "target": "≈ $450K (UK FY)",
-          "owner": "Deepak",
-          "due": "Board pack",
+          "due": "Interim scheme",
+          "note": "Confirmed 5 Jun PR. Longer-term consulting-model incentives baked in later.",
+          "label": "Jennifer — 30% bonus",
+          "owner": "Jennifer / Adrian",
+          "status": "prog",
+          "target": "Progressive EBITDA buckets — pool fills once the EBITDA target is hit, with multipliers above",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "—",
+          "note": "",
+          "label": "Michelle — 25% (VP)",
+          "owner": "Jennifer",
+          "status": "prog",
+          "target": "Performance-based",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "—",
+          "note": "Everyone else performance-based; wider scheme deferred this year.",
+          "label": "Wider-staff scheme",
+          "owner": "Jennifer",
           "status": "open",
-          "note": "Board-pack headline; still a placeholder until his revised number lands."
+          "target": "Deferred",
+          "prog": "0%",
+          "conf": "50%"
         },
         {
-          "label": "Revenue ~$4M @ 15% net",
-          "target": "Driven by billable hours",
-          "owner": "Deepak",
           "due": "—",
-          "status": "prog",
-          "note": ""
-        },
-        {
-          "label": "Earnout & leadership transition",
-          "target": "Earnout protected; move to part-time after Q1 next year",
-          "owner": "Deepak / Adrian",
-          "due": "Q1 next yr",
+          "note": "Adrian's framing: confidence matters more than the absolute. Verify the basis vs the live model.",
+          "label": "EBITDA target = bonus-pool trigger",
+          "owner": "Jennifer",
           "status": "mon",
-          "note": "Confirm against the earnout agreement."
-        },
-        {
-          "label": "Bonus scheme finalisation",
-          "target": "Differentiated technical / managed / professional-services schemes",
-          "owner": "Deepak / Adrian Scales",
-          "due": "—",
-          "status": "prog",
-          "note": ""
-        },
-        {
-          "label": "One-off bonus",
-          "target": "~£16K discrepancy",
-          "owner": "Deepak",
-          "due": "25 Mar",
-          "status": "done",
-          "note": "Resolved 25 Mar (logged in £ while the rest sits in $)."
-        },
-        {
-          "label": "Pay review sign-off",
-          "target": "Performance-based model; $14K accrual shortfall; payroll audit",
-          "owner": "Deepak",
-          "due": "—",
-          "status": "prog",
-          "note": ""
+          "target": "Hit EBITDA target (basis ~$5.3M / sub-$500k)",
+          "prog": "0%",
+          "conf": "50%"
         }
       ],
+      "email": "jennifer@bioteam.net",
       "items": [
         {
+          "date": "5 Jun",
           "type": "goal",
-          "title": "Utilisation OKRs",
-          "detail": "Delivery-focused billable utilisation targets.",
-          "owner": "Deepak",
-          "date": "—",
+          "owner": "Jennifer",
+          "title": "AWS multiomics migration — lead priority",
+          "detail": "AWS-referred, ~year-long; port ~100 multiomics workflows to the cloud. Strong technical + strategic fit ('bread and butter') but capacity-constrained.",
           "status": "prog"
         },
         {
-          "type": "goal",
-          "title": "Sales +30% & service-portfolio expansion",
-          "detail": "Grow sales 30%; widen the service portfolio.",
-          "owner": "Deepak",
-          "date": "—",
+          "date": "5 Jun",
+          "type": "action",
+          "owner": "Jennifer",
+          "title": "Resource the AWS project",
+          "detail": "John & Jacob are the workflow experts but committed → team around Ali (Claude Code adoption) + Brian (AI), with part-time senior science oversight. Protect margin first; NAG Services loan only as a last resort; any junior hire tied to the contract. Go very hard on AI automation.",
           "status": "prog"
         },
         {
-          "type": "action",
-          "title": "NAGS billable-hours sub-OKR",
-          "detail": "nAG Services billable-hours target.",
-          "owner": "Deepak",
           "date": "—",
+          "type": "action",
+          "owner": "Jennifer",
+          "title": "Funded POC to scope AWS timeline",
+          "detail": "Scope with a funded POC before committing a timeline.",
+          "status": "open"
+        },
+        {
+          "date": "—",
+          "type": "goal",
+          "owner": "Jennifer",
+          "title": "Revenue / EBITDA",
+          "detail": "April came in ~+$9k vs budget; the EBITDA target doubles as the bonus-pool trigger.",
+          "status": "mon"
+        },
+        {
+          "date": "5 Jun",
+          "type": "action",
+          "owner": "Jennifer",
+          "title": "AI OKRs — value-spend map",
+          "detail": "Current-usage map done; next is the inverse time-/value-spend map so AI effort lands on the critical path. Currently behind.",
           "status": "prog"
         },
         {
-          "type": "action",
-          "title": "Dennis Runner hire — Senior Delivery Director",
-          "detail": "Senior delivery leadership hire.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "open"
-        },
-        {
-          "type": "goal",
-          "title": "EMEA / E1",
-          "detail": "EMEA expansion / E1 proposal.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "open"
-        },
-        {
-          "type": "action",
-          "title": "Strategy deck",
-          "detail": "Build the strategy deck.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "open"
-        },
-        {
+          "date": "5 Jun",
           "type": "watch",
-          "title": "Churn / Bismarck integration",
-          "detail": "Monitor churn through the X-ISS ↔ nAG Services integration.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "mon"
+          "owner": "Jennifer / Michelle",
+          "title": "Contracts pipeline",
+          "detail": "Neogenomics signed & expanding; Sanofi RFI lost but warm (Michelle to run a lost-call); Emory scoping a large assessment; ECMWF milestone-based (20% on task 1).",
+          "status": "prog"
         },
         {
-          "type": "watch",
-          "title": "EOD value-prop clarity",
-          "detail": "Clarify the EOD value proposition.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "mon"
-        },
-        {
-          "type": "watch",
-          "title": "Professional-services separation",
-          "detail": "Separate professional services cleanly.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "mon"
-        },
-        {
-          "type": "watch",
-          "title": "Houston closure",
-          "detail": "Houston site closure.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "mon"
-        },
-        {
-          "type": "watch",
-          "title": "Cognitive hiring tests",
-          "detail": "Introduce cognitive tests in hiring.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "open"
-        },
-        {
-          "type": "watch",
-          "title": "MEA",
-          "detail": "Monitor.",
-          "owner": "Deepak",
-          "date": "—",
-          "status": "mon"
-        },
-        {
+          "date": "5 Jun",
           "type": "disc",
-          "title": "Earnout expense definitions",
-          "detail": "Definitions agreed.",
-          "owner": "Deepak / Adrian",
-          "date": "—",
-          "status": "done"
+          "owner": "Jennifer / Adrian",
+          "title": "BD ownership",
+          "detail": "Behavioural/cultural gap fixed through the grading system (principals/fellows owning a service line) + empowerment, not incentives or guidance — including willingness to move goalposts.",
+          "status": "open"
         }
       ],
       "themes": [
         {
-          "theme": "Delivery & utilisation",
-          "good": "Billable-hours utilisation up across delivery",
-          "signal": "OKRs in flight",
-          "rating": "Developing"
+          "good": "Principals/fellows own service lines; empowered, accountable BD",
+          "theme": "Business development",
+          "rating": "Needs focus",
+          "signal": "Cultural gap; grading-system fix in train (5 Jun)"
         },
         {
-          "theme": "Growth — sales & portfolio",
-          "good": "+30% sales; expand the service portfolio",
-          "signal": "In progress",
-          "rating": "Developing"
-        },
-        {
-          "theme": "Bismarck integration",
-          "good": "Clean X-ISS ↔ nAG Services integration; manage churn",
-          "signal": "Monitoring",
-          "rating": "Needs focus"
-        },
-        {
-          "theme": "Leadership transition",
-          "good": "Earnout protected; orderly move to part-time",
-          "signal": "After Q1 next year",
-          "rating": "Watch"
-        },
-        {
-          "theme": "Comp & schemes",
-          "good": "Differentiated PS / managed / technical schemes; clean payroll",
-          "signal": "$14K accrual shortfall; payroll audit",
-          "rating": "Needs focus"
+          "good": "Tight cadence; AI effort on the critical path",
+          "theme": "Operating cadence & AI",
+          "rating": "Developing",
+          "signal": "AI value-map still behind (5 Jun)"
         }
       ],
+      "pin": "307510"
+    },
+    {
+      "id": "deepak",
+      "cur": "$",
       "log": [
         {
           "date": "2026-05-14",
@@ -1006,7 +813,214 @@
           "date": "2026-03-25",
           "text": "~£16K one-off bonus discrepancy resolved."
         }
-      ]
+      ],
+      "name": "Deepak Khosla",
+      "role": "X-ISS — MD (Bismarck)",
+      "bonus": [
+        {
+          "due": "Board pack",
+          "note": "Board-pack headline; still a placeholder until his revised number lands.",
+          "label": "Adjusted EBITDA",
+          "owner": "Deepak",
+          "status": "open",
+          "target": "≈ $450K (UK FY)",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "—",
+          "note": "",
+          "label": "Revenue ~$4M @ 15% net",
+          "owner": "Deepak",
+          "status": "prog",
+          "target": "Driven by billable hours",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "Q1 next yr",
+          "note": "Confirm against the earnout agreement.",
+          "label": "Earnout & leadership transition",
+          "owner": "Deepak / Adrian",
+          "status": "mon",
+          "target": "Earnout protected; move to part-time after Q1 next year",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "—",
+          "note": "",
+          "label": "Bonus scheme finalisation",
+          "owner": "Deepak / Adrian Scales",
+          "status": "prog",
+          "target": "Differentiated technical / managed / professional-services schemes",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "25 Mar",
+          "note": "Resolved 25 Mar (logged in £ while the rest sits in $).",
+          "label": "One-off bonus",
+          "owner": "Deepak",
+          "status": "done",
+          "target": "~£16K discrepancy",
+          "prog": "0%",
+          "conf": "50%"
+        },
+        {
+          "due": "—",
+          "note": "",
+          "label": "Pay review sign-off",
+          "owner": "Deepak",
+          "status": "prog",
+          "target": "Performance-based model; $14K accrual shortfall; payroll audit",
+          "prog": "0%",
+          "conf": "50%"
+        }
+      ],
+      "email": "dkhosla@x-iss.com",
+      "items": [
+        {
+          "date": "—",
+          "type": "goal",
+          "owner": "Deepak",
+          "title": "Utilisation OKRs",
+          "detail": "Delivery-focused billable utilisation targets.",
+          "status": "prog"
+        },
+        {
+          "date": "—",
+          "type": "goal",
+          "owner": "Deepak",
+          "title": "Sales +30% & service-portfolio expansion",
+          "detail": "Grow sales 30%; widen the service portfolio.",
+          "status": "prog"
+        },
+        {
+          "date": "—",
+          "type": "action",
+          "owner": "Deepak",
+          "title": "NAGS billable-hours sub-OKR",
+          "detail": "nAG Services billable-hours target.",
+          "status": "prog"
+        },
+        {
+          "date": "—",
+          "type": "action",
+          "owner": "Deepak",
+          "title": "Dennis Runner hire — Senior Delivery Director",
+          "detail": "Senior delivery leadership hire.",
+          "status": "open"
+        },
+        {
+          "date": "—",
+          "type": "goal",
+          "owner": "Deepak",
+          "title": "EMEA / E1",
+          "detail": "EMEA expansion / E1 proposal.",
+          "status": "open"
+        },
+        {
+          "date": "—",
+          "type": "action",
+          "owner": "Deepak",
+          "title": "Strategy deck",
+          "detail": "Build the strategy deck.",
+          "status": "open"
+        },
+        {
+          "date": "—",
+          "type": "watch",
+          "owner": "Deepak",
+          "title": "Churn / Bismarck integration",
+          "detail": "Monitor churn through the X-ISS ↔ nAG Services integration.",
+          "status": "mon"
+        },
+        {
+          "date": "—",
+          "type": "watch",
+          "owner": "Deepak",
+          "title": "EOD value-prop clarity",
+          "detail": "Clarify the EOD value proposition.",
+          "status": "mon"
+        },
+        {
+          "date": "—",
+          "type": "watch",
+          "owner": "Deepak",
+          "title": "Professional-services separation",
+          "detail": "Separate professional services cleanly.",
+          "status": "mon"
+        },
+        {
+          "date": "—",
+          "type": "watch",
+          "owner": "Deepak",
+          "title": "Houston closure",
+          "detail": "Houston site closure.",
+          "status": "mon"
+        },
+        {
+          "date": "—",
+          "type": "watch",
+          "owner": "Deepak",
+          "title": "Cognitive hiring tests",
+          "detail": "Introduce cognitive tests in hiring.",
+          "status": "open"
+        },
+        {
+          "date": "—",
+          "type": "watch",
+          "owner": "Deepak",
+          "title": "MEA",
+          "detail": "Monitor.",
+          "status": "mon"
+        },
+        {
+          "date": "—",
+          "type": "disc",
+          "owner": "Deepak / Adrian",
+          "title": "Earnout expense definitions",
+          "detail": "Definitions agreed.",
+          "status": "done"
+        }
+      ],
+      "themes": [
+        {
+          "good": "Billable-hours utilisation up across delivery",
+          "theme": "Delivery & utilisation",
+          "rating": "Developing",
+          "signal": "OKRs in flight"
+        },
+        {
+          "good": "+30% sales; expand the service portfolio",
+          "theme": "Growth — sales & portfolio",
+          "rating": "Developing",
+          "signal": "In progress"
+        },
+        {
+          "good": "Clean X-ISS ↔ nAG Services integration; manage churn",
+          "theme": "Bismarck integration",
+          "rating": "Needs focus",
+          "signal": "Monitoring"
+        },
+        {
+          "good": "Earnout protected; orderly move to part-time",
+          "theme": "Leadership transition",
+          "rating": "Watch",
+          "signal": "After Q1 next year"
+        },
+        {
+          "good": "Differentiated PS / managed / technical schemes; clean payroll",
+          "theme": "Comp & schemes",
+          "rating": "Needs focus",
+          "signal": "$14K accrual shortfall; payroll audit"
+        }
+      ],
+      "pin": "740212"
     }
-  ]
+  ],
+  "version": "unified-v1",
+  "updatedAt": "2026-06-12T11:02:50.157Z",
+  "updatedBy": ""
 }
