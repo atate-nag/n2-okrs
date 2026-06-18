@@ -1,0 +1,56 @@
+{
+  "version": "dup-1",
+  "source": {
+    "meeting_title": "Ian Wilson 1:1 — 17 Jun 2026",
+    "meeting_date":  "2026-06-17",
+    "fireflies_url": "https://app.fireflies.ai/view/EXAMPLE",
+    "attendees":     ["Adrian Tate", "Ian Wilson"]
+  },
+  "updates": [
+    {
+      "target": "slt-1to1",
+      "path":   "people[ian].bonus[Ian — 35% bonus]",
+      "op":     "set",
+      "fields": { "status": "prog", "prog": "30%", "conf": "70%" },
+      "rationale": "Ian: 'EBITDA tracking on £1.9m line, give or take recharges — feels solid for the period.'"
+    },
+    {
+      "target": "slt-1to1",
+      "path":   "people[ian].goals",
+      "op":     "append",
+      "value":  {
+        "label":  "Chair the E1 review board",
+        "target": "Run 3 reviews by end of Q2; clear go/no-go on the first proposal",
+        "owner":  "Ian",
+        "due":    "End Q2",
+        "status": "prog",
+        "note":   "Personal development: practising senior gating decisions.",
+        "prog":   "0%",
+        "conf":   "60%"
+      },
+      "rationale": "Adrian: 'Owning the E1 review board is the development stretch I want from you this quarter.'"
+    },
+    {
+      "target": "slt-1to1",
+      "path":   "people[ian].items",
+      "op":     "append",
+      "value":  {
+        "type":   "action",
+        "title":  "Load Mikey 70/20/10 weighting into HiBob",
+        "detail": "Bonus weighting confirmed in the 1:1; load before payroll lock.",
+        "owner":  "Ian / HR",
+        "date":   "24 Jun",
+        "status": "open"
+      }
+    },
+    {
+      "target": "slt-1to1",
+      "path":   "people[ian].log",
+      "op":     "prepend",
+      "value": {
+        "date": "2026-06-17",
+        "text": "1:1 — EBITDA confidence held at 70%, prog moved to 30%. New personal goal: chair the E1 review board this quarter. Action: Mikey weighting → HiBob by 24 Jun."
+      }
+    }
+  ]
+}

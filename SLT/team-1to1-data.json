@@ -21,68 +21,69 @@
           "text": "First 1:1 of the cycle — BU priorities and retention map set."
         }
       ],
+      "pin": "406515",
       "name": "Ian Wilson",
       "role": "nAG Product — BU lead",
       "bonus": [
         {
           "due": "Monthly review",
+          "conf": "50%",
           "note": "P&L lands ~£1.9m but excludes intercompany recharges & the UVA/Arkham charge — validate with Darren (Apr actuals); may be overestimated.",
+          "prog": "0%",
           "label": "Ian — 35% bonus",
           "owner": "Ian / Darren",
           "status": "prog",
-          "target": "EBITDA £1.9m + 3 × E1 proposals",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "EBITDA £1.9m + 3 × E1 proposals"
         },
         {
           "due": "Load to HiBob",
+          "conf": "50%",
           "note": "Title approved 9 Jun. Relocating to Germany Jan + 3-mo unpaid leave Oct–Dec — weigh Q4 coverage.",
+          "prog": "0%",
           "label": "Joe — 15% (Director of R&D)",
           "owner": "Ian / HR",
           "status": "prog",
-          "target": "~70/20/10, majority on the 3 E1s; other two TBD",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "~70/20/10, majority on the 3 E1s; other two TBD"
         },
         {
           "due": "Load to HiBob",
+          "conf": "50%",
           "note": "Weight the priority E1 goal hardest — last year equal weighting let a 0% cost only a third.",
+          "prog": "0%",
           "label": "Mikey — 15% max",
           "owner": "Ian / HR",
           "status": "prog",
-          "target": "~70/20/10, majority on the 3 E1s",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "~70/20/10, majority on the 3 E1s"
         },
         {
           "due": "In progress",
+          "conf": "50%",
           "note": "End ad-hoc goal-setting; weightings on every plan.",
+          "prog": "0%",
           "label": "All bonused staff",
           "owner": "Ian / Karen",
           "status": "prog",
-          "target": "Goals weighted in HiBob; E1 weighted heaviest",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Goals weighted in HiBob; E1 weighted heaviest"
         },
         {
           "due": "—",
+          "conf": "50%",
           "note": "Be far more precise on the EBITDA gate than last year.",
+          "prog": "0%",
           "label": "BU-wide EBITDA gate",
           "owner": "Ian / Darren",
           "status": "mon",
-          "target": "Sufficient accrued group EBITDA",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Sufficient accrued group EBITDA"
         },
         {
           "due": "—",
+          "conf": "50%",
           "note": "Drop all cost-of-living language; tie rises to company + job performance.",
+          "prog": "0%",
           "label": "Pay-rise framing",
           "owner": "Ian",
           "status": "prog",
-          "target": "Performance-based, not cost-of-living",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Performance-based, not cost-of-living"
         }
       ],
       "email": "ian.wilson@n2grp.com",
@@ -192,7 +193,7 @@
           "signal": "The 3 E1s must be good ones — Jake heads-up before they advance (9 Jun)"
         }
       ],
-      "pin": "406515"
+      "goals": []
     },
     {
       "id": "jake",
@@ -215,18 +216,19 @@
           "text": "1:1 — early-cycle priorities."
         }
       ],
+      "pin": "139542",
       "name": "Jake Kennard",
       "role": "Innovation / E1 processing",
       "bonus": [
         {
           "due": "—",
+          "conf": "50%",
           "note": "This year's bonus is light; next year is the payout year. Align on the *how* of growth spend.",
+          "prog": "0%",
           "label": "FY EBITDA target — the bonus lever",
           "owner": "Jake / Adrian / Scales",
           "status": "mon",
-          "target": "Hit FY EBITDA with disciplined, time-boxed growth spend",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Hit FY EBITDA with disciplined, time-boxed growth spend"
         }
       ],
       "email": "jake.kennard@n2grp.com",
@@ -302,7 +304,7 @@
           "signal": "Defining 'done' still a risk (30 Apr PR)"
         }
       ],
-      "pin": "139542"
+      "goals": []
     },
     {
       "id": "scales",
@@ -327,28 +329,29 @@
           "text": "First 1:1 of the cycle — group finance priorities set."
         }
       ],
+      "pin": "234550",
       "name": "Adrian Scales",
       "role": "Interim finance / ops chief",
       "bonus": [
         {
-          "label": "Group EBITDA",
-          "target": "£2M (50% weight)",
-          "owner": "Adrian Scales",
           "due": "FY26–27",
-          "status": "prog",
+          "conf": "50%",
           "note": "",
           "prog": "0%",
-          "conf": "50%"
+          "label": "Group EBITDA",
+          "owner": "Adrian Scales",
+          "status": "prog",
+          "target": "£2M (50% weight)"
         },
         {
-          "label": "Strategic acquisition",
-          "target": "1 acquisition in Due Diligence (50% weight)",
-          "owner": "Adrian Scales",
           "due": "FY26–27",
-          "status": "prog",
+          "conf": "50%",
           "note": "",
           "prog": "0%",
-          "conf": "50%"
+          "label": "Strategic acquisition",
+          "owner": "Adrian Scales",
+          "status": "prog",
+          "target": "1 acquisition in Due Diligence (50% weight)"
         }
       ],
       "email": "adrian.scales@n2grp.com",
@@ -442,7 +445,7 @@
           "signal": "PR development flag"
         }
       ],
-      "pin": "234550"
+      "goals": []
     },
     {
       "id": "jack",
@@ -465,18 +468,19 @@
           "text": "1:1 — financial/bonus model shared with Adrian (view-only, HR data protected); Xero transition ~10%."
         }
       ],
+      "pin": "675094",
       "name": "Jack Gidding",
       "role": "STAC — MD",
       "bonus": [
         {
           "due": "1 Jun",
+          "conf": "50%",
           "note": "Resolve David Whitney's base+commission plan as part of this.",
+          "prog": "0%",
           "label": "Bonus documentation → Bob",
           "owner": "Jack / Karen",
           "status": "prog",
-          "target": "EBITDA-based tiers; upload to Bob as the legal equivalent of letters",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "EBITDA-based tiers; upload to Bob as the legal equivalent of letters"
         }
       ],
       "email": "jack.gidding@stacresearch.com",
@@ -654,7 +658,7 @@
           "signal": "Blocked on David (1 Jun)"
         }
       ],
-      "pin": "675094"
+      "goals": []
     },
     {
       "id": "jen",
@@ -673,48 +677,49 @@
           "text": "1:1 — April actuals ~+$9k vs budget; revenue confidence discussion."
         }
       ],
+      "pin": "307510",
       "name": "Jennifer Wortman",
       "role": "BioTeam — lead",
       "bonus": [
         {
           "due": "Interim scheme",
+          "conf": "50%",
           "note": "Confirmed 5 Jun PR. Longer-term consulting-model incentives baked in later.",
+          "prog": "0%",
           "label": "Jennifer — 30% bonus",
           "owner": "Jennifer / Adrian",
           "status": "prog",
-          "target": "Progressive EBITDA buckets — pool fills once the EBITDA target is hit, with multipliers above",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Progressive EBITDA buckets — pool fills once the EBITDA target is hit, with multipliers above"
         },
         {
           "due": "—",
+          "conf": "50%",
           "note": "",
+          "prog": "0%",
           "label": "Michelle — 25% (VP)",
           "owner": "Jennifer",
           "status": "prog",
-          "target": "Performance-based",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Performance-based"
         },
         {
           "due": "—",
+          "conf": "50%",
           "note": "Everyone else performance-based; wider scheme deferred this year.",
+          "prog": "0%",
           "label": "Wider-staff scheme",
           "owner": "Jennifer",
           "status": "open",
-          "target": "Deferred",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Deferred"
         },
         {
           "due": "—",
+          "conf": "50%",
           "note": "Adrian's framing: confidence matters more than the absolute. Verify the basis vs the live model.",
+          "prog": "0%",
           "label": "EBITDA target = bonus-pool trigger",
           "owner": "Jennifer",
           "status": "mon",
-          "target": "Hit EBITDA target (basis ~$5.3M / sub-$500k)",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Hit EBITDA target (basis ~$5.3M / sub-$500k)"
         }
       ],
       "email": "jennifer@bioteam.net",
@@ -790,7 +795,7 @@
           "signal": "AI value-map still behind (5 Jun)"
         }
       ],
-      "pin": "307510"
+      "goals": []
     },
     {
       "id": "deepak",
@@ -814,68 +819,69 @@
           "text": "~£16K one-off bonus discrepancy resolved."
         }
       ],
+      "pin": "740212",
       "name": "Deepak Khosla",
       "role": "X-ISS — MD (Bismarck)",
       "bonus": [
         {
           "due": "Board pack",
+          "conf": "50%",
           "note": "Board-pack headline; still a placeholder until his revised number lands.",
+          "prog": "0%",
           "label": "Adjusted EBITDA",
           "owner": "Deepak",
           "status": "open",
-          "target": "≈ $450K (UK FY)",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "≈ $450K (UK FY)"
         },
         {
           "due": "—",
+          "conf": "50%",
           "note": "",
+          "prog": "0%",
           "label": "Revenue ~$4M @ 15% net",
           "owner": "Deepak",
           "status": "prog",
-          "target": "Driven by billable hours",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Driven by billable hours"
         },
         {
           "due": "Q1 next yr",
+          "conf": "50%",
           "note": "Confirm against the earnout agreement.",
+          "prog": "0%",
           "label": "Earnout & leadership transition",
           "owner": "Deepak / Adrian",
           "status": "mon",
-          "target": "Earnout protected; move to part-time after Q1 next year",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Earnout protected; move to part-time after Q1 next year"
         },
         {
           "due": "—",
+          "conf": "50%",
           "note": "",
+          "prog": "0%",
           "label": "Bonus scheme finalisation",
           "owner": "Deepak / Adrian Scales",
           "status": "prog",
-          "target": "Differentiated technical / managed / professional-services schemes",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Differentiated technical / managed / professional-services schemes"
         },
         {
           "due": "25 Mar",
+          "conf": "50%",
           "note": "Resolved 25 Mar (logged in £ while the rest sits in $).",
+          "prog": "0%",
           "label": "One-off bonus",
           "owner": "Deepak",
           "status": "done",
-          "target": "~£16K discrepancy",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "~£16K discrepancy"
         },
         {
           "due": "—",
+          "conf": "50%",
           "note": "",
+          "prog": "0%",
           "label": "Pay review sign-off",
           "owner": "Deepak",
           "status": "prog",
-          "target": "Performance-based model; $14K accrual shortfall; payroll audit",
-          "prog": "0%",
-          "conf": "50%"
+          "target": "Performance-based model; $14K accrual shortfall; payroll audit"
         }
       ],
       "email": "dkhosla@x-iss.com",
@@ -1017,7 +1023,7 @@
           "signal": "$14K accrual shortfall; payroll audit"
         }
       ],
-      "pin": "740212"
+      "goals": []
     }
   ],
   "version": "unified-v1",

@@ -180,6 +180,11 @@ button{padding:8px 14px;font-size:13px;border-width:2px;font-weight:500;border-r
 [contenteditable]:focus{background:#fff;box-shadow:0 0 0 2px var(--gold)}
 select{padding:4px 7px;font-size:12px;border-width:2px;border-radius:7px}
 
+/* ---- section label inside Goals tab ---- */
+.seclbl{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.seclbl-text{font-family:'Space Grotesk',Inter,sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--ink)}
+.seclbl .add{margin-left:auto}
+
 /* ---- progress / confidence pills ---- */
 .kpi{display:inline-flex;align-items:center;gap:10px;margin-left:auto}
 .kpi .group{display:inline-flex;align-items:center;gap:5px}
@@ -302,6 +307,7 @@ const SEED={
  people:[
  /* ---------------- IAN WILSON ---------------- */
  {id:"ian",name:"Ian Wilson",role:"nAG Product — BU lead",email:"ian.wilson@n2grp.com",cur:"£",
+  goals:[],
   bonus:[
    {label:"Ian — 35% bonus",target:"EBITDA £1.9m + 3 × E1 proposals",owner:"Ian / Darren",due:"Monthly review",status:"prog",note:"P&L lands ~£1.9m but excludes intercompany recharges & the UVA/Arkham charge — validate with Darren (Apr actuals); may be overestimated."},
    {label:"Joe — 15% (Director of R&D)",target:"~70/20/10, majority on the 3 E1s; other two TBD",owner:"Ian / HR",due:"Load to HiBob",status:"prog",note:"Title approved 9 Jun. Relocating to Germany Jan + 3-mo unpaid leave Oct–Dec — weigh Q4 coverage."},
@@ -336,6 +342,7 @@ const SEED={
   ]},
  /* ---------------- JAKE KENNARD ---------------- */
  {id:"jake",name:"Jake Kennard",role:"Innovation / E1 processing",email:"jake.kennard@n2grp.com",cur:"£",
+  goals:[],
   bonus:[
    {label:"FY EBITDA target — the bonus lever",target:"Hit FY EBITDA with disciplined, time-boxed growth spend",owner:"Jake / Adrian / Scales",due:"—",status:"mon",note:"This year's bonus is light; next year is the payout year. Align on the *how* of growth spend."}
   ],
@@ -360,6 +367,7 @@ const SEED={
   ]},
  /* ---------------- ADRIAN SCALES ---------------- */
  {id:"scales",name:"Adrian Scales",role:"Interim finance / ops chief",email:"adrian.scales@n2grp.com",cur:"£",
+  goals:[],
   bonus:[
    {label:"Group EBITDA",target:"£2M (50% weight)",owner:"Adrian Scales",due:"FY26–27",status:"prog",note:"",prog:"0%",conf:"50%"},
    {label:"Strategic acquisition",target:"1 acquisition in Due Diligence (50% weight)",owner:"Adrian Scales",due:"FY26–27",status:"prog",note:"",prog:"0%",conf:"50%"}
@@ -393,6 +401,7 @@ const SEED={
   ]},
  /* ---------------- JACK GIDDING ---------------- */
  {id:"jack",name:"Jack Gidding",role:"STAC — MD",email:"jack.gidding@stacresearch.com",cur:"$",
+  goals:[],
   bonus:[
    {label:"Bonus documentation → Bob",target:"EBITDA-based tiers; upload to Bob as the legal equivalent of letters",owner:"Jack / Karen",due:"1 Jun",status:"prog",note:"Resolve David Whitney's base+commission plan as part of this."}
   ],
@@ -430,6 +439,7 @@ const SEED={
   ]},
  /* ---------------- JENNIFER WORTMAN ---------------- */
  {id:"jen",name:"Jennifer Wortman",role:"BioTeam — lead",email:"jennifer@bioteam.net",cur:"$",
+  goals:[],
   bonus:[
    {label:"Jennifer — 30% bonus",target:"Progressive EBITDA buckets — pool fills once the EBITDA target is hit, with multipliers above",owner:"Jennifer / Adrian",due:"Interim scheme",status:"prog",note:"Confirmed 5 Jun PR. Longer-term consulting-model incentives baked in later."},
    {label:"Michelle — 25% (VP)",target:"Performance-based",owner:"Jennifer",due:"—",status:"prog",note:""},
@@ -456,6 +466,7 @@ const SEED={
   ]},
  /* ---------------- DEEPAK KHOSLA ---------------- */
  {id:"deepak",name:"Deepak Khosla",role:"X-ISS — MD (Bismarck)",email:"dkhosla@x-iss.com",cur:"$",
+  goals:[],
   bonus:[
    {label:"Adjusted EBITDA",target:"≈ $450K (UK FY)",owner:"Deepak",due:"Board pack",status:"open",note:"Board-pack headline; still a placeholder until his revised number lands."},
    {label:"Revenue ~$4M @ 15% net",target:"Driven by billable hours",owner:"Deepak",due:"—",status:"prog",note:""},
@@ -525,7 +536,7 @@ const LANES=[["goal","Goals","var(--green)"],["action","Actions","var(--blue)"],
 const TABS=[
   ["priorities","Priorities",d=>d.items.length],
   ["themes","PR themes",d=>d.themes.length],
-  ["bonus","Bonus & targets",d=>d.bonus.length],
+  ["goals","Goals",d=>(d.bonus?.length||0)+(d.goals?.length||0)],
   ["log","1:1 log",d=>d.log.length]
 ];
 function esc(s){return (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
@@ -556,30 +567,34 @@ function statusSel(val,onch){
 }
 function badge(val){const s=ST[val]||ST.open;return `<span class="badge ${s[1]}">${s[0]}</span>`;}
 function tlClass(v){const n=parseFloat(String(v||'').replace('%','').trim());if(isNaN(n)||n<=0)return 'tl-grey';if(n<40)return 'tl-red';if(n<70)return 'tl-amber';return 'tl-green';}
+function brow(b,i,setFn,delFn){
+  return `<div class="brow">
+    <div class="label" contenteditable onblur="${setFn}(${i},'label',this)">${esc(b.label)}</div>
+    <div class="target" contenteditable onblur="${setFn}(${i},'target',this)">${esc(b.target)}</div>
+    <div class="metarow">
+      <span><span class="k">Owner</span><span contenteditable onblur="${setFn}(${i},'owner',this)">${esc(b.owner||'')}</span></span>
+      <span><span class="k">Due</span><span contenteditable onblur="${setFn}(${i},'due',this)">${esc(b.due||'')}</span></span>
+      <span>${statusSel(b.status,`${setFn}(${i},'status',{value:this.value})`)}</span>
+      <span class="kpi">
+        <span class="group"><span class="k">Conf</span><span class="metric ${tlClass(b.conf)}" contenteditable onblur="${setFn}(${i},'conf',this)">${esc(b.conf||'0%')}</span></span>
+        <span class="group"><span class="k">Prog</span><span class="metric ${tlClass(b.prog)}" contenteditable onblur="${setFn}(${i},'prog',this)">${esc(b.prog||'0%')}</span></span>
+      </span>
+      <button class="icon" title="Delete" onclick="${delFn}(${i})">✕</button>
+    </div>
+    ${b.note!==undefined?`<div class="note" contenteditable onblur="${setFn}(${i},'note',this)">${esc(b.note)}</div>`:''}
+  </div>`;
+}
 
 function render(){
   const d=p();
 
-  const bonus=`
-      <div class="panehd"><button class="add" onclick="addBonus()">+ Add target</button></div>
-      <div class="bonus">
-        ${d.bonus.map((b,i)=>`
-          <div class="brow">
-            <div class="label" contenteditable onblur="setB(${i},'label',this)">${esc(b.label)}</div>
-            <div class="target" contenteditable onblur="setB(${i},'target',this)">${esc(b.target)}</div>
-            <div class="metarow">
-              <span><span class="k">Owner</span><span contenteditable onblur="setB(${i},'owner',this)">${esc(b.owner)}</span></span>
-              <span><span class="k">Due</span><span contenteditable onblur="setB(${i},'due',this)">${esc(b.due)}</span></span>
-              <span>${statusSel(b.status,`setB(${i},'status',{value:this.value})`)}</span>
-              <span class="kpi">
-                <span class="group"><span class="k">Conf</span><span class="metric ${tlClass(b.conf)}" contenteditable onblur="setB(${i},'conf',this)">${esc(b.conf||'0%')}</span></span>
-                <span class="group"><span class="k">Prog</span><span class="metric ${tlClass(b.prog)}" contenteditable onblur="setB(${i},'prog',this)">${esc(b.prog||'0%')}</span></span>
-              </span>
-              <button class="icon" title="Delete" onclick="delB(${i})">✕</button>
-            </div>
-            ${b.note!==undefined?`<div class="note" contenteditable onblur="setB(${i},'note',this)">${esc(b.note)}</div>`:''}
-          </div>`).join("")}
-      </div>`;
+  const bonusRows = (d.bonus||[]).map((b,i)=>brow(b,i,'setB','delB')).join("");
+  const goalRows  = (d.goals||[]).map((b,i)=>brow(b,i,'setG','delG')).join("");
+  const goals=`
+      <div class="seclbl"><span class="seclbl-text">Bonus goals</span><button class="add" onclick="addBonus()">+ Add bonus goal</button></div>
+      <div class="bonus">${bonusRows||'<p class="muted" style="padding:8px 4px">No bonus goals.</p>'}</div>
+      <div class="seclbl" style="margin-top:26px"><span class="seclbl-text">Personal goals</span><button class="add" onclick="addGoal()">+ Add personal goal</button></div>
+      <div class="bonus">${goalRows||'<p class="muted" style="padding:8px 4px">No personal goals.</p>'}</div>`;
 
   const lanes=LANES.map(l=>{
     const its=d.items.map((it,idx)=>({it,idx})).filter(o=>o.it.type===l[0]);
@@ -621,7 +636,8 @@ function render(){
           </div>`).join("")}
       </div>`;
 
-  const panes={priorities,themes,bonus,log};
+  const panes={priorities,themes,goals,log};
+  if(activeTab==='bonus')activeTab='goals'; // legacy key
   if(!panes[activeTab])activeTab="priorities";
   const tabs=TABS.map(t=>`
     <button class="tab ${activeTab===t[0]?'on':''}" onclick="setTab('${t[0]}')">
@@ -673,14 +689,17 @@ function card(it,idx){
 function val(el){return el.value!==undefined?el.value:el.innerText.trim();}
 function setMeta(k,el){p()[k]=val(el);persist();if(k==='name'||k==='role'||k==='cur')renderSide();}
 function setB(i,k,el){p().bonus[i][k]=val(el);persist();if(k==='status'||k==='prog'||k==='conf')render();}
+function setG(i,k,el){(p().goals=p().goals||[])[i][k]=val(el);persist();if(k==='status'||k==='prog'||k==='conf')render();}
 function setI(i,k,el){p().items[i][k]=val(el);persist();if(k==='status'||k==='type')render();}
 function setT(i,k,el){p().themes[i][k]=val(el);persist();}
 function setL(i,k,el){let v=val(el);if(k==='date')v=v.replace(/ · silent$/,'');p().log[i][k]=v;persist();}
-function addBonus(){p().bonus.push({label:"New target",target:"",owner:"",due:"",status:"open",note:"",prog:"0%",conf:"50%"});persist();render();}
+function addBonus(){p().bonus.push({label:"New bonus goal",target:"",owner:"",due:"",status:"open",note:"",prog:"0%",conf:"50%"});persist();render();}
+function addGoal(){(p().goals=p().goals||[]).push({label:"New personal goal",target:"",owner:"",due:"",status:"open",note:"",prog:"0%",conf:"50%"});persist();render();}
 function addItem(){p().items.unshift({type:"action",title:"New priority",detail:"",owner:"",date:"",status:"open"});persist();render();}
 function addTheme(){p().themes.push({theme:"New theme",good:"",signal:"",rating:""});persist();render();}
 function addLog(){p().log.unshift({date:new Date().toISOString().slice(0,10),text:""});persist();render();}
 function delB(i){p().bonus.splice(i,1);persist();render();}
+function delG(i){p().goals.splice(i,1);persist();render();}
 function delI(i){p().items.splice(i,1);persist();render();}
 function delT(i){p().themes.splice(i,1);persist();render();}
 function delL(i){p().log.splice(i,1);persist();render();}
