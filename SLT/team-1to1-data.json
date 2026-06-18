@@ -87,6 +87,7 @@
         }
       ],
       "email": "ian.wilson@n2grp.com",
+      "goals": [],
       "items": [
         {
           "date": "9 Jun",
@@ -192,13 +193,16 @@
           "rating": "Needs focus",
           "signal": "The 3 E1s must be good ones — Jake heads-up before they advance (9 Jun)"
         }
-      ],
-      "goals": []
+      ]
     },
     {
       "id": "jake",
       "cur": "£",
       "log": [
+        {
+          "date": "2026-06-16",
+          "text": "Recorded readout of the 2-day strategy offsite (Bristol follow-up). Major change to Jake's time split: ~20% C2, 50% BioSTAC, 20% A2 (early-stage M&A) search, 10% possible SI2/standard E1 — official goals to be rewritten to match. BioSTAC becomes lead focus: Jake to take the proposal over from Blake & Jack and build it out; 3-phase test (benchmark<->event demand -> vendor sponsorship -> can we run it); end-state Jess runs it on STAC payroll. A2 search led by Scales + Evan with Jake on investigation/follow-up, reviewed weekly at M2SOT. Bioteam exit by Aug reaffirmed, but Jake may stay slightly longer on sales / 1:1s with Jen (still held to targets) to mitigate 'stasis' risk. Innovation must deliver >=1 quality E1 or face being wound down (~12-month review)."
+        },
         {
           "date": "2026-05-14",
           "text": "1:1 — E1 cycle cadence and lead-gen ROI discussion."
@@ -232,6 +236,7 @@
         }
       ],
       "email": "jake.kennard@n2grp.com",
+      "goals": [],
       "items": [
         {
           "date": "30 Apr",
@@ -288,6 +293,41 @@
           "title": "Three PR risk areas",
           "detail": "BU absorption; E1 'done' definition; strategy-change time sinks.",
           "status": "mon"
+        },
+        {
+          "type": "goal",
+          "owner": "Jake",
+          "title": "BioSTAC — lead the E1 (group-level Strategic Initiative, lands in STAC if successful)",
+          "detail": "Group-level Strategic Initiative — NOT a BioTeam project; lands in STAC if successful. ~50% of Jake's time; takes the proposal over from Blake & Jack and builds it out. 3-phase test: (1) demand link between benchmarks and event attendance, (2) vendor sponsorship, (3) can we run it. Build out the proposal in the next week; end-state Jess runs it on STAC payroll with James (vendor side) + benchmark support.",
+          "status": "prog"
+        },
+        {
+          "type": "action",
+          "owner": "Jake",
+          "title": "A2 early-stage M&A search — investigation & follow-up",
+          "detail": "~20% of Jake's time. Search led by Scales + Evan; Jake picks up investigation/follow-up on interesting targets. Reviewed weekly at M2SOT. Target profile: further-along bootstrapped teams at lower valuations (angel- not VC/accelerator-stage), to help replace revenue previously expected from E1 proposals.",
+          "status": "open"
+        },
+        {
+          "type": "action",
+          "owner": "Jake",
+          "title": "Rewrite official goals to match new time split",
+          "detail": "Realign Jake's recorded goals/HiBob targets to 20% C2 / 50% BioSTAC / 20% A2 search / 10% SI2. (Detailed OKR weightings handled in the group OKR meeting.)",
+          "status": "open"
+        },
+        {
+          "type": "watch",
+          "owner": "Jake",
+          "title": "Bioteam 'stasis' / Jen managed-upwards risk",
+          "detail": "As the group goes more arm's-length, risk that Bioteam drifts and Jen is 'managed upwards'. Mitigation: Jake stays in a bit longer on the sales side and keeps 1:1s with Jen (still held to targets); his 20% C2 allocation lets him support Bioteam more than originally planned.",
+          "status": "mon"
+        },
+        {
+          "type": "watch",
+          "owner": "Jake",
+          "title": "Innovation E1 funnel under test",
+          "detail": "Offsite set a hard bar: the innovation team must produce >=1 quality E1 proposal or no further ones will be commissioned; if nothing exciting emerges from innovation/incubators within ~12 months, both could be wound down. Relevant to Jake's E1 core mandate.",
+          "status": "mon"
         }
       ],
       "themes": [
@@ -303,8 +343,7 @@
           "rating": "Needs focus",
           "signal": "Defining 'done' still a risk (30 Apr PR)"
         }
-      ],
-      "goals": []
+      ]
     },
     {
       "id": "scales",
@@ -355,6 +394,7 @@
         }
       ],
       "email": "adrian.scales@n2grp.com",
+      "goals": [],
       "items": [
         {
           "date": "—",
@@ -444,13 +484,20 @@
           "rating": "Developing",
           "signal": "PR development flag"
         }
-      ],
-      "goals": []
+      ]
     },
     {
       "id": "jack",
       "cur": "$",
       "log": [
+        {
+          "date": "2026-06-12",
+          "text": "1:1 (admin/bonus). Bonus set 100% on financials — 50% revenue / 50% EBITDA, no extra metric added; targets going into HiBob today (Jack + team). Dashboard pruned: alignment-prep and build-dashboards items closed off; FY forecast and David's comp confirmed as the two remaining big open actions. Explore/BioSTAC not handed outside Stack but needs a technical sponsor + technical builder; group to decide funding at next week's offsite so it doesn't hit Jack's targets. David comp still a red flag (4× rule may not fit the scaled-down Tier-3 plan). Jack to feed Stack-synergistic acquisition prospects to Adrian. In-person strategy session placeholder 10 Jul; Jack on leave ~2 weeks late-June/early-July."
+        },
+        {
+          "date": "2026-06-11",
+          "text": "STAC Q1 alignment. Spring summit series +29.5% YoY (record attendance; most events sold out 6–8 wks early); Tier-3 pipeline ~$600k→~$1M with new logos (ARM/Graviton via Goldman, Celestica, CoreWeave full-year, Ingram Micro, SHI). BioSTAC is the only live E1 — Jack+Blake to bring a proposal to the group within ~a month (needs upfront investment; mini-BioSTAC Q1 next FY). Key-person risk widened: Stuart departed (load to Jack/James; contract PM converting to full-time 5 days/wk via NAG) and Bishop fully retired, leaving Dom sole auditor. Ops: all-in on Agorafi for events + Salesforce→HubSpot eval (contract to Apr-27). Finance: model/Salesforce-vs-accounts reconciliation underway with Darren (AR deepest ever — likely timing). Annual targets/OKRs carried to the OKR meeting."
+        },
         {
           "date": "2026-06-01",
           "text": "PR — items deferred to actions (Bob upload, alignment prep, David comp, forecast, dashboards). Membership & events targets reaffirmed."
@@ -475,15 +522,26 @@
         {
           "due": "1 Jun",
           "conf": "50%",
-          "note": "Resolve David Whitney's base+commission plan as part of this.",
+          "note": "Targets being finalised in HiBob on 12 Jun — Adrian uploading by EOD; Jack entering his and team targets.",
           "prog": "0%",
           "label": "Bonus documentation → Bob",
           "owner": "Jack / Karen",
           "status": "prog",
           "target": "EBITDA-based tiers; upload to Bob as the legal equivalent of letters"
+        },
+        {
+          "due": "FY26/27",
+          "conf": "50%",
+          "note": "FY26/27 bonus tied entirely to the two BU financial goals — 50% on revenue, 50% on EBITDA; no separate non-financial metric added (revenue/EBITDA judged to already capture summit and retention). Jack to confirm and enter his own and his team's targets in HiBob.",
+          "prog": "0%",
+          "label": "Bonus — 100% financial (50% revenue / 50% EBITDA)",
+          "owner": "Jack",
+          "status": "prog",
+          "target": "50% revenue + 50% EBITDA (FY26/27)"
         }
       ],
       "email": "jack.gidding@stacresearch.com",
+      "goals": [],
       "items": [
         {
           "date": "—",
@@ -498,7 +556,7 @@
           "type": "goal",
           "owner": "Jack / D. Whitney",
           "title": "Tier 3 vendor revenue",
-          "detail": "2 projects, +$50K by Q2; early engagement with Tier-3 vendors.",
+          "detail": "Pipeline ~$600k, targeting ~$1M in coming weeks; new/returning Tier-3 logos this spring incl. ARM (Graviton testing, out of a Goldman Sachs discussion), Celestica, CoreWeave (signed for the full year), Ingram Micro, SHI and Adtran; Intel deepening (exploring a CEO keynote at the fall NY summit). David Whitney leading engagement.",
           "status": "prog"
         },
         {
@@ -514,7 +572,7 @@
           "type": "goal",
           "owner": "Jack / J. Corcoran",
           "title": "Summit / event revenue",
-          "detail": "+30% YoY; Chicago → New York, London, NPL mini-summit (9 Jul).",
+          "detail": "Spring series revenue +29.5% YoY (~$300k uplift); record registration and attendance across all four events, most selling out 6–8 weeks ahead; driven by re-tiered pricing (silver/gold/platinum) and moving the discount policy off the price list, plus ~20 new logos and no-cost marquee panelists priming the community.",
           "status": "prog"
         },
         {
@@ -522,15 +580,7 @@
           "type": "goal",
           "owner": "Jack",
           "title": "Explore initiative (phased)",
-          "detail": "Q1 hypothesis → Q2 sponsor group → Q4 event.",
-          "status": "open"
-        },
-        {
-          "date": "11 Jun",
-          "type": "action",
-          "owner": "Jack",
-          "title": "11 Jun alignment prep",
-          "detail": "Performance-vs-target deck; keep last cycle's structure; Adrian to send agenda ahead.",
+          "detail": "Not being handed outside Stack; needs additional resource to drive — a technical 'sponsor/steward' to shape the offering with end users, plus a technical builder to drive the AI-built work; likely Stack staff (contract or otherwise). Requires a group-level funding decision (group offsite Mon/Tue next week) so the cost doesn't fall on Jack's BU targets.",
           "status": "open"
         },
         {
@@ -538,31 +588,23 @@
           "type": "action",
           "owner": "Jack",
           "title": "David Whitney comp redesign",
-          "detail": "Base+commission aligned to the sales team; David refuses commission — mirror Matt's plan; resolve in bonus talks.",
-          "status": "block"
+          "detail": "Recorded as an open action (the recurring red flag): David's sales comp isn't fully aligned with the scaled-down Tier-3 plan; the usual ~4× revenue rule-of-thumb for a salesperson may not fit, so a different basis is needed. David isn't bonused (no HiBob bonus upload for him today), so not urgent this week, but still to close out.",
+          "status": "open"
         },
         {
           "date": "—",
           "type": "action",
           "owner": "Jack",
           "title": "Year-one detailed FY forecast",
-          "detail": "Non-linear yr1; straight-line yr2–4; use as a management tool, not just audit.",
+          "detail": "C2 baseline started from April closed books (one fiscal month): revenue ~$316k (£→$ converted) vs a run-rate EBITDA ~$133k — figures don't yet fully reconcile. Year-on-year comparison blocked: Darren supplied an Apr–Jun lump, not broken out per month, so YoY can't be produced yet.",
           "status": "open"
-        },
-        {
-          "date": "12 May",
-          "type": "action",
-          "owner": "Jack / Wendy",
-          "title": "Build tracking dashboards",
-          "detail": "Vendor research + events; feed metrics into alignment meetings & Adrian's shared dashboard.",
-          "status": "prog"
         },
         {
           "date": "18 Mar",
           "type": "action",
           "owner": "Jack",
           "title": "C2 stabilisation migrations",
-          "detail": "HubSpot, Xero, Drupal 7 upgrade, Asana→M365; cloud-cost cuts; negotiate vendor credits.",
+          "detail": "Going all-in on Agorafi as the single end-to-end event platform (registration/speakers/agenda) to remove a reconciliation step; Jack/James/Simon to run a process-simplification review in July. Evaluating a Salesforce→HubSpot move (In² enterprise licence); Salesforce contract runs to Apr 2027 so there's time — Adrian Scales to set up a HubSpot overview.",
           "status": "prog"
         },
         {
@@ -570,7 +612,7 @@
           "type": "action",
           "owner": "Jack",
           "title": "Hiring & capacity",
-          "detail": "Junior salesperson, contract Technical Delivery Manager, train Wendy on data, group controller onboarding.",
+          "detail": "Contract project manager (currently 3 days/wk) agreed to convert to full-time 5 days/wk at a slight saving; onboarding through NAG (UK/Wales), Jack working with Karen — will absorb back-end technical workload off Jack and James.",
           "status": "prog"
         },
         {
@@ -578,7 +620,7 @@
           "type": "watch",
           "owner": "Jack",
           "title": "Key-person risk — Stuart's exit",
-          "detail": "Last day 5 Jun; confirm a clean, complete handover; no continuity gaps.",
+          "detail": "Stuart has now departed; his back-end/technical responsibilities fall to Jack and James in the interim, mitigated by converting the contract PM to full-time (see hiring item).",
           "status": "mon"
         },
         {
@@ -602,16 +644,16 @@
           "type": "watch",
           "owner": "Jack",
           "title": "Forecasting / impairment",
-          "detail": "Keep a conservative forecast.",
+          "detail": "Live reconciliation issue: Jack's model and Salesforce predict spring event revenue (London/Hong Kong) that hasn't fully flowed to the accounts; likely timing — AR is the deepest ever as invoicing moved to Louise's group. Adrian Scales + Darren investigating before next meeting. Only known write-off: an Oracle benchmark (sponsor left without a PO, past their FY).",
           "status": "mon"
         },
         {
           "date": "23 Apr",
           "type": "disc",
           "owner": "Jack / Jake / Ian",
-          "title": "BioStack E1",
-          "detail": "Cross-BU innovation with Jake & Ian; scalable benchmarks + small summer pilots.",
-          "status": "open"
+          "title": "BioSTAC E1",
+          "detail": "Jack + Blake (BioTeam) scoping post-NY summit; ~5 candidate benchmark domains identified; aiming to put an E1 proposal to the group within ~1 month; needs upfront investment (neither Stack nor BioTeam has spare resource); mini-BioSTAC targeted for Q1 next FY using AI/Claude-code-built test harnesses; open-source community model and the Stack↔BioTeam commercial split still to define. Next Jack/Blake meeting Tue; Ian's E1 proposal agent to be shared via Jake.",
+          "status": "prog"
         },
         {
           "date": "—",
@@ -636,6 +678,20 @@
           "title": "C2→C1 engine prioritisation",
           "detail": "Sequence the engine work.",
           "status": "open"
+        },
+        {
+          "type": "watch",
+          "owner": "Jack",
+          "title": "Audit resource capacity",
+          "detail": "Bishop has fully retired (had continued AI/ML audits post-retirement and built the Claude code-review prompts, which Stack retains). Dom is now the sole auditor and the known bottleneck during summit season. Need additional/fungible audit capacity and a defined code-review process; Jack has asked In² whether any resource can be lent and flagged training lead-time.",
+          "status": "mon"
+        },
+        {
+          "type": "action",
+          "owner": "Jack",
+          "title": "Surface acquisition prospects (Stack-synergistic)",
+          "detail": "Jack to use his community visibility to flag potential acquisition targets and report to Adrian. Group is actively seeking another acquisition this year; deep synergy with Stack is especially attractive; M&A strategy will also consider early-stage/partial stakes.",
+          "status": "open"
         }
       ],
       "themes": [
@@ -657,8 +713,7 @@
           "rating": "Needs focus",
           "signal": "Blocked on David (1 Jun)"
         }
-      ],
-      "goals": []
+      ]
     },
     {
       "id": "jen",
@@ -723,6 +778,7 @@
         }
       ],
       "email": "jennifer@bioteam.net",
+      "goals": [],
       "items": [
         {
           "date": "5 Jun",
@@ -794,8 +850,7 @@
           "rating": "Developing",
           "signal": "AI value-map still behind (5 Jun)"
         }
-      ],
-      "goals": []
+      ]
     },
     {
       "id": "deepak",
@@ -885,6 +940,7 @@
         }
       ],
       "email": "dkhosla@x-iss.com",
+      "goals": [],
       "items": [
         {
           "date": "—",
@@ -1022,8 +1078,20 @@
           "rating": "Needs focus",
           "signal": "$14K accrual shortfall; payroll audit"
         }
-      ],
-      "goals": []
+      ]
+    },
+    {
+      "id": "james",
+      "name": "James Smith",
+      "role": "nAG EoD — head",
+      "email": "",
+      "cur": "£",
+      "pin": "373420",
+      "bonus": [],
+      "goals": [],
+      "items": [],
+      "themes": [],
+      "log": []
     }
   ],
   "version": "unified-v1",

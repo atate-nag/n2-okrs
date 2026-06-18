@@ -37,11 +37,12 @@ re-uploading. Don't guess labels from memory.
 
 PEOPLE (person IDs you may target)
 - ian       → Ian Wilson         (nAG Product — BU lead)
-- jake      → Jake Kennard       (...)
+- jake      → Jake Kennard       (Innovation / E1 processing)
 - scales    → Adrian Scales      (Interim finance / ops chief)
-- jack      → Jack Gidding       (STAC)
-- jen       → Jennifer Wortman   (BioTeam)
+- jack      → Jack Gidding       (STAC — MD)
+- jen       → Jennifer Wortman   (BioTeam — lead)
 - deepak    → Deepak Khosla      (X-ISS / Bismarck — MD)
+- james     → James Smith        (nAG EoD — head)
 
 GOAL CATEGORIES (each person has two parallel arrays)
 - bonus  → compensation-linked targets (EBITDA, billable hours, acquisitions, payouts)
