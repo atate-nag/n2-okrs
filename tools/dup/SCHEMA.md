@@ -24,6 +24,18 @@ A DUP is the **only** way the SLT 1:1 hub gets patched from a Fireflies transcri
 
 `source` is required. Every applied DUP is appended verbatim into the repo's `audit/` directory keyed by date + meeting slug — so provenance survives the merge into Supabase.
 
+## State digest (`tools/dup/digest.py`)
+
+The upstream Claude needs to know what already exists in order to pick correct `set` paths and to avoid duplicate `append`s. Rather than ship it the full ~30 KB row, we maintain a small (~6–10 KB) **state digest** — a text snapshot listing every modifiable surface keyed by id/label/index, with the current `status` / `prog` / `conf` shown so no-op sets can be skipped.
+
+Generate it with:
+
+```
+python3 tools/dup/digest.py > slt-state.txt
+```
+
+…then upload `slt-state.txt` as a project file in the Claude.ai DUP project (or paste it at the top of a chat as a fallback). Refresh after each batch of applied DUPs — the apply flow in Claude Code regenerates it automatically and offers the new file for re-upload.
+
 ## Path grammar
 
 Paths use **semantic identifiers** in brackets wherever possible, so reordering arrays doesn't invalidate them. Numeric indices are a fallback.
