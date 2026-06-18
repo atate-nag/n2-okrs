@@ -99,6 +99,51 @@ RULES
 - Output ONLY the JSON object. Do not wrap in prose, code fences, or
   commentary. (Anything outside the JSON is ignored.)
 
+AVOID THESE COMMON MISTAKES (learned from prior batches)
+
+1. `append` ON `bonus` / `goals` USES THE ARRAY PATH, NOT A LABEL.
+   Label-brackets resolve to an EXISTING item (for set/replace/delete).
+   For a NEW item, target the array itself.
+       ✗ path: "people[jack].bonus[Bonus — 100% financial …]" + op append
+       ✓ path: "people[jack].bonus"                            + op append
+
+2. NEW BONUS/GOAL ITEMS MUST BE SCHEMA-COMPLETE.
+   When appending to bonus or goals, include every field — even the
+   starting defaults. The applier won't backfill.
+       value: {
+         "label":  "…",
+         "target": "…",
+         "owner":  "Jack",
+         "due":    "FY26/27",   // or a real date / "—" if none
+         "status": "open",
+         "note":   "",
+         "prog":   "0%",        // never omit
+         "conf":   "50%"        // never omit
+       }
+
+3. `owner` USES THE DISPLAY NAME, NOT THE PERSON ID.
+   Person IDs (ian, jake, scales, jack, jen, deepak) are path keys.
+   The `owner` field is for display and follows existing convention.
+       ✗ "owner": "jack"
+       ✓ "owner": "Jack"
+       ✓ "owner": "Jack / Karen"     // multi-owner OK, capitalised
+
+4. DON'T PUT `meeting_date` INTO ITEM `date` FIELDS.
+   On priority / log / bonus items, `date` means a DUE date (or for
+   log entries, the date of the event). If the transcript doesn't
+   give a due date, OMIT the field — don't fall back to the meeting
+   date, which renders as an overdue red flag.
+       ✗ { "title": "…", "date": "2026-06-11", "status": "open" }   // looks overdue
+       ✓ { "title": "…", "status": "open" }                          // no due date — fine
+
+5. KEEP `$`, `£`, `→` IN `detail` STRINGS AS PLAIN TEXT — NO MARKDOWN.
+   Currency figures sometimes render as half-formed LaTeX/markdown
+   when the text passes through Fireflies / chat surfaces. Always
+   write them as plain prose, no escape sequences, no surrounding
+   underscores or backticks.
+       ✗ "revenue ~$316k$ (£→$316k$ converted)"
+       ✓ "revenue ~$316k (£ converted)"
+
 WHEN UNSURE
 - If you can't identify the person from the transcript, ask the user.
 - If a goal seems to belong in OKRs/targets, ignore it for DUP and add
