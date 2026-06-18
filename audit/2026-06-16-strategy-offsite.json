@@ -1,0 +1,99 @@
+{
+  "version": "dup-1",
+  "source": {
+    "meeting_title": "Strategy Offsite Readout (Fireflies: 'Jun 16, 02:47 PM')",
+    "meeting_date": "2026-06-16",
+    "fireflies_url": "https://app.fireflies.ai/view/01KV8B071HHJEVHJCJ9C9BD5ST",
+    "attendees": [
+      "Adrian Tate",
+      "Adrian Scales",
+      "Jake Kennard"
+    ]
+  },
+  "updates": [
+    {
+      "target": "slt-1to1",
+      "path": "people[jake].log",
+      "op": "prepend",
+      "value": {
+        "date": "2026-06-16",
+        "text": "Recorded readout of the 2-day strategy offsite (Bristol follow-up). Major change to Jake's time split: ~20% C2, 50% BioSTAC, 20% A2 (early-stage M&A) search, 10% possible SI2/standard E1 — official goals to be rewritten to match. BioSTAC becomes lead focus: Jake to take the proposal over from Blake & Jack and build it out; 3-phase test (benchmark<->event demand -> vendor sponsorship -> can we run it); end-state Jess runs it on STAC payroll. A2 search led by Scales + Evan with Jake on investigation/follow-up, reviewed weekly at M2SOT. Bioteam exit by Aug reaffirmed, but Jake may stay slightly longer on sales / 1:1s with Jen (still held to targets) to mitigate 'stasis' risk. Innovation must deliver >=1 quality E1 or face being wound down (~12-month review)."
+      },
+      "rationale": "we'll try to run through everything we did. So it's all recorded. In particular the key decisions and then the implications of them for us."
+    },
+    {
+      "target": "slt-1to1",
+      "path": "people[jake].items",
+      "op": "append",
+      "value": {
+        "type": "goal",
+        "title": "BioSTAC — lead the E1 (group-level Strategic Initiative, lands in STAC if successful)",
+        "detail": "Group-level Strategic Initiative — NOT a BioTeam project; lands in STAC if successful. ~50% of Jake's time; takes the proposal over from Blake & Jack and builds it out. 3-phase test: (1) demand link between benchmarks and event attendance, (2) vendor sponsorship, (3) can we run it. Build out the proposal in the next week; end-state Jess runs it on STAC payroll with James (vendor side) + benchmark support.",
+        "owner": "Jake",
+        "status": "prog"
+      },
+      "rationale": "First thing is I need to understand where that team who I think is basically Blake and Jack have got to ... So we're going to have to seize that and take that off them."
+    },
+    {
+      "target": "slt-1to1",
+      "path": "people[jake].items",
+      "op": "append",
+      "value": {
+        "type": "action",
+        "title": "A2 early-stage M&A search — investigation & follow-up",
+        "detail": "~20% of Jake's time. Search led by Scales + Evan; Jake picks up investigation/follow-up on interesting targets. Reviewed weekly at M2SOT. Target profile: further-along bootstrapped teams at lower valuations (angel- not VC/accelerator-stage), to help replace revenue previously expected from E1 proposals.",
+        "owner": "Jake",
+        "status": "open"
+      },
+      "rationale": "the search will probably be mainly handled by like me and Evan ... then bringing in Jake and then Jake will be hands over to do the investigation and follow up piece if there's interesting targets."
+    },
+    {
+      "target": "slt-1to1",
+      "path": "people[jake].items",
+      "op": "append",
+      "value": {
+        "type": "action",
+        "title": "Rewrite official goals to match new time split",
+        "detail": "Realign Jake's recorded goals/HiBob targets to 20% C2 / 50% BioSTAC / 20% A2 search / 10% SI2. (Detailed OKR weightings handled in the group OKR meeting.)",
+        "owner": "Jake",
+        "status": "open"
+      },
+      "rationale": "That's a massive change in your priorities ... we need to change your official goals to match it."
+    },
+    {
+      "target": "slt-1to1",
+      "path": "people[jake].items",
+      "op": "append",
+      "value": {
+        "type": "watch",
+        "title": "Bioteam 'stasis' / Jen managed-upwards risk",
+        "detail": "As the group goes more arm's-length, risk that Bioteam drifts and Jen is 'managed upwards'. Mitigation: Jake stays in a bit longer on the sales side and keeps 1:1s with Jen (still held to targets); his 20% C2 allocation lets him support Bioteam more than originally planned.",
+        "owner": "Jake",
+        "status": "mon"
+      },
+      "rationale": "another risk also around bioteam is ... the stasis that may emerge as soon as we go a bit more arm's length ... And Jen Being managed upwards as a result."
+    },
+    {
+      "target": "slt-1to1",
+      "path": "people[jake].items",
+      "op": "append",
+      "value": {
+        "type": "watch",
+        "title": "Innovation E1 funnel under test",
+        "detail": "Offsite set a hard bar: the innovation team must produce >=1 quality E1 proposal or no further ones will be commissioned; if nothing exciting emerges from innovation/incubators within ~12 months, both could be wound down. Relevant to Jake's E1 core mandate.",
+        "owner": "Jake",
+        "status": "mon"
+      },
+      "rationale": "Innovation have got to pull one out of the bag ... We're not going to do another one ... if by this time next year we don't have anything really exciting from the incubators or from the innovation team, could potentially wind them both down."
+    },
+    {
+      "target": "slt-1to1",
+      "path": "people[jack].items[15]",
+      "op": "set",
+      "fields": {
+        "title": "BioSTAC E1"
+      },
+      "rationale": "Spelling consistency — BioSTAC is the canonical name (BioTeam+STAC portmanteau, STAC capitalised). Existing title was 'BioStack E1'."
+    }
+  ]
+}
