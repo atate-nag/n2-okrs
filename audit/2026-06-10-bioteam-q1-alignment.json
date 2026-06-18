@@ -1,0 +1,35 @@
+{
+  "version": "dup-1",
+  "source": {
+    "meeting_title": "BioTeam Q1 Alignment Meeting 1",
+    "meeting_date": "2026-06-10",
+    "fireflies_url": "https://app.fireflies.ai/view/01KT71N1PXN1TRYQNMSS2CXR2A",
+    "attendees": ["Adrian Tate","Adrian Scales","Jake Kennard","Jennifer Wortman","Michelle Bayly","Shelli Downs"]
+  },
+  "updates": [
+    {"target":"slt-1to1","path":"people[jen].bonus[Wider-staff scheme]","op":"set",
+     "fields":{"note":"Deferred by agreement — no movement until BD is reorganised company-wide; team felt other priorities rank higher right now. Revisit once BD structure and the sales/consultant incentive model are decided."},
+     "rationale":"Jake: 'There's no movement in that direction.' Michelle: 'a few other things higher priority right now.'"},
+    {"target":"slt-1to1","path":"people[jen].items[5]","op":"set",
+     "fields":{"detail":"Weighted commercial pipeline ~300k (incl. ~350k NeoGenomics still in qualification at standard weighting; AWS excluded as not yet sales-qualified). Deals close fast (~2 wks), so a thin pipeline is partly expected but uncertainty is high. New-business close rate weak — recent wins almost all existing clients (skewed by the lumpy 750k MGB); several new logos lost, hinting at value-prop misalignment. Jake to keep tracking new-vs-existing close rates and re-baseline from Apr/May to strip out Jan noise."},
+     "rationale":"Jake: 'the weighted pipeline amount is currently about 300k' / 'that close rate has not been as good'."},
+    {"target":"slt-1to1","path":"people[jen].items[6]","op":"set",
+     "fields":{"status":"prog","detail":"Jake + Jennifer ran a CBS challenge-mapping session: value-proposition alignment to market is the #1 challenge, alongside weak outbound sales and limited access to decision-makers for hypothesis testing. Core push is getting consultants — especially senior ones — to own more BD. Next steps: define value props across verticals (Nick has started), test the viability of each, and define how to engage more consulting staff in BD. Easy channel / online thought-leadership growth already tried without much success."},
+     "rationale":"Jennifer: 'how do we get consultants to take more ownership of BD responsibility, especially senior consultants.'"},
+    {"target":"slt-1to1","path":"people[jen].items[4]","op":"set",
+     "fields":{"detail":"Map of every current AI use (and how it's used) is complete — Michelle built it. Next step (per Adrian): assess how people spend their time to identify where AI acceleration would add most value."},
+     "rationale":"Jennifer: 'Michelle helped make a map of every place we're currently using AI … assess how people are using their time and whether those are places that we could target for AI acceleration.'"},
+    {"target":"slt-1to1","path":"people[jen].items","op":"append",
+     "value":{"type":"watch","title":"Specialist-resource bottleneck on large projects","detail":"One or two large projects could max out scarce, highly-technical consultants and compromise either delivery or the capacity to sign new business — even though overall utilisation is currently low. Triggered by NeoGenomics wanting more resource plus a potential large Natera engagement (via Amazon/AWS) needing significant resource for 9 months to a year. Can't train other consultants up quickly on this work. Exploring internal N2 collaboration or short-term contractors (engaged per-contract, no ongoing commitment). Adrian flagged this as a different category to the revenue/cost risks — only bites if they land the large business.","owner":"Jennifer","status":"open"},
+     "rationale":"Jennifer: 'one or two large projects could max out high demand resources and compromise our ability to either deliver on things we commit to or sign new business.'"},
+    {"target":"slt-1to1","path":"people[jen].items","op":"append",
+     "value":{"type":"action","title":"Map skill-set constraints for resource planning","detail":"Set out clearly where the specialist skill-set constraints are so SLT can see capacity against the incoming large-project demand. Michelle already doing 'resource Tetris'; aim to come back with options quickly.","owner":"Jennifer","status":"open"},
+     "rationale":"Scales: 'maybe setting it out for us … we can clearly see what those skill set constraints are' — Jennifer: 'Absolutely.'"},
+    {"target":"slt-1to1","path":"people[jen].items","op":"append",
+     "value":{"type":"action","title":"Decide BioIT World 2027 booth (cancellation window)","detail":"Provisional booth booked at this year's rate with a 30-day, no-penalty cancellation; provisional decision needed in the next couple of weeks. ROI as a lead-gen event isn't there (~10 booth scans from ~150 tier-1 target attendees, mostly existing contacts; no measurable web-traffic lift from talks). Likely reframe future presence to thought-leadership / talks rather than a booth — talks alone would do the 'we're still alive' job. Spend this year ~24k booth+extras, ~55k incl. travel (Michelle to confirm with Lauren). If de-booking, registrations for a few speakers (about half a booth's cost) could keep a talk presence.","owner":"Jennifer / Michelle","status":"open"},
+     "rationale":"Adrian: 'your ROI conversation is going to be pretty simple... Not remotely there, is it? So reframe it.'"},
+    {"target":"slt-1to1","path":"people[jen].log","op":"prepend",
+     "value":{"date":"2026-06-10","text":"Alignment (BioTeam Q1) — BD-focused quarter: value-prop alignment to market is the #1 challenge (CBS mapping with Jake); push to get senior consultants owning BD. Pipeline thin (~300k weighted, AWS not yet qualified) but deals close fast; new-logo close rate weak, wins skewed to existing/MGB. BioIT World poor for lead-gen (~10 scans / 150 tier-1) — likely reframe to thought-leadership; booth decision in ~2 wks (30-day cancel; ~24k spend, ~55k incl. travel). New risk: large projects (NeoGenomics +, potential Natera 9mo-1yr via AWS) could max scarce specialists despite low overall util — Jennifer to map skill-set constraints; Michelle on 'resource Tetris'. 3 Explore projects progressing (BioStack + converging data-management workflows). Wider-staff bonus scheme deferred until BD reorganised. Financials: May back in red (base-pay rise + BioIT costs); pushing 6M stretch to claim 'stabilised'."},
+     "rationale":"Summary of the 10 Jun BioTeam Q1 alignment."}
+  ]
+}
