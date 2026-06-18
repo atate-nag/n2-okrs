@@ -1,0 +1,33 @@
+{
+  "version": "dup-1",
+  "source": {
+    "meeting_title": "1:1 Adrian T / Jack",
+    "meeting_date": "2026-06-12",
+    "fireflies_url": "https://app.fireflies.ai/view/01KTPAZ00VCP3HNKGGH3ZAK4ZY",
+    "attendees": ["Adrian Tate", "Jack Gidding"]
+  },
+  "updates": [
+    { "target":"slt-1to1","path":"people[jack].bonus","op":"append",
+      "value":{"label":"Bonus — 100% financial (50% revenue / 50% EBITDA)","target":"50% revenue + 50% EBITDA (FY26/27)","owner":"Jack","due":"FY26/27","status":"prog","note":"FY26/27 bonus tied entirely to the two BU financial goals — 50% on revenue, 50% on EBITDA; no separate non-financial metric added (revenue/EBITDA judged to already capture summit and retention). Jack to confirm and enter his own and his team's targets in HiBob.","prog":"0%","conf":"50%"},
+      "rationale":"Adrian: 'It'll be a 50% allocation on the revenue, 50% on EBITDA.'" },
+    { "target":"slt-1to1","path":"people[jack].bonus[Bonus documentation → Bob]","op":"set",
+      "fields":{"note":"Targets being finalised in HiBob on 12 Jun — Adrian uploading by EOD; Jack entering his and team targets."},
+      "rationale":"Jack: 'I'm working on Hibob today to get these.'" },
+    { "target":"slt-1to1","path":"people[jack].items[4]","op":"set",
+      "fields":{"detail":"Not being handed outside Stack; needs additional resource to drive — a technical 'sponsor/steward' to shape the offering with end users, plus a technical builder to drive the AI-built work; likely Stack staff (contract or otherwise). Requires a group-level funding decision (group offsite Mon/Tue next week) so the cost doesn't fall on Jack's BU targets."},
+      "rationale":"Adrian: 'we've got to fund the project basically so that it's not coming off your targets.'" },
+    { "target":"slt-1to1","path":"people[jack].items[6]","op":"set",
+      "fields":{"status":"open","detail":"Recorded as an open action (the recurring red flag): David's sales comp isn't fully aligned with the scaled-down Tier-3 plan; the usual ~4× revenue rule-of-thumb for a salesperson may not fit, so a different basis is needed. David isn't bonused (no HiBob bonus upload for him today), so not urgent this week, but still to close out."},
+      "rationale":"Adrian: 'the David comp has been the only two like big chunky items.'" },
+    { "target":"slt-1to1","path":"people[jack].items","op":"append",
+      "value":{"type":"action","title":"Surface acquisition prospects (Stack-synergistic)","detail":"Jack to use his community visibility to flag potential acquisition targets and report to Adrian. Group is actively seeking another acquisition this year; deep synergy with Stack is especially attractive; M&A strategy will also consider early-stage/partial stakes.","owner":"Jack","status":"open"},
+      "rationale":"Adrian: 'Any prospects then … please, let's talk about them.'" },
+    { "target":"slt-1to1","path":"people[jack].items[8]","op":"delete",
+      "rationale":"Adrian: 'I get rid of the dashboards.' — built and Jack given access; build action removed." },
+    { "target":"slt-1to1","path":"people[jack].items[5]","op":"delete",
+      "rationale":"Adrian: 'I'll get rid of the alignment prep.' — closed/clutter removed." },
+    { "target":"slt-1to1","path":"people[jack].log","op":"prepend",
+      "value":{"date":"2026-06-12","text":"1:1 (admin/bonus). Bonus set 100% on financials — 50% revenue / 50% EBITDA, no extra metric added; targets going into HiBob today (Jack + team). Dashboard pruned: alignment-prep and build-dashboards items closed off; FY forecast and David's comp confirmed as the two remaining big open actions. Explore/BioSTAC not handed outside Stack but needs a technical sponsor + technical builder; group to decide funding at next week's offsite so it doesn't hit Jack's targets. David comp still a red flag (4× rule may not fit the scaled-down Tier-3 plan). Jack to feed Stack-synergistic acquisition prospects to Adrian. In-person strategy session placeholder 10 Jul; Jack on leave ~2 weeks late-June/early-July."},
+      "rationale":"Adrian: 'we're trying to tie bonus targets as closely as possible to high level goals.'" }
+  ]
+}
