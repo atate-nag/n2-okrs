@@ -720,6 +720,10 @@
       "cur": "$",
       "log": [
         {
+          "date": "2026-06-10",
+          "text": "Alignment (BioTeam Q1) — BD-focused quarter: value-prop alignment to market is the #1 challenge (CBS mapping with Jake); push to get senior consultants owning BD. Pipeline thin (~300k weighted, AWS not yet qualified) but deals close fast; new-logo close rate weak, wins skewed to existing/MGB. BioIT World poor for lead-gen (~10 scans / 150 tier-1) — likely reframe to thought-leadership; booth decision in ~2 wks (30-day cancel; ~24k spend, ~55k incl. travel). New risk: large projects (NeoGenomics +, potential Natera 9mo-1yr via AWS) could max scarce specialists despite low overall util — Jennifer to map skill-set constraints; Michelle on 'resource Tetris'. 3 Explore projects progressing (BioStack + converging data-management workflows). Wider-staff bonus scheme deferred until BD reorganised. Financials: May back in red (base-pay rise + BioIT costs); pushing 6M stretch to claim 'stabilised'."
+        },
+        {
           "date": "2026-06-05",
           "text": "PR — bonus confirmed: Jennifer 30%, Michelle 25%, rest performance-based, progressive EBITDA buckets (interim). AWS multiomics migration is the lead priority; resourcing around Ali + Brian, margin-protected. Contracts: Neogenomics signed & expanding; Sanofi lost-but-warm; Emory & ECMWF live."
         },
@@ -759,7 +763,7 @@
         {
           "due": "—",
           "conf": "50%",
-          "note": "Everyone else performance-based; wider scheme deferred this year.",
+          "note": "Deferred by agreement — no movement until BD is reorganised company-wide; team felt other priorities rank higher right now. Revisit once BD structure and the sales/consultant incentive model are decided.",
           "prog": "0%",
           "label": "Wider-staff scheme",
           "owner": "Jennifer",
@@ -817,7 +821,7 @@
           "type": "action",
           "owner": "Jennifer",
           "title": "AI OKRs — value-spend map",
-          "detail": "Current-usage map done; next is the inverse time-/value-spend map so AI effort lands on the critical path. Currently behind.",
+          "detail": "Map of every current AI use (and how it's used) is complete — Michelle built it. Next step (per Adrian): assess how people spend their time to identify where AI acceleration would add most value.",
           "status": "prog"
         },
         {
@@ -825,7 +829,7 @@
           "type": "watch",
           "owner": "Jennifer / Michelle",
           "title": "Contracts pipeline",
-          "detail": "Neogenomics signed & expanding; Sanofi RFI lost but warm (Michelle to run a lost-call); Emory scoping a large assessment; ECMWF milestone-based (20% on task 1).",
+          "detail": "Weighted commercial pipeline ~300k (incl. ~350k NeoGenomics still in qualification at standard weighting; AWS excluded as not yet sales-qualified). Deals close fast (~2 wks), so a thin pipeline is partly expected but uncertainty is high. New-business close rate weak — recent wins almost all existing clients (skewed by the lumpy 750k MGB); several new logos lost, hinting at value-prop misalignment. Jake to keep tracking new-vs-existing close rates and re-baseline from Apr/May to strip out Jan noise.",
           "status": "prog"
         },
         {
@@ -833,7 +837,28 @@
           "type": "disc",
           "owner": "Jennifer / Adrian",
           "title": "BD ownership",
-          "detail": "Behavioural/cultural gap fixed through the grading system (principals/fellows owning a service line) + empowerment, not incentives or guidance — including willingness to move goalposts.",
+          "detail": "Jake + Jennifer ran a CBS challenge-mapping session: value-proposition alignment to market is the #1 challenge, alongside weak outbound sales and limited access to decision-makers for hypothesis testing. Core push is getting consultants — especially senior ones — to own more BD. Next steps: define value props across verticals (Nick has started), test the viability of each, and define how to engage more consulting staff in BD. Easy channel / online thought-leadership growth already tried without much success.",
+          "status": "prog"
+        },
+        {
+          "type": "watch",
+          "owner": "Jennifer",
+          "title": "Specialist-resource bottleneck on large projects",
+          "detail": "One or two large projects could max out scarce, highly-technical consultants and compromise either delivery or the capacity to sign new business — even though overall utilisation is currently low. Triggered by NeoGenomics wanting more resource plus a potential large Natera engagement (via Amazon/AWS) needing significant resource for 9 months to a year. Can't train other consultants up quickly on this work. Exploring internal N2 collaboration or short-term contractors (engaged per-contract, no ongoing commitment). Adrian flagged this as a different category to the revenue/cost risks — only bites if they land the large business.",
+          "status": "open"
+        },
+        {
+          "type": "action",
+          "owner": "Jennifer",
+          "title": "Map skill-set constraints for resource planning",
+          "detail": "Set out clearly where the specialist skill-set constraints are so SLT can see capacity against the incoming large-project demand. Michelle already doing 'resource Tetris'; aim to come back with options quickly.",
+          "status": "open"
+        },
+        {
+          "type": "action",
+          "owner": "Jennifer / Michelle",
+          "title": "Decide BioIT World 2027 booth (cancellation window)",
+          "detail": "Provisional booth booked at this year's rate with a 30-day, no-penalty cancellation; provisional decision needed in the next couple of weeks. ROI as a lead-gen event isn't there (~10 booth scans from ~150 tier-1 target attendees, mostly existing contacts; no measurable web-traffic lift from talks). Likely reframe future presence to thought-leadership / talks rather than a booth — talks alone would do the 'we're still alive' job. Spend this year ~24k booth+extras, ~55k incl. travel (Michelle to confirm with Lauren). If de-booking, registrations for a few speakers (about half a booth's cost) could keep a talk presence.",
           "status": "open"
         }
       ],
@@ -1082,16 +1107,99 @@
     },
     {
       "id": "james",
+      "cur": "£",
+      "log": [
+        {
+          "date": "2026-06-19",
+          "text": "Folded CBS Challenge Map v2 (post-11 Jun alignment) into the board: 9 challenges (C1–C9) as watch/disc items + 2 levers (L1–L2) as actions. Critical reinforcing loop: C1 (liability) ↔ C5 (identity) — seeking liability protection triggers staff-aug reclassification. Suggested sequence: C5 → C1 → C4 → C2 → C7 → C3 → C8 → C9 → C6. Levers to test: L1 ring-fencing (Adrian Scales' proposal), L2 land-and-expand reframe (Jake). Source: EoD_Challenge_Map_v2.html (CBS working artefact)."
+        }
+      ],
+      "pin": "373420",
       "name": "James Smith",
       "role": "nAG EoD — head",
-      "email": "",
-      "cur": "£",
-      "pin": "373420",
       "bonus": [],
+      "email": "",
       "goals": [],
-      "items": [],
-      "themes": [],
-      "log": []
+      "items": [
+        {
+          "type": "watch",
+          "title": "C1 — Legal / liability friction blocks onboarding",
+          "detail": "Critical · impact 92 · addressability 28 · linked: C2, C4. — Reconfirmed as the crux. The block is the indemnity clause more than the commercials: Exxon wants unlimited liability on a ~£350K contract; a £10M cap still stalls it. Critically, the pass-through partner does NOT solve it — Raise inherits and flows down the same terms. Negotiating protection also creates visibility that triggers staff-aug reclassification (see loop to C5). — Decision it forces: Is there any pragmatic liability route that survives a supermajor — partner, ring-fenced entity, or a capped position they will accept — or is new-logo growth structurally blocked?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "watch",
+          "title": "C2 — The promise outruns the delivery",
+          "detail": "Critical · impact 84 · addressability 50 · linked: C1, C5, C7. — Confirmed and concrete: the six-week speed promise to Exxon broke, one vetted candidate lost outright, a second walked, ~£4K sunk on sourcing for an unclosable deal. Proposed reframe on the table: stop selling first-engagement speed, sell post-onboarding long-term agility instead. — Decision it forces: Do we re-cut the value prop to \"slow to start, then fast forever\", or narrow the promise to what we can reliably deliver today?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "watch",
+          "title": "C3 — The moat doesn't travel",
+          "detail": "Critical · impact 80 · addressability 24 · linked: C9, C4, C8, C6. — Confirmed. Wins rest on reputation — originally NAG's product reputation, now the emerging HPC/BP reputation — plus relationships. Reputation travels weakly to new logos; relationships not at all. Decays fast outside BP and O&G. — Decision it forces: Is there a portable asset — a productised model, a bench, a partner network — that can win without one person's relationships?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "watch",
+          "title": "C4 — No engine beneath the MD",
+          "detail": "Critical · impact 86 · addressability 76 · linked: C1, C3, C6. — No talent bench, no technical recruiters, no documented operations; every account leans on James. The £4K-of-LinkedIn, candidates-lost episode is this gap in action. Still the one high-impact challenge squarely within our control — and it unlocks several others. — Decision it forces: What repeatable engine — sourcing bench, recruiting capacity, an account-leadership layer — removes the single-person dependency and lets a fourth account stand up without grinding James down?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "watch",
+          "title": "C5 — Identity — and it's being decided for us",
+          "detail": "Critical · impact 88 · addressability 42 · linked: C2, C7, C8. — Hardened. You said it plainly: we are functionally staff aug with extras that justify margin. The new edge: Exxon procurement is imposing the staff-aug classification regardless of how we frame the SOW, dragging us toward competing with commodity staffing firms. Identity is no longer purely our choice. — Decision it forces: Do we deliberately own a specialist HPC/AI staff-aug identity, fight to be classified as services, or split the two by route?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "disc",
+          "title": "C6 — Fractional bench blocked by IP",
+          "detail": "Opportunity · impact 64 · addressability 33 · linked: C4, C3. — Total (Keith Gray) and BP (Elizabeth Althow) are pulling for a shared fractional / project bench. Blocked by competitor-confidentiality; the CCA vehicle exists but is heavyweight. Died once under cold outreach — relationships have since warmed. — Decision it forces: Is the consortium / fractional model worth the legal weight now, or parked until the engine and relationships are stronger?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "disc",
+          "title": "C7 — Cross-sell never operationalised",
+          "detail": "Opportunity · impact 70 · addressability 80 · linked: C2, C5. — Group expertise is sold but never delivered into accounts. Total's Donnie Cooper has explicitly asked for the differentiation versus StaffHawk; year-end conversion is the prize. Warm, fast, within control. — Decision it forces: Can we land one real cross-sell engagement into an existing account this quarter to prove the services story is more than a pitch?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "watch",
+          "title": "C8 — Attribution — largely answered",
+          "detail": "Foundational · impact 54 · addressability 72 · linked: C5, C3. — The alignment call effectively settled this: every win (BP extensions, Total, Exxon) was opportunistic inbound to a known provider on reputation — clients are not buying into a value prop. The question is now answered, but the answer is that there is no controllable acquisition engine yet. — Decision it forces: Given growth has been reputation-driven inbound, can that be deliberately engineered — or only protected?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "watch",
+          "title": "C9 — BP concentration + catastrophic-risk exposure",
+          "detail": "Foundational · impact 80 · addressability 28 · linked: C3. — Now has a concrete vector: an unlimited-indemnity signature on a small contract could sink the group. And the anchor is softening — BP forecast down £4.93M → £4.5M, staff being moved to India (defence question parked), prior cost-cutting. Bounds the risk appetite hard. — Decision it forces: What is the most growth we can pursue without ever putting BP — or the group balance sheet via indemnity — at risk?",
+          "owner": "James",
+          "status": "mon"
+        },
+        {
+          "type": "action",
+          "title": "L1 — Liability ring-fencing (separate EoD entity)",
+          "detail": "Lever · potential 60 · feasibility 40 · acts on: C1, C9. — Adrian Scales' proposal: a standalone EoD subsidiary to contain liability so a worst case can't bleed into the group. Partial mitigation for C1 and C9 — but counterparties will likely demand an affiliate/parent-guarantee clause and defeat it. Worth scoping, not banking on. — Open question: Would a ring-fenced entity hold up against a supermajor's affiliate clause, and is the legal cost justified by the protection it actually delivers?",
+          "owner": "James / Adrian Scales",
+          "status": "open"
+        },
+        {
+          "type": "action",
+          "title": "L2 — Land-and-expand reframe (Jake)",
+          "detail": "Lever · potential 66 · feasibility 55 · acts on: C1, C2. — Jake's challenge: if the model is one client a year grown from ~$100K to several $M, the onboarding/liability friction is a one-time entry cost and the speed shows up later as agility. Total reportedly framed SC as a long-term partnership. If true, it splits C1 — a barrier to new logos, not to expanding landed accounts. Untested against the opportunistic-inbound pattern. — Open question: Is there real evidence a client will buy the long-term-agility vision and expand — or is every deal a discrete project that ends?",
+          "owner": "James / Jake",
+          "status": "open"
+        }
+      ],
+      "themes": []
     }
   ],
   "version": "unified-v1",

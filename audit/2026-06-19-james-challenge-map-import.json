@@ -1,0 +1,85 @@
+{
+  "version": "manual-import-1",
+  "kind": "challenge-map",
+  "date": "2026-06-19",
+  "source_file": "EoD_Challenge_Map_v2.html",
+  "source_note": "CBS Challenge Map v2 working artefact, updated from 11 Jun alignment. Held locally, not committed to repo.",
+  "target": "people[james]",
+  "imported": {
+    "items": [
+      {
+        "code": "C1",
+        "type": "watch",
+        "status": "mon",
+        "title": "Legal / liability friction blocks onboarding"
+      },
+      {
+        "code": "C2",
+        "type": "watch",
+        "status": "mon",
+        "title": "The promise outruns the delivery"
+      },
+      {
+        "code": "C3",
+        "type": "watch",
+        "status": "mon",
+        "title": "The moat doesn't travel"
+      },
+      {
+        "code": "C4",
+        "type": "watch",
+        "status": "mon",
+        "title": "No engine beneath the MD"
+      },
+      {
+        "code": "C5",
+        "type": "watch",
+        "status": "mon",
+        "title": "Identity — and it's being decided for us"
+      },
+      {
+        "code": "C6",
+        "type": "disc",
+        "status": "mon",
+        "title": "Fractional bench blocked by IP"
+      },
+      {
+        "code": "C7",
+        "type": "disc",
+        "status": "mon",
+        "title": "Cross-sell never operationalised"
+      },
+      {
+        "code": "C8",
+        "type": "watch",
+        "status": "mon",
+        "title": "Attribution — largely answered"
+      },
+      {
+        "code": "C9",
+        "type": "watch",
+        "status": "mon",
+        "title": "BP concentration + catastrophic-risk exposure"
+      },
+      {
+        "code": "L1",
+        "type": "action",
+        "status": "open",
+        "title": "Liability ring-fencing (separate EoD entity)"
+      },
+      {
+        "code": "L2",
+        "type": "action",
+        "status": "open",
+        "title": "Land-and-expand reframe (Jake)"
+      }
+    ],
+    "log_added": "1 entry on 2026-06-19 documenting the import + suggested sequence (C5→C1→C4→C2→C7→C3→C8→C9→C6) + C1↔C5 reinforcing loop."
+  },
+  "type_mapping_rule": {
+    "critical": "watch",
+    "foundational": "watch",
+    "opportunity": "disc",
+    "lever": "action"
+  }
+}
