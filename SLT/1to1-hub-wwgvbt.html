@@ -214,6 +214,91 @@ body.viewonly .sidefoot button,
 body.viewonly select{display:none!important}
 body.viewonly .side .plist{pointer-events:none}
 body.viewonly .metric{cursor:default}
+
+/* ---- Challenge Map tab (CBS visualisation) ---- */
+.cmap{
+  --cm-paper:#E7EAE5; --cm-paper2:#DDE1DA; --cm-ink:#15242C; --cm-ink-soft:#3a4a52;
+  --cm-faint:rgba(21,36,44,.10); --cm-fainter:rgba(21,36,44,.055);
+  --cm-line:rgba(21,36,44,.28);
+  background:var(--cm-paper); color:var(--cm-ink);
+  border:1.5px solid var(--cm-ink); border-radius:4px;
+  padding:24px clamp(16px,3vw,32px) 32px;
+  font-family:Inter,system-ui,sans-serif;
+}
+.cmap .masthead{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;border-bottom:1.5px solid var(--cm-ink);padding-bottom:14px;margin-bottom:0;}
+.cmap .title-wrap h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(22px,3.4vw,34px);letter-spacing:-.02em;line-height:.98;margin:0;color:var(--cm-ink);}
+.cmap .title-wrap h3 .v{font-size:.42em;vertical-align:super;color:#BB463C;font-weight:600;letter-spacing:0;}
+.cmap .title-wrap .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--cm-ink-soft);margin:0 0 8px;}
+.cmap .meta{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--cm-ink-soft);text-align:right;line-height:1.7;white-space:nowrap;}
+.cmap .meta b{color:var(--cm-ink);font-weight:600}
+.cmap .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--cm-faint);border:1px solid var(--cm-faint);border-top:none;margin-bottom:20px;}
+.cmap .stat{background:var(--cm-paper);padding:10px 13px}
+.cmap .stat .k{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--cm-ink-soft);margin-bottom:5px}
+.cmap .stat .v{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;line-height:1.15;color:var(--cm-ink);}
+.cmap .stat .v small{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:400;color:var(--cm-ink-soft);display:block;margin-top:3px}
+@media(max-width:720px){.cmap .strip{grid-template-columns:repeat(2,1fr)}}
+.cmap .axes-note{font-size:12.5px;color:var(--cm-ink-soft);max-width:780px;margin:0 0 20px;line-height:1.55;}
+.cmap .axes-note b{color:var(--cm-ink);font-weight:600}
+.cmap .stage{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start}
+@media(max-width:920px){.cmap .stage{grid-template-columns:1fr}}
+.cmap .field-wrap{position:relative;background:var(--cm-paper2);border:1.5px solid var(--cm-ink);border-radius:3px;overflow:hidden;}
+.cmap svg.field{display:block;width:100%;height:auto}
+.cmap .axis-cap{position:absolute;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cm-ink-soft);pointer-events:none;}
+.cmap .axis-y{left:9px;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left center}
+.cmap .cap-x-left{left:50px;bottom:9px}
+.cmap .cap-x-right{right:14px;bottom:9px}
+.cmap .node{cursor:pointer}
+.cmap .node .halo{opacity:0;transition:opacity .18s}
+.cmap .node circle.dot{transition:filter .18s}
+.cmap .node text{font-family:'IBM Plex Mono',monospace;font-weight:600;pointer-events:none}
+.cmap .node:hover circle.dot,.cmap .node.active circle.dot{filter:brightness(1.08)}
+.cmap .node:hover .halo,.cmap .node.active .halo,.cmap .node:focus .halo{opacity:1}
+.cmap .node:focus{outline:none}
+.cmap .badge{font-family:'IBM Plex Mono',monospace;font-weight:600;fill:var(--cm-ink-soft)}
+.cmap .edge{stroke:var(--cm-line);stroke-width:1.2;fill:none;transition:stroke .18s,stroke-width .18s,opacity .18s}
+.cmap .edge.dim{opacity:.16}
+.cmap .edge.lit{stroke-width:2.4;opacity:1}
+.cmap .reinf{fill:none;stroke:#BB463C;stroke-width:2.2;stroke-dasharray:1 6;stroke-linecap:round;opacity:.8;transition:opacity .18s,stroke-width .18s}
+.cmap .reinf.dim{opacity:.4}
+.cmap .reinf.lit{stroke-width:3.2;opacity:1}
+.cmap .reinf-lab{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#BB463C;letter-spacing:.08em}
+.cmap .qlabel{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--cm-ink-soft);letter-spacing:.12em;text-transform:uppercase}
+.cmap .readout{border:1.5px solid var(--cm-ink);border-radius:3px;background:var(--cm-paper2);min-height:540px;display:flex;flex-direction:column;}
+.cmap .readout-head{display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--cm-ink-soft);padding:11px 14px;border-bottom:1px solid var(--cm-faint);}
+.cmap .dot-live{width:7px;height:7px;border-radius:50%;background:var(--cm-ink-soft);display:inline-block;margin-left:8px}
+.cmap .readout-body{padding:16px 16px 18px;flex:1;color:var(--cm-ink);}
+.cmap .legend-row{display:flex;align-items:center;gap:9px;font-size:12.5px;margin-bottom:9px}
+.cmap .swatch{width:13px;height:13px;border-radius:50%;flex:none}
+.cmap .swatch.hollow{background:transparent;border:1.6px dashed #B07A2E}
+.cmap .legend-row b{font-weight:600}
+.cmap .helptext{font-size:12px;color:var(--cm-ink-soft);line-height:1.55;margin:14px 0 0;border-top:1px solid var(--cm-faint);padding-top:14px}
+.cmap .helptext b{color:var(--cm-ink)}
+.cmap .rank-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--cm-ink-soft);margin:18px 0 9px;border-top:1px solid var(--cm-faint);padding-top:14px}
+.cmap .rank{list-style:none;margin:0;padding:0}
+.cmap .rank li{display:flex;gap:10px;align-items:baseline;font-size:12.5px;padding:5px 0;cursor:pointer;border-bottom:1px solid var(--cm-fainter);line-height:1.3;color:var(--cm-ink);}
+.cmap .rank li:hover{color:#BB463C}
+.cmap .rank li .seq{font-family:'IBM Plex Mono',monospace;color:var(--cm-ink-soft);font-size:11px;min-width:16px}
+.cmap .rank li .code{font-family:'IBM Plex Mono',monospace;font-weight:600;min-width:26px}
+.cmap .d-code{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px}
+.cmap .chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#fff;padding:3px 8px;border-radius:2px;vertical-align:middle;margin-left:8px;}
+.cmap .chip.delta{background:none;color:#BB463C;border:1px solid #BB463C;margin-left:6px}
+.cmap .d-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;line-height:1.12;margin:10px 0 4px;letter-spacing:-.01em;color:var(--cm-ink);}
+.cmap .gauges{display:flex;gap:16px;margin:14px 0 4px}
+.cmap .gauge{flex:1}
+.cmap .gauge .lab{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cm-ink-soft);display:flex;justify-content:space-between;margin-bottom:5px}
+.cmap .gauge .lab b{color:var(--cm-ink);font-weight:600}
+.cmap .track{height:6px;background:var(--cm-faint);border-radius:3px;overflow:hidden}
+.cmap .fill{height:100%;border-radius:3px;width:0;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.cmap .d-desc{font-size:13px;line-height:1.58;margin:14px 0 0}
+.cmap .q-block,.cmap .links{margin-top:14px;border-top:1px solid var(--cm-faint);padding-top:12px}
+.cmap .qlab{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cm-ink-soft);margin-bottom:6px}
+.cmap .qtext{font-size:13px;line-height:1.5;font-style:italic;color:var(--cm-ink);}
+.cmap .linkchip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;border:1px solid var(--cm-faint);border-radius:2px;padding:4px 8px;margin:0 6px 6px 0;cursor:pointer;background:transparent;font-family:inherit;color:var(--cm-ink);}
+.cmap .linkchip:hover{background:var(--cm-paper);border-color:var(--cm-ink-soft)}
+.cmap .linkchip .lc-code{font-family:'IBM Plex Mono',monospace;font-weight:600}
+.cmap .clear-btn{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:none;border:none;color:var(--cm-ink-soft);cursor:pointer;padding:0;margin-left:auto}
+.cmap .clear-btn:hover{color:#BB463C}
+.cmap .footnote{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--cm-ink-soft);margin-top:20px;line-height:1.7;border-top:1px solid var(--cm-faint);padding-top:12px}
 </style>
 </head>
 <body>
@@ -533,12 +618,17 @@ function encodeState(obj){ return btoa(unescape(encodeURIComponent(JSON.stringif
 const ST={open:["Open","b-open"],prog:["In progress","b-prog"],block:["Blocked","b-block"],mon:["Monitoring","b-mon"],done:["Done","b-done"]};
 const STORDER=["open","prog","block","mon","done"];
 const LANES=[["goal","Goals","var(--green)"],["action","Actions","var(--blue)"],["watch","Watch","var(--amber)"],["disc","Discussion","var(--grey)"]];
-const TABS=[
-  ["priorities","Priorities",d=>d.items.length],
-  ["themes","PR themes",d=>d.themes.length],
-  ["goals","Goals",d=>(d.bonus?.length||0)+(d.goals?.length||0)],
-  ["log","1:1 log",d=>d.log.length]
-];
+function tabsFor(d){
+  const t=[
+    ["priorities","Priorities",d=>d.items.length],
+    ["themes","PR themes",d=>d.themes.length],
+    ["goals","Goals",d=>(d.bonus?.length||0)+(d.goals?.length||0)],
+    ["log","1:1 log",d=>d.log.length]
+  ];
+  if (d && d.challengeMap && Array.isArray(d.challengeMap.nodes))
+    t.splice(1, 0, ["challengeMap","Challenge map",d=>d.challengeMap.nodes.length]);
+  return t;
+}
 function esc(s){return (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function initials(n){return n.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase();}
 function p(){return DATA.people[current];}
@@ -636,9 +726,11 @@ function render(){
           </div>`).join("")}
       </div>`;
 
-  const panes={priorities,themes,goals,log};
+  const challengeMap = d.challengeMap ? '<div id="cmap-host"></div>' : '';
+  const panes={priorities,themes,goals,log,challengeMap};
   if(activeTab==='bonus')activeTab='goals'; // legacy key
-  if(!panes[activeTab])activeTab="priorities";
+  if(!panes[activeTab] || (activeTab==='challengeMap' && !d.challengeMap))activeTab="priorities";
+  const TABS=tabsFor(d);
   const tabs=TABS.map(t=>`
     <button class="tab ${activeTab===t[0]?'on':''}" onclick="setTab('${t[0]}')">
       ${t[1]}<span class="tcount">${t[2](d)}</span></button>`).join("");
@@ -666,6 +758,7 @@ function render(){
     <div class="tabs">${tabs}</div>
     <div class="pane">${panes[activeTab]}</div>`;
   renderSide();
+  if(activeTab==='challengeMap' && d.challengeMap) renderChallengeMap(d.challengeMap);
 }
 function card(it,idx){
   return `<div class="card">
@@ -733,6 +826,187 @@ function shareLink(){
   persist();
   const url=location.origin+location.pathname+"#"+encodeState(DATA);
   navigator.clipboard.writeText(url).then(()=>toast("Share link copied"),()=>{prompt("Copy this link:",url);});
+}
+
+/* ============ CHALLENGE MAP (per-person SVG visualisation) ============ */
+function renderChallengeMap(cm){
+  const host = document.getElementById('cmap-host');
+  if (!host) return;
+
+  // skeleton (HTML)
+  const stripHtml = (cm.strip||[]).map(s =>
+    `<div class="stat"><div class="k">${esc(s.k)}</div><div class="v">${esc(s.v)}<small>${esc(s.sub||'')}</small></div></div>`
+  ).join('');
+  const metaHtml = (cm.meta_lines||[]).map(l => `<div>${l}</div>`).join('');
+  host.innerHTML = `<div class="cmap">
+    <div class="masthead">
+      <div class="title-wrap">
+        <p class="eyebrow">${esc(cm.eyebrow||'')}</p>
+        <h3>${esc(cm.title||'Challenge Map')}${cm.version?` <span class="v">${esc(cm.version)}</span>`:''}</h3>
+      </div>
+      <div class="meta">${metaHtml}</div>
+    </div>
+    ${stripHtml?`<div class="strip">${stripHtml}</div>`:''}
+    <p class="axes-note">${esc(cm.axes_note||'')}</p>
+    <div class="stage">
+      <div class="field-wrap">
+        <svg class="field" id="cmap-field" viewBox="0 0 1000 720" role="img" aria-label="Challenge map plotting field"></svg>
+        <span class="axis-cap axis-y">Impact on growth ceiling →</span>
+        <span class="axis-cap cap-x-left">← Harder to address</span>
+        <span class="axis-cap cap-x-right">Within our control →</span>
+      </div>
+      <aside class="readout">
+        <div class="readout-head"><span>Readout</span><span id="cmap-live">— standby<span class="dot-live"></span></span></div>
+        <div class="readout-body" id="cmap-body"></div>
+      </aside>
+    </div>
+    ${cm.footnote_html?`<p class="footnote">${cm.footnote_html}</p>`:''}
+  </div>`;
+
+  // SVG construction (ported from EoD_Challenge_Map_v2.html)
+  const NODES = cm.nodes||[], EDGES = cm.edges||[], REINF = cm.reinf||[], RANK = cm.rank||[];
+  const CLASS = cm.classes || {};
+  const VB={w:1000,h:720}, M={t:46,r:46,b:62,l:64};
+  const PW=VB.w-M.l-M.r, PH=VB.h-M.t-M.b;
+  const px=a=>M.l+(a/100)*PW, py=i=>M.t+(1-i/100)*PH;
+  const NS='http://www.w3.org/2000/svg';
+  const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const byCode={}; NODES.forEach(n=>byCode[n.code]=n);
+  const svg=document.getElementById('cmap-field');
+
+  // grid + quadrants
+  const gGrid=el('g',{}); svg.appendChild(gGrid);
+  for(let v=0;v<=100;v+=10){
+    gGrid.appendChild(el('line',{x1:px(v),y1:M.t,x2:px(v),y2:M.t+PH,stroke:'rgba(21,36,44,0.06)','stroke-width':1}));
+    gGrid.appendChild(el('line',{x1:M.l,y1:py(v),x2:M.l+PW,y2:py(v),stroke:'rgba(21,36,44,0.06)','stroke-width':1}));
+  }
+  gGrid.appendChild(el('line',{x1:px(50),y1:M.t,x2:px(50),y2:M.t+PH,stroke:'rgba(21,36,44,0.22)','stroke-width':1,'stroke-dasharray':'2 5'}));
+  gGrid.appendChild(el('line',{x1:M.l,y1:py(50),x2:M.l+PW,y2:py(50),stroke:'rgba(21,36,44,0.22)','stroke-width':1,'stroke-dasharray':'2 5'}));
+  gGrid.appendChild(el('rect',{x:M.l,y:M.t,width:PW,height:PH,fill:'none',stroke:'rgba(21,36,44,0.35)','stroke-width':1.2}));
+  function qlab(x,y,t,a){const e=el('text',{x,y,'text-anchor':a||'start'});e.setAttribute('class','qlabel');e.textContent=t;svg.appendChild(e);}
+  qlab(M.l+PW-8,M.t+18,'Move now','end');
+  qlab(M.l+8,M.t+18,'Hard but decisive','start');
+  qlab(M.l+PW-8,M.t+PH-10,'Easy · opportunistic','end');
+  qlab(M.l+8,M.t+PH-10,'Watch · park','start');
+
+  // edges
+  const gEdges=el('g',{}); svg.appendChild(gEdges);
+  const edgeEls=[];
+  EDGES.forEach(([a,b])=>{
+    const na=byCode[a], nb=byCode[b]; if(!na||!nb) return;
+    const ln=el('line',{x1:px(na.addr),y1:py(na.impact),x2:px(nb.addr),y2:py(nb.impact)});
+    ln.setAttribute('class','edge'); ln.dataset.a=a; ln.dataset.b=b;
+    gEdges.appendChild(ln); edgeEls.push(ln);
+  });
+  // reinforcing loop (curved)
+  let reinfPath=null;
+  if (REINF.length===2 && byCode[REINF[0]] && byCode[REINF[1]]) {
+    const ra=byCode[REINF[0]], rb=byCode[REINF[1]];
+    const x1=px(ra.addr),y1=py(ra.impact),x2=px(rb.addr),y2=py(rb.impact);
+    const mx=(x1+x2)/2,my=(y1+y2)/2,dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1;
+    const off=46, cx=mx+(-dy/len)*off, cy=my+(dx/len)*off;
+    reinfPath=el('path',{d:`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`}); reinfPath.setAttribute('class','reinf');
+    gEdges.appendChild(reinfPath);
+    const bx=0.25*x1+0.5*cx+0.25*x2, by=0.25*y1+0.5*cy+0.25*y2;
+    const reinfLab=el('text',{x:bx+8,y:by,'text-anchor':'start'}); reinfLab.setAttribute('class','reinf-lab'); reinfLab.textContent='↻ reinforces'; svg.appendChild(reinfLab);
+  }
+
+  // nodes
+  const gNodes=el('g',{}); svg.appendChild(gNodes);
+  const nodeEls={};
+  NODES.forEach(n=>{
+    const x=px(n.addr), y=py(n.impact), r=15+n.impact*0.11;
+    const col=(CLASS[n.cls]||{color:'#888'}).color, hollow=(n.cls==='lever');
+    const g=el('g',{tabindex:0,role:'button','aria-label':n.code+' '+n.title}); g.setAttribute('class','node'); g.dataset.code=n.code;
+    g.appendChild(el('circle',{class:'halo',cx:x,cy:y,r:r+8,fill:'none',stroke:col,'stroke-width':1.4,'stroke-opacity':.5}));
+    const dot=el('circle',{class:'dot',cx:x,cy:y,r:r,fill:hollow?'#DDE1DA':col,stroke:col,'stroke-width':hollow?2:0});
+    if(hollow) dot.setAttribute('stroke-dasharray','3 3');
+    g.appendChild(dot);
+    const t=el('text',{x:x,y:y+4,'text-anchor':'middle','font-size':n.cls==='lever'?12:13,fill:hollow?col:'#F2F4F0'}); t.textContent=n.code; g.appendChild(t);
+    if(n.changed){const bd=el('text',{x:x+r+3,y:y-r+2,'font-size':12}); bd.setAttribute('class','badge'); bd.textContent='Δ'; g.appendChild(bd);}
+    gNodes.appendChild(g); nodeEls[n.code]=g;
+    g.addEventListener('mouseenter',()=>cmapHover(n.code));
+    g.addEventListener('mouseleave',()=>{if(!cmapPinned)cmapClearHover();});
+    g.addEventListener('click',()=>cmapSelect(n.code));
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cmapSelect(n.code);}});
+  });
+
+  let cmapPinned=null;
+  const body=document.getElementById('cmap-body');
+  const live=document.getElementById('cmap-live');
+  const isReinf=code=>REINF.includes(code);
+
+  function litEdges(code){
+    edgeEls.forEach(ln=>{
+      const on = ln.dataset.a===code || ln.dataset.b===code;
+      ln.classList.toggle('lit',on); ln.classList.toggle('dim',!on);
+      if(on) ln.setAttribute('stroke',(CLASS[byCode[code].cls]||{color:'#888'}).color);
+    });
+    if(reinfPath){ reinfPath.classList.toggle('lit',isReinf(code)); reinfPath.classList.toggle('dim',!isReinf(code)); }
+    Object.entries(nodeEls).forEach(([c,g])=>g.classList.toggle('active',c===code));
+  }
+  function clearLit(){
+    edgeEls.forEach(ln=>{ln.classList.remove('lit','dim');ln.removeAttribute('stroke');});
+    if(reinfPath){ reinfPath.classList.remove('lit','dim'); }
+    Object.values(nodeEls).forEach(g=>g.classList.remove('active'));
+  }
+  function cmapHover(code){ if(cmapPinned)return; litEdges(code); renderDetail(code,false); live.innerHTML=code+' · live<span class="dot-live" style="background:'+(CLASS[byCode[code].cls]||{color:'#888'}).color+'"></span>'; }
+  function cmapClearHover(){ clearLit(); renderDefault(); live.innerHTML='— standby<span class="dot-live"></span>'; }
+  function cmapSelect(code){ if(cmapPinned===code){cmapPinned=null;cmapClearHover();return;} cmapPinned=code; litEdges(code); renderDetail(code,true); live.innerHTML=code+' · pinned<span class="dot-live" style="background:'+(CLASS[byCode[code].cls]||{color:'#888'}).color+'"></span>'; }
+
+  function renderDefault(){
+    const helptext = cm.helptext_html || '';
+    body.innerHTML=`
+      <div class="legend-row"><span class="swatch" style="background:${(CLASS.critical||{}).color||'#888'}"></span><span><b>Critical</b> — binding constraint</span></div>
+      <div class="legend-row"><span class="swatch" style="background:${(CLASS.opportunity||{}).color||'#888'}"></span><span><b>Opportunity</b> — client-pulled lever</span></div>
+      <div class="legend-row"><span class="swatch" style="background:${(CLASS.foundational||{}).color||'#888'}"></span><span><b>Foundational</b> — bounds/informs strategy</span></div>
+      <div class="legend-row"><span class="swatch hollow"></span><span><b>Lever / option</b> — candidate move to test</span></div>
+      ${helptext?`<p class="helptext">${helptext}</p>`:''}
+      ${RANK.length?`<div class="rank-title">Suggested sequence</div><ol class="rank" id="cmap-rank"></ol>`:''}`;
+    const ol=document.getElementById('cmap-rank');
+    if (ol) RANK.forEach((c,i)=>{
+      const n=byCode[c]; if(!n) return;
+      const li=document.createElement('li');
+      li.innerHTML=`<span class="seq">${String(i+1).padStart(2,'0')}</span><span class="code" style="color:${(CLASS[n.cls]||{}).color||'#888'}">${c}</span><span>${esc(n.title)}</span>`;
+      li.addEventListener('mouseenter',()=>{if(!cmapPinned)litEdges(c);});
+      li.addEventListener('mouseleave',()=>{if(!cmapPinned)clearLit();});
+      li.addEventListener('click',()=>cmapSelect(c));
+      ol.appendChild(li);
+    });
+  }
+  function renderDetail(code,pin){
+    const n=byCode[code]; if(!n) return;
+    const col=(CLASS[n.cls]||{color:'#888'}).color;
+    body.innerHTML=`
+      <div style="display:flex;align-items:center;flex-wrap:wrap">
+        <span class="d-code" style="color:${col}">${n.code}</span>
+        <span class="chip" style="background:${col}">${esc((CLASS[n.cls]||{}).name||n.cls)}</span>
+        ${n.changed?'<span class="chip delta">Δ updated</span>':''}
+        ${pin?'<button class="clear-btn" id="cmap-unpin">✕ unpin</button>':''}
+      </div>
+      <div class="d-title">${esc(n.title)}</div>
+      <div class="gauges">
+        <div class="gauge"><div class="lab"><span>${n.cls==='lever'?'Potential':'Impact'}</span><b>${n.impact}</b></div><div class="track"><div class="fill" data-w="${n.impact}" style="background:${col}"></div></div></div>
+        <div class="gauge"><div class="lab"><span>${n.cls==='lever'?'Feasibility':'Addressability'}</span><b>${n.addr}</b></div><div class="track"><div class="fill" data-w="${n.addr}" style="background:${col}"></div></div></div>
+      </div>
+      <p class="d-desc">${esc(n.desc)}</p>
+      <div class="q-block"><div class="qlab">${n.cls==='lever'?'Open question':'Decision it forces'}</div><div class="qtext">${esc(n.q)}</div></div>
+      <div class="links"><div class="qlab">${n.cls==='lever'?'Acts on':'Linked challenges'}</div><div id="cmap-linkwrap"></div></div>`;
+    requestAnimationFrame(()=>body.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'));
+    const lw=document.getElementById('cmap-linkwrap');
+    (n.links||[]).forEach(c=>{
+      const m=byCode[c]; if(!m) return;
+      const b=document.createElement('button'); b.className='linkchip';
+      b.innerHTML=`<span class="lc-code" style="color:${(CLASS[m.cls]||{}).color||'#888'}">${c}</span> ${esc(m.title)}`;
+      b.addEventListener('mouseenter',()=>litEdges(c));
+      b.addEventListener('mouseleave',()=>litEdges(code));
+      b.addEventListener('click',()=>cmapSelect(c));
+      lw.appendChild(b);
+    });
+    if(pin){const u=document.getElementById('cmap-unpin'); if(u)u.addEventListener('click',()=>{cmapPinned=null;cmapClearHover();});}
+  }
+
+  renderDefault();
 }
 
 /* ============ BOOT ============ */

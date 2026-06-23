@@ -1,0 +1,11 @@
+{
+  "version": "manual-import-2",
+  "kind": "challenge-map-as-tab",
+  "date": "2026-06-23",
+  "source_file": "EoD_Challenge_Map_v2.html",
+  "target": "people[james].challengeMap",
+  "supersedes": "audit/2026-06-19-james-challenge-map-import.json",
+  "note": "Earlier import (2026-06-19) folded the map's 11 nodes into items/log. That was wrong — the visual is the point. Rolled back, attached as a structured `challengeMap` field on james, and added a dedicated 'Challenge map' tab that renders the SVG visualisation faithfully. Tab is conditional: only shown when person.challengeMap is present.",
+  "schema": "{ version, eyebrow, title, meta_lines[], strip[], axes_note, classes{critical|opportunity|foundational|lever:{name,color}}, nodes[{code,cls,addr,impact,changed?,title,desc,q,links[]}], edges[[a,b]], reinf[a,b], rank[], helptext_html, footnote_html }",
+  "tab_visibility_rule": "tabsFor(d) inserts the Challenge map tab when d.challengeMap exists with a nodes array."
+}
