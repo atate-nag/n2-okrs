@@ -920,13 +920,13 @@ function renderChallengeMap(cm){
   host.innerHTML = `<div class="cmap${cmapEditMode?' editing':''}">
     <div class="masthead">
       <div class="title-wrap">
-        <p class="eyebrow">${esc(cm.eyebrow||'')}</p>
+        ${cm.eyebrow?`<p class="eyebrow">${esc(cm.eyebrow)}</p>`:''}
         <h3>${esc(cm.title||'Challenge Map')}${cm.version?` <span class="v">${esc(cm.version)}</span>`:''}</h3>
       </div>
-      <div class="meta">${metaHtml}</div>
+      ${metaHtml?`<div class="meta">${metaHtml}</div>`:''}
     </div>
     ${stripHtml?`<div class="strip">${stripHtml}</div>`:''}
-    <p class="axes-note">${esc(cm.axes_note||'')}</p>
+    ${cm.axes_note?`<p class="axes-note">${esc(cm.axes_note)}</p>`:''}
     <div class="stage">
       <div class="field-wrap">
         <svg class="field" id="cmap-field" viewBox="0 0 1000 720" role="img" aria-label="Challenge map plotting field"></svg>

@@ -1115,214 +1115,28 @@
       "bonus": [],
       "email": "",
       "goals": [],
-      "items": [],
+      "items": [
+        {
+          "date": "",
+          "type": "action",
+          "owner": "",
+          "title": "New priority",
+          "detail": "Strategic Crux Identification for EOD",
+          "status": "prog"
+        }
+      ],
       "themes": [],
       "challengeMap": {
-        "version": "v2",
-        "updated": "from 11 Jun alignment",
-        "eyebrow": "CBS Diagnostic · Working Artefact",
-        "title": "EoD Challenge Map",
-        "meta_lines": [
-          "Expertise on Demand · n2 Group",
-          "Updated from 11 Jun alignment",
-          "9 challenges · 2 levers · Δ = moved since v1"
-        ],
-        "strip": [
-          {
-            "k": "Forecast EBITDA",
-            "v": "Above plan",
-            "sub": "vs £1.4M target · rev ≈ £5.2M+"
-          },
-          {
-            "k": "Margin by route",
-            "v": "45 / 50 / 15%",
-            "sub": "BP · Exxon · Total · floor 20%"
-          },
-          {
-            "k": "Binding constraint",
-            "v": "Liability",
-            "sub": "unlimited ask on £350K deal"
-          },
-          {
-            "k": "Sales-hire benchmark",
-            "v": "$130K + 12%",
-            "sub": "GP ongoing · judged ill-fit"
-          }
-        ],
-        "axes_note": "Each challenge is plotted by impact on EoD's growth ceiling against addressability — how much sits within our control. Solid nodes are challenges; hollow nodes are candidate levers we might pull. The dashed brick line between C1 and C5 is a reinforcing loop: seeking legal protection creates procurement visibility, which gets us reclassified as staff aug — which is exactly the identity problem. Hover or tap any node for its readout.",
-        "classes": {
-          "critical": {
-            "name": "Critical",
-            "color": "#BB463C"
-          },
-          "opportunity": {
-            "name": "Opportunity",
-            "color": "#2E7D6B"
-          },
-          "foundational": {
-            "name": "Foundational",
-            "color": "#3C5A78"
-          },
-          "lever": {
-            "name": "Lever / option",
-            "color": "#B07A2E"
-          }
-        },
-        "nodes": [
-          {
-            "code": "C1",
-            "cls": "critical",
-            "addr": 28,
-            "impact": 92,
-            "changed": true,
-            "title": "Legal / liability friction blocks onboarding",
-            "desc": "Reconfirmed as the crux. The block is the indemnity clause more than the commercials: Exxon wants unlimited liability on a ~£350K contract; a £10M cap still stalls it. Critically, the pass-through partner does NOT solve it — Raise inherits and flows down the same terms. Negotiating protection also creates visibility that triggers staff-aug reclassification (see loop to C5).",
-            "q": "Is there any pragmatic liability route that survives a supermajor — partner, ring-fenced entity, or a capped position they will accept — or is new-logo growth structurally blocked?",
-            "links": [
-              "C2",
-              "C4"
-            ]
-          },
-          {
-            "code": "C2",
-            "cls": "critical",
-            "addr": 50,
-            "impact": 84,
-            "changed": true,
-            "title": "The promise outruns the delivery",
-            "desc": "Confirmed and concrete: the six-week speed promise to Exxon broke, one vetted candidate lost outright, a second walked, ~£4K sunk on sourcing for an unclosable deal. Proposed reframe on the table: stop selling first-engagement speed, sell post-onboarding long-term agility instead.",
-            "q": "Do we re-cut the value prop to \"slow to start, then fast forever\", or narrow the promise to what we can reliably deliver today?",
-            "links": [
-              "C1",
-              "C5",
-              "C7"
-            ]
-          },
-          {
-            "code": "C3",
-            "cls": "critical",
-            "addr": 24,
-            "impact": 80,
-            "title": "The moat doesn't travel",
-            "desc": "Confirmed. Wins rest on reputation — originally NAG's product reputation, now the emerging HPC/BP reputation — plus relationships. Reputation travels weakly to new logos; relationships not at all. Decays fast outside BP and O&G.",
-            "q": "Is there a portable asset — a productised model, a bench, a partner network — that can win without one person's relationships?",
-            "links": [
-              "C9",
-              "C4",
-              "C8",
-              "C6"
-            ]
-          },
-          {
-            "code": "C4",
-            "cls": "critical",
-            "addr": 76,
-            "impact": 86,
-            "title": "No engine beneath the MD",
-            "desc": "No talent bench, no technical recruiters, no documented operations; every account leans on James. The £4K-of-LinkedIn, candidates-lost episode is this gap in action. Still the one high-impact challenge squarely within our control — and it unlocks several others.",
-            "q": "What repeatable engine — sourcing bench, recruiting capacity, an account-leadership layer — removes the single-person dependency and lets a fourth account stand up without grinding James down?",
-            "links": [
-              "C1",
-              "C3",
-              "C6"
-            ]
-          },
-          {
-            "code": "C5",
-            "cls": "critical",
-            "addr": 42,
-            "impact": 88,
-            "changed": true,
-            "title": "Identity — and it's being decided for us",
-            "desc": "Hardened. You said it plainly: we are functionally staff aug with extras that justify margin. The new edge: Exxon procurement is imposing the staff-aug classification regardless of how we frame the SOW, dragging us toward competing with commodity staffing firms. Identity is no longer purely our choice.",
-            "q": "Do we deliberately own a specialist HPC/AI staff-aug identity, fight to be classified as services, or split the two by route?",
-            "links": [
-              "C2",
-              "C7",
-              "C8"
-            ]
-          },
-          {
-            "code": "C6",
-            "cls": "opportunity",
-            "addr": 33,
-            "impact": 64,
-            "title": "Fractional bench blocked by IP",
-            "desc": "Total (Keith Gray) and BP (Elizabeth Althow) are pulling for a shared fractional / project bench. Blocked by competitor-confidentiality; the CCA vehicle exists but is heavyweight. Died once under cold outreach — relationships have since warmed.",
-            "q": "Is the consortium / fractional model worth the legal weight now, or parked until the engine and relationships are stronger?",
-            "links": [
-              "C4",
-              "C3"
-            ]
-          },
-          {
-            "code": "C7",
-            "cls": "opportunity",
-            "addr": 80,
-            "impact": 70,
-            "title": "Cross-sell never operationalised",
-            "desc": "Group expertise is sold but never delivered into accounts. Total's Donnie Cooper has explicitly asked for the differentiation versus StaffHawk; year-end conversion is the prize. Warm, fast, within control.",
-            "q": "Can we land one real cross-sell engagement into an existing account this quarter to prove the services story is more than a pitch?",
-            "links": [
-              "C2",
-              "C5"
-            ]
-          },
-          {
-            "code": "C8",
-            "cls": "foundational",
-            "addr": 72,
-            "impact": 54,
-            "changed": true,
-            "title": "Attribution — largely answered",
-            "desc": "The alignment call effectively settled this: every win (BP extensions, Total, Exxon) was opportunistic inbound to a known provider on reputation — clients are not buying into a value prop. The question is now answered, but the answer is that there is no controllable acquisition engine yet.",
-            "q": "Given growth has been reputation-driven inbound, can that be deliberately engineered — or only protected?",
-            "links": [
-              "C5",
-              "C3"
-            ]
-          },
-          {
-            "code": "C9",
-            "cls": "foundational",
-            "addr": 28,
-            "impact": 80,
-            "changed": true,
-            "title": "BP concentration + catastrophic-risk exposure",
-            "desc": "Now has a concrete vector: an unlimited-indemnity signature on a small contract could sink the group. And the anchor is softening — BP forecast down £4.93M → £4.5M, staff being moved to India (defence question parked), prior cost-cutting. Bounds the risk appetite hard.",
-            "q": "What is the most growth we can pursue without ever putting BP — or the group balance sheet via indemnity — at risk?",
-            "links": [
-              "C3"
-            ]
-          },
-          {
-            "code": "L1",
-            "cls": "lever",
-            "addr": 40,
-            "impact": 60,
-            "changed": true,
-            "title": "Liability ring-fencing (separate EoD entity)",
-            "desc": "Adrian Scales' proposal: a standalone EoD subsidiary to contain liability so a worst case can't bleed into the group. Partial mitigation for C1 and C9 — but counterparties will likely demand an affiliate/parent-guarantee clause and defeat it. Worth scoping, not banking on.",
-            "q": "Would a ring-fenced entity hold up against a supermajor's affiliate clause, and is the legal cost justified by the protection it actually delivers?",
-            "links": [
-              "C1",
-              "C9"
-            ]
-          },
-          {
-            "code": "L2",
-            "cls": "lever",
-            "addr": 55,
-            "impact": 66,
-            "changed": true,
-            "title": "Land-and-expand reframe (Jake)",
-            "desc": "Jake's challenge: if the model is one client a year grown from ~$100K to several $M, the onboarding/liability friction is a one-time entry cost and the speed shows up later as agility. Total reportedly framed SC as a long-term partnership. If true, it splits C1 — a barrier to new logos, not to expanding landed accounts. Untested against the opportunistic-inbound pattern.",
-            "q": "Is there real evidence a client will buy the long-term-agility vision and expand — or is every deal a discrete project that ends?",
-            "links": [
-              "C1",
-              "C2"
-            ]
-          }
+        "rank": [
+          "C5",
+          "C1",
+          "C4",
+          "C2",
+          "C7",
+          "C3",
+          "C8",
+          "C9",
+          "C6"
         ],
         "edges": [
           [
@@ -1386,27 +1200,227 @@
             "C2"
           ]
         ],
+        "nodes": [
+          {
+            "q": "Is there any pragmatic liability route that survives a supermajor — partner, ring-fenced entity, or a capped position they will accept — or is new-logo growth structurally blocked?",
+            "cls": "critical",
+            "addr": 28,
+            "code": "C1",
+            "desc": "Reconfirmed as the crux. The block is the indemnity clause more than the commercials: Exxon wants unlimited liability on a ~£350K contract; a £10M cap still stalls it. Critically, the pass-through partner does NOT solve it — Raise inherits and flows down the same terms. Negotiating protection also creates visibility that triggers staff-aug reclassification (see loop to C5).",
+            "links": [
+              "C2",
+              "C4"
+            ],
+            "title": "Legal / liability friction blocks onboarding",
+            "impact": 92,
+            "changed": true
+          },
+          {
+            "q": "Do we re-cut the value prop to \"slow to start, then fast forever\", or narrow the promise to what we can reliably deliver today?",
+            "cls": "critical",
+            "addr": 55,
+            "code": "C2",
+            "desc": "Confirmed and concrete: the six-week speed promise to Exxon broke, one vetted candidate lost outright, a second walked, ~£4K sunk on sourcing for an unclosable deal. Proposed reframe on the table: stop selling first-engagement speed, sell post-onboarding long-term agility instead.",
+            "links": [
+              "C1",
+              "C5",
+              "C7"
+            ],
+            "title": "The promise outruns the delivery",
+            "impact": 85,
+            "changed": true
+          },
+          {
+            "q": "Is there a portable asset — a productised model, a bench, a partner network — that can win without one person's relationships?",
+            "cls": "critical",
+            "addr": 24,
+            "code": "C3",
+            "desc": "Confirmed. Wins rest on reputation — originally NAG's product reputation, now the emerging HPC/BP reputation — plus relationships. Reputation travels weakly to new logos; relationships not at all. Decays fast outside BP and O&G.",
+            "links": [
+              "C9",
+              "C4",
+              "C8",
+              "C6"
+            ],
+            "title": "The moat doesn't travel",
+            "impact": 80
+          },
+          {
+            "q": "What repeatable engine — sourcing bench, recruiting capacity, an account-leadership layer — removes the single-person dependency and lets a fourth account stand up without grinding James down?",
+            "cls": "critical",
+            "addr": 76,
+            "code": "C4",
+            "desc": "No talent bench, no technical recruiters, no documented operations; every account leans on James. The £4K-of-LinkedIn, candidates-lost episode is this gap in action. Still the one high-impact challenge squarely within our control — and it unlocks several others.",
+            "links": [
+              "C1",
+              "C3",
+              "C6"
+            ],
+            "title": "No engine beneath the MD",
+            "impact": 86
+          },
+          {
+            "q": "Do we deliberately own a specialist HPC/AI staff-aug identity, fight to be classified as services, or split the two by route?",
+            "cls": "critical",
+            "addr": 43,
+            "code": "C5",
+            "desc": "Hardened. You said it plainly: we are functionally staff aug with extras that justify margin. The new edge: Exxon procurement is imposing the staff-aug classification regardless of how we frame the SOW, dragging us toward competing with commodity staffing firms. Identity is no longer purely our choice.",
+            "links": [
+              "C2",
+              "C7",
+              "C8"
+            ],
+            "title": "Identity — and it's being decided for us",
+            "impact": 88,
+            "changed": true
+          },
+          {
+            "q": "Is the consortium / fractional model worth the legal weight now, or parked until the engine and relationships are stronger?",
+            "cls": "opportunity",
+            "addr": 33,
+            "code": "C6",
+            "desc": "Total (Keith Gray) and BP (Elizabeth Althow) are pulling for a shared fractional / project bench. Blocked by competitor-confidentiality; the CCA vehicle exists but is heavyweight. Died once under cold outreach — relationships have since warmed.",
+            "links": [
+              "C4",
+              "C3"
+            ],
+            "title": "Fractional bench blocked by IP",
+            "impact": 64
+          },
+          {
+            "q": "Can we land one real cross-sell engagement into an existing account this quarter to prove the services story is more than a pitch?",
+            "cls": "opportunity",
+            "addr": 80,
+            "code": "C7",
+            "desc": "Group expertise is sold but never delivered into accounts. Total's Donnie Cooper has explicitly asked for the differentiation versus StaffHawk; year-end conversion is the prize. Warm, fast, within control.",
+            "links": [
+              "C2",
+              "C5"
+            ],
+            "title": "Cross-sell never operationalised",
+            "impact": 70
+          },
+          {
+            "q": "Given growth has been reputation-driven inbound, can that be deliberately engineered — or only protected?",
+            "cls": "foundational",
+            "addr": 72,
+            "code": "C8",
+            "desc": "The alignment call effectively settled this: every win (BP extensions, Total, Exxon) was opportunistic inbound to a known provider on reputation — clients are not buying into a value prop. The question is now answered, but the answer is that there is no controllable acquisition engine yet.",
+            "links": [
+              "C5",
+              "C3"
+            ],
+            "title": "Attribution — largely answered",
+            "impact": 54,
+            "changed": true
+          },
+          {
+            "q": "What is the most growth we can pursue without ever putting BP — or the group balance sheet via indemnity — at risk?",
+            "cls": "foundational",
+            "addr": 28,
+            "code": "C9",
+            "desc": "Now has a concrete vector: an unlimited-indemnity signature on a small contract could sink the group. And the anchor is softening — BP forecast down £4.93M → £4.5M, staff being moved to India (defence question parked), prior cost-cutting. Bounds the risk appetite hard.",
+            "links": [
+              "C3"
+            ],
+            "title": "BP concentration + catastrophic-risk exposure",
+            "impact": 80,
+            "changed": true
+          },
+          {
+            "q": "Would a ring-fenced entity hold up against a supermajor's affiliate clause, and is the legal cost justified by the protection it actually delivers?",
+            "cls": "lever",
+            "addr": 40,
+            "code": "L1",
+            "desc": "Adrian Scales' proposal: a standalone EoD subsidiary to contain liability so a worst case can't bleed into the group. Partial mitigation for C1 and C9 — but counterparties will likely demand an affiliate/parent-guarantee clause and defeat it. Worth scoping, not banking on.",
+            "links": [
+              "C1",
+              "C9"
+            ],
+            "title": "Liability ring-fencing (separate EoD entity)",
+            "impact": 60,
+            "changed": true
+          },
+          {
+            "q": "Is there real evidence a client will buy the long-term-agility vision and expand — or is every deal a discrete project that ends?",
+            "cls": "lever",
+            "addr": 55,
+            "code": "L2",
+            "desc": "Jake's challenge: if the model is one client a year grown from ~$100K to several $M, the onboarding/liability friction is a one-time entry cost and the speed shows up later as agility. Total reportedly framed SC as a long-term partnership. If true, it splits C1 — a barrier to new logos, not to expanding landed accounts. Untested against the opportunistic-inbound pattern.",
+            "links": [
+              "C1",
+              "C2"
+            ],
+            "title": "Land-and-expand reframe (Jake)",
+            "impact": 66,
+            "changed": true
+          }
+        ],
         "reinf": [
           "C1",
           "C5"
         ],
-        "rank": [
-          "C5",
-          "C1",
-          "C4",
-          "C2",
-          "C7",
-          "C3",
-          "C8",
-          "C9",
-          "C6"
+        "strip": [],
+        "title": "EoD Challenge Map",
+        "classes": {
+          "lever": {
+            "name": "Lever / option",
+            "color": "#B07A2E"
+          },
+          "critical": {
+            "name": "Critical",
+            "color": "#BB463C"
+          },
+          "opportunity": {
+            "name": "Opportunity",
+            "color": "#2E7D6B"
+          },
+          "foundational": {
+            "name": "Foundational",
+            "color": "#3C5A78"
+          }
+        },
+        "eyebrow": "",
+        "updated": "from 11 Jun alignment",
+        "version": "",
+        "axes_note": "Each challenge is plotted by impact on EoD's growth ceiling against addressability — how much sits within our control. Solid nodes are challenges; hollow nodes are candidate levers we might pull. The dashed brick line between C1 and C5 is a reinforcing loop: seeking legal protection creates procurement visibility, which gets us reclassified as staff aug — which is exactly the identity problem. Hover or tap any node for its readout.",
+        "changelog": [
+          {
+            "date": "2026-07-16T07:09:18.793Z",
+            "kind": "move",
+            "node": "C2",
+            "text": "59,83 → 55,85",
+            "actor": "James"
+          },
+          {
+            "date": "2026-07-16T07:09:04.581Z",
+            "kind": "move",
+            "node": "C2",
+            "text": "53,84 → 59,83",
+            "actor": "James"
+          },
+          {
+            "date": "2026-07-16T07:09:02.330Z",
+            "kind": "move",
+            "node": "C5",
+            "text": "42,88 → 43,88",
+            "actor": "James"
+          },
+          {
+            "date": "2026-07-16T07:09:00.557Z",
+            "kind": "move",
+            "node": "C2",
+            "text": "50,84 → 53,84",
+            "actor": "James"
+          }
         ],
-        "helptext_html": "Since v1: <b>C1</b> reframed to liability and pushed less addressable — the partner route doesn't fix indemnity. The <b>C1↔C5 loop</b> is now drawn: seeking protection triggers staff-aug reclassification. <b>C8</b> is largely answered (reputation-driven inbound), <b>C9</b> gains the catastrophic-indemnity vector. Two new levers — ring-fencing (L1) and land-and-expand (L2).",
-        "footnote_html": "CRITICAL = binding constraint · OPPORTUNITY = client-pulled lever · FOUNDATIONAL = bounds/informs strategy · LEVER = candidate move (testable).<br>Positions are judgement-based, to provoke the prioritisation argument at validation — not to settle it."
+        "meta_lines": [],
+        "footnote_html": "CRITICAL = binding constraint · OPPORTUNITY = client-pulled lever · FOUNDATIONAL = bounds/informs strategy · LEVER = candidate move (testable).<br>Positions are judgement-based, to provoke the prioritisation argument at validation — not to settle it.",
+        "helptext_html": "Since v1: <b>C1</b> reframed to liability and pushed less addressable — the partner route doesn't fix indemnity. The <b>C1↔C5 loop</b> is now drawn: seeking protection triggers staff-aug reclassification. <b>C8</b> is largely answered (reputation-driven inbound), <b>C9</b> gains the catastrophic-indemnity vector. Two new levers — ring-fencing (L1) and land-and-expand (L2)."
       }
     }
   ],
   "version": "unified-v1",
-  "updatedAt": "2026-06-12T11:02:50.157Z",
+  "updatedAt": "2026-07-16T07:09:18.793Z",
   "updatedBy": ""
 }
