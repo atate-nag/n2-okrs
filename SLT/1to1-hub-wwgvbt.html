@@ -39,6 +39,7 @@ body{background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-s
 
 /* ---- main ---- */
 .main{flex:1;min-width:0;padding:30px 38px 80px;max-width:1020px}
+.main.main-wide{max-width:1600px;padding-right:48px}
 .head{display:flex;align-items:flex-start;gap:16px;border-bottom:1px solid var(--line2);padding-bottom:18px;margin-bottom:6px}
 .head .dot{width:46px;height:46px;flex:0 0 46px;font-size:18px}
 .head h2{font-family:'Space Grotesk',Inter,sans-serif;font-weight:600;font-size:27px;margin:0;letter-spacing:-.015em}
@@ -239,9 +240,8 @@ body.viewonly .metric{cursor:default}
 @media(max-width:720px){.cmap .strip{grid-template-columns:repeat(2,1fr)}}
 .cmap .axes-note{font-size:12.5px;color:var(--cm-ink-soft);max-width:780px;margin:0 0 20px;line-height:1.55;}
 .cmap .axes-note b{color:var(--cm-ink);font-weight:600}
-.cmap .stage{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start}
-@media(max-width:920px){.cmap .stage{grid-template-columns:1fr}}
-.cmap .field-wrap{position:relative;background:var(--cm-paper2);border:1.5px solid var(--cm-ink);border-radius:3px;overflow:hidden;}
+.cmap .stage{display:flex;flex-direction:column;gap:20px}
+.cmap .field-wrap{position:relative;background:var(--cm-paper2);border:1.5px solid var(--cm-ink);border-radius:3px;overflow:hidden;max-height:calc(100vh - 240px);aspect-ratio:1000/720;margin:0 auto;width:100%}
 .cmap svg.field{display:block;width:100%;height:auto}
 .cmap .axis-cap{position:absolute;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--cm-ink-soft);pointer-events:none;}
 .cmap .axis-y{left:9px;top:50%;transform:translateY(-50%) rotate(-90deg);transform-origin:left center}
@@ -263,7 +263,7 @@ body.viewonly .metric{cursor:default}
 .cmap .reinf.lit{stroke-width:3.2;opacity:1}
 .cmap .reinf-lab{font-family:'IBM Plex Mono',monospace;font-size:10px;fill:#BB463C;letter-spacing:.08em}
 .cmap .qlabel{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--cm-ink-soft);letter-spacing:.12em;text-transform:uppercase}
-.cmap .readout{border:1.5px solid var(--cm-ink);border-radius:3px;background:var(--cm-paper2);min-height:540px;display:flex;flex-direction:column;}
+.cmap .readout{border:1.5px solid var(--cm-ink);border-radius:3px;background:var(--cm-paper2);min-height:auto;display:flex;flex-direction:column;}
 .cmap .readout-head{display:flex;justify-content:space-between;align-items:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--cm-ink-soft);padding:11px 14px;border-bottom:1px solid var(--cm-faint);}
 .cmap .dot-live{width:7px;height:7px;border-radius:50%;background:var(--cm-ink-soft);display:inline-block;margin-left:8px}
 .cmap .readout-body{padding:16px 16px 18px;flex:1;color:var(--cm-ink);}
@@ -776,7 +776,9 @@ function render(){
     <button class="tab ${activeTab===t[0]?'on':''}" onclick="setTab('${t[0]}')">
       ${t[1]}<span class="tcount">${t[2](d)}</span></button>`).join("");
 
-  document.getElementById("main").innerHTML=`
+  const mainEl = document.getElementById("main");
+  mainEl.classList.toggle('main-wide', activeTab==='challengeMap');
+  mainEl.innerHTML=`
     <div class="head">
       <span class="dot" style="background:${ACCENT[d.id]||'#888'}">${initials(d.name)}</span>
       <div>
