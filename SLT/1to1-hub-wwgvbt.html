@@ -299,6 +299,47 @@ body.viewonly .metric{cursor:default}
 .cmap .clear-btn{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:none;border:none;color:var(--cm-ink-soft);cursor:pointer;padding:0;margin-left:auto}
 .cmap .clear-btn:hover{color:#BB463C}
 .cmap .footnote{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--cm-ink-soft);margin-top:20px;line-height:1.7;border-top:1px solid var(--cm-faint);padding-top:12px}
+
+/* ---- Challenge map: edit mode ---- */
+.cmap .cmap-controls{display:flex;align-items:center;gap:12px}
+.cmap-toggle{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:1px solid var(--cm-ink-soft);border-radius:2px;color:var(--cm-ink-soft);padding:4px 9px;cursor:pointer}
+.cmap-toggle:hover{color:var(--cm-ink);border-color:var(--cm-ink)}
+.cmap.editing .cmap-toggle{background:var(--cm-ink);color:var(--cm-paper);border-color:var(--cm-ink)}
+.cmap.editing .node circle.dot{cursor:grab}
+.cmap.editing .node.dragging circle.dot{cursor:grabbing;filter:brightness(1.15)}
+.cmap [contenteditable="true"]{outline:none;border-radius:2px;transition:background .12s}
+.cmap.editing [contenteditable="true"]:hover{background:rgba(21,36,44,.06)}
+.cmap.editing [contenteditable="true"]:focus{background:rgba(255,255,255,.6);box-shadow:0 0 0 2px #BB463C}
+.cmap-mode-hint{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--cm-ink-soft);letter-spacing:.06em;margin-top:10px;padding:8px 10px;background:rgba(187,70,60,.06);border-left:2px solid #BB463C;border-radius:2px}
+.cmap-edit-actions{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.cmap-edit-actions button{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:var(--cm-paper);border:1px solid var(--cm-ink-soft);border-radius:2px;color:var(--cm-ink);padding:5px 10px;cursor:pointer}
+.cmap-edit-actions button:hover{background:var(--cm-ink);color:var(--cm-paper);border-color:var(--cm-ink)}
+.cmap-edit-actions button.danger{color:#BB463C;border-color:#BB463C}
+.cmap-edit-actions button.danger:hover{background:#BB463C;color:#fff}
+.cmap-note-form{margin-top:14px;border-top:1px solid var(--cm-faint);padding-top:12px}
+.cmap-note-form .qlab{margin-bottom:6px}
+.cmap-note-form textarea{width:100%;box-sizing:border-box;font-family:Inter,sans-serif;font-size:12.5px;line-height:1.5;color:var(--cm-ink);background:rgba(255,255,255,.5);border:1px solid var(--cm-faint);border-radius:2px;padding:7px 9px;resize:vertical;min-height:52px;outline:none}
+.cmap-note-form textarea:focus{border-color:#BB463C;background:#fff}
+.cmap-note-form .row{display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:8px}
+.cmap-note-form .row .scope{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cm-ink-soft)}
+.cmap-note-form button{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:var(--cm-ink);color:var(--cm-paper);border:none;border-radius:2px;padding:5px 10px;cursor:pointer}
+.cmap-note-form button:disabled{opacity:.4;cursor:not-allowed}
+.cmap-changelog{margin-top:18px;border-top:1px solid var(--cm-faint);padding-top:14px}
+.cmap-changelog .title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--cm-ink-soft);margin-bottom:9px;display:flex;justify-content:space-between;align-items:baseline}
+.cmap-changelog .title .n{font-weight:400}
+.cmap-changelog ul{list-style:none;margin:0;padding:0;max-height:220px;overflow-y:auto}
+.cmap-changelog li{font-size:11.5px;line-height:1.45;padding:6px 0;border-bottom:1px solid var(--cm-fainter);color:var(--cm-ink);display:grid;grid-template-columns:auto 1fr;gap:8px}
+.cmap-changelog li:last-child{border-bottom:none}
+.cmap-changelog li .when{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--cm-ink-soft);white-space:nowrap;padding-top:1px}
+.cmap-changelog li .who{font-weight:600}
+.cmap-changelog li .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--cm-ink-soft);margin:0 4px}
+.cmap-changelog li .n-code{font-family:'IBM Plex Mono',monospace;font-weight:600}
+.cmap-empty{font-size:11.5px;color:var(--cm-ink-soft);font-style:italic}
+
+/* keep the map editable in member view-only mode — it's a strategic
+   artefact intentionally shared for iteration by its owner. */
+body.viewonly .cmap [contenteditable="true"]{pointer-events:auto}
+body.viewonly .cmap-toggle,body.viewonly .cmap-edit-actions button,body.viewonly .cmap-note-form button,body.viewonly .cmap-note-form textarea{display:''}
 </style>
 </head>
 <body>
@@ -828,7 +869,45 @@ function shareLink(){
   navigator.clipboard.writeText(url).then(()=>toast("Share link copied"),()=>{prompt("Copy this link:",url);});
 }
 
-/* ============ CHALLENGE MAP (per-person SVG visualisation) ============ */
+/* ============ CHALLENGE MAP (per-person SVG visualisation + editor) ============ */
+let cmapEditMode = false;
+
+function cmapActor(){
+  const s = sessionStorage.getItem('sltpin');
+  if (s === 'manager' || s === '1') return 'Adrian';
+  if (s && s.startsWith('member:')){
+    const id = s.slice(7);
+    const pp = (DATA && DATA.people) ? DATA.people.find(p => p.id === id) : null;
+    return pp ? pp.name.split(' ')[0] : 'Member';
+  }
+  return 'Unknown';
+}
+
+function cmapLog(cm, node, kind, text){
+  if (!Array.isArray(cm.changelog)) cm.changelog = [];
+  cm.changelog.unshift({
+    date: new Date().toISOString(),
+    actor: cmapActor(),
+    node: node || null,
+    kind,
+    text
+  });
+  if (cm.changelog.length > 200) cm.changelog.length = 200;
+}
+
+function cmapFmtDate(iso){
+  try{ const d=new Date(iso); return d.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
+  catch(e){ return iso; }
+}
+
+function cmapNextCode(cm, cls){
+  const prefix = cls==='lever' ? 'L' : 'C';
+  let n = 1;
+  const codes = new Set((cm.nodes||[]).map(x=>x.code));
+  while (codes.has(prefix+n)) n++;
+  return prefix+n;
+}
+
 function renderChallengeMap(cm){
   const host = document.getElementById('cmap-host');
   if (!host) return;
@@ -838,7 +917,7 @@ function renderChallengeMap(cm){
     `<div class="stat"><div class="k">${esc(s.k)}</div><div class="v">${esc(s.v)}<small>${esc(s.sub||'')}</small></div></div>`
   ).join('');
   const metaHtml = (cm.meta_lines||[]).map(l => `<div>${l}</div>`).join('');
-  host.innerHTML = `<div class="cmap">
+  host.innerHTML = `<div class="cmap${cmapEditMode?' editing':''}">
     <div class="masthead">
       <div class="title-wrap">
         <p class="eyebrow">${esc(cm.eyebrow||'')}</p>
@@ -856,7 +935,13 @@ function renderChallengeMap(cm){
         <span class="axis-cap cap-x-right">Within our control →</span>
       </div>
       <aside class="readout">
-        <div class="readout-head"><span>Readout</span><span id="cmap-live">— standby<span class="dot-live"></span></span></div>
+        <div class="readout-head">
+          <span>Readout</span>
+          <div class="cmap-controls">
+            <button class="cmap-toggle" id="cmap-toggle" type="button">${cmapEditMode?'Done editing':'Edit map'}</button>
+            <span id="cmap-live">— standby<span class="dot-live"></span></span>
+          </div>
+        </div>
         <div class="readout-body" id="cmap-body"></div>
       </aside>
     </div>
@@ -927,9 +1012,79 @@ function renderChallengeMap(cm){
     gNodes.appendChild(g); nodeEls[n.code]=g;
     g.addEventListener('mouseenter',()=>cmapHover(n.code));
     g.addEventListener('mouseleave',()=>{if(!cmapPinned)cmapClearHover();});
-    g.addEventListener('click',()=>cmapSelect(n.code));
     g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cmapSelect(n.code);}});
+    // In edit mode: mousedown starts drag; click still selects if no drag happened.
+    // In view mode: click selects (no drag).
+    let downAt=null, dragging=false;
+    g.addEventListener('mousedown',e=>{
+      if(e.button!==0) return;
+      downAt={x:e.clientX,y:e.clientY};
+      if(!cmapEditMode) return;
+      e.preventDefault();
+      startDrag(n.code, g);
+    });
+    g.addEventListener('click',e=>{
+      // suppress click after a real drag (mouseup handler sets a flag; check timing)
+      if(g._suppressClick){ g._suppressClick=false; return; }
+      cmapSelect(n.code);
+    });
   });
+
+  // ---- Drag support ----
+  function svgPoint(clientX, clientY){
+    const pt = svg.createSVGPoint(); pt.x = clientX; pt.y = clientY;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+  function coordToScore(x, y){
+    const addr = Math.round(((x - M.l) / PW) * 100);
+    const imp  = Math.round((1 - (y - M.t) / PH) * 100);
+    return { addr: Math.max(0, Math.min(100, addr)), impact: Math.max(0, Math.min(100, imp)) };
+  }
+  function edgesForNode(code){ return edgeEls.filter(ln => ln.dataset.a===code || ln.dataset.b===code); }
+  function updateNodeVisual(code, addr, impact){
+    const g = nodeEls[code]; if(!g) return;
+    const x = px(addr), y = py(impact);
+    g.querySelector('circle.halo').setAttribute('cx',x);
+    g.querySelector('circle.halo').setAttribute('cy',y);
+    g.querySelector('circle.dot').setAttribute('cx',x);
+    g.querySelector('circle.dot').setAttribute('cy',y);
+    const txt = g.querySelector('text'); txt.setAttribute('x',x); txt.setAttribute('y',y+4);
+    const badge = g.querySelectorAll('text')[1]; if(badge){
+      const r = 15 + byCode[code].impact*0.11;
+      badge.setAttribute('x', x + r + 3); badge.setAttribute('y', y - r + 2);
+    }
+    edgesForNode(code).forEach(ln => {
+      const which = ln.dataset.a===code ? '1' : '2';
+      ln.setAttribute('x'+which, x); ln.setAttribute('y'+which, y);
+    });
+  }
+  function startDrag(code, g){
+    const node = byCode[code]; if(!node) return;
+    const startAddr = node.addr, startImp = node.impact;
+    g.classList.add('dragging');
+    let moved = false;
+    const onMove = ev => {
+      const pt = svgPoint(ev.clientX, ev.clientY);
+      const {addr, impact} = coordToScore(pt.x, pt.y);
+      if (addr!==node.addr || impact!==node.impact) moved = true;
+      node.addr = addr; node.impact = impact;
+      updateNodeVisual(code, addr, impact);
+    };
+    const onUp = ev => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      g.classList.remove('dragging');
+      if (moved) {
+        cmapLog(cm, code, 'move', `${startAddr},${startImp} → ${node.addr},${node.impact}`);
+        if (typeof persist === 'function') persist();
+        g._suppressClick = true;
+        // refresh readout without full rerender
+        if (cmapPinned===code) renderDetail(code, true);
+      }
+    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  }
 
   let cmapPinned=null;
   const body=document.getElementById('cmap-body');
@@ -962,7 +1117,21 @@ function renderChallengeMap(cm){
       <div class="legend-row"><span class="swatch" style="background:${(CLASS.foundational||{}).color||'#888'}"></span><span><b>Foundational</b> — bounds/informs strategy</span></div>
       <div class="legend-row"><span class="swatch hollow"></span><span><b>Lever / option</b> — candidate move to test</span></div>
       ${helptext?`<p class="helptext">${helptext}</p>`:''}
-      ${RANK.length?`<div class="rank-title">Suggested sequence</div><ol class="rank" id="cmap-rank"></ol>`:''}`;
+      ${cmapEditMode?`
+        <p class="cmap-mode-hint">Editing as <b>${esc(cmapActor())}</b>. Drag nodes to reposition. Click a node to edit its title/description/question or delete it. Every change is logged below with the author, time and node.</p>
+        <div class="cmap-edit-actions">
+          <button id="cmap-add-crit" type="button">+ Critical</button>
+          <button id="cmap-add-opp" type="button">+ Opportunity</button>
+          <button id="cmap-add-found" type="button">+ Foundational</button>
+          <button id="cmap-add-lever" type="button">+ Lever</button>
+        </div>
+        <div class="cmap-note-form">
+          <div class="qlab">Log a note (no node pinned)</div>
+          <textarea id="cmap-note-text" placeholder="e.g. Session context, resolved item, upcoming test…"></textarea>
+          <div class="row"><span class="scope">Scope: whole map</span><button type="button" id="cmap-note-submit">Log note</button></div>
+        </div>`:''}
+      ${RANK.length?`<div class="rank-title">Suggested sequence</div><ol class="rank" id="cmap-rank"></ol>`:''}
+      ${renderChangelogHtml()}`;
     const ol=document.getElementById('cmap-rank');
     if (ol) RANK.forEach((c,i)=>{
       const n=byCode[c]; if(!n) return;
@@ -973,10 +1142,34 @@ function renderChallengeMap(cm){
       li.addEventListener('click',()=>cmapSelect(c));
       ol.appendChild(li);
     });
+    if (cmapEditMode) {
+      const bind=(id,cls)=>{const b=document.getElementById(id);if(b)b.addEventListener('click',()=>addNode(cls));};
+      bind('cmap-add-crit','critical'); bind('cmap-add-opp','opportunity');
+      bind('cmap-add-found','foundational'); bind('cmap-add-lever','lever');
+      const submit=document.getElementById('cmap-note-submit');
+      if (submit) submit.addEventListener('click',()=>{
+        const ta=document.getElementById('cmap-note-text');
+        const t=(ta.value||'').trim(); if(!t) return;
+        cmapLog(cm, null, 'note', t);
+        if(typeof persist==='function') persist();
+        renderDefault();
+      });
+    }
+  }
+  function renderChangelogHtml(){
+    const log = Array.isArray(cm.changelog) ? cm.changelog : [];
+    if (!log.length) return '<div class="cmap-changelog"><div class="title"><span>Changelog</span><span class="n">no entries yet</span></div><p class="cmap-empty">Structural edits and logged notes will show up here.</p></div>';
+    const shown = log.slice(0, 40);
+    const items = shown.map(e => {
+      const nodeHtml = e.node ? `<span class="n-code" style="color:${(CLASS[(byCode[e.node]||{}).cls]||{}).color||'#888'}">${esc(e.node)}</span>` : '';
+      return `<li><span class="when">${esc(cmapFmtDate(e.date))}</span><span><span class="who">${esc(e.actor||'')}</span><span class="k">${esc(e.kind||'')}</span>${nodeHtml} ${esc(e.text||'')}</span></li>`;
+    }).join('');
+    return `<div class="cmap-changelog"><div class="title"><span>Changelog</span><span class="n">${log.length} entries · showing ${shown.length}</span></div><ul>${items}</ul></div>`;
   }
   function renderDetail(code,pin){
     const n=byCode[code]; if(!n) return;
     const col=(CLASS[n.cls]||{color:'#888'}).color;
+    const canEdit = cmapEditMode && pin;
     body.innerHTML=`
       <div style="display:flex;align-items:center;flex-wrap:wrap">
         <span class="d-code" style="color:${col}">${n.code}</span>
@@ -984,14 +1177,24 @@ function renderChallengeMap(cm){
         ${n.changed?'<span class="chip delta">Δ updated</span>':''}
         ${pin?'<button class="clear-btn" id="cmap-unpin">✕ unpin</button>':''}
       </div>
-      <div class="d-title">${esc(n.title)}</div>
+      <div class="d-title"${canEdit?' contenteditable="true" data-field="title"':''}>${esc(n.title)}</div>
       <div class="gauges">
         <div class="gauge"><div class="lab"><span>${n.cls==='lever'?'Potential':'Impact'}</span><b>${n.impact}</b></div><div class="track"><div class="fill" data-w="${n.impact}" style="background:${col}"></div></div></div>
         <div class="gauge"><div class="lab"><span>${n.cls==='lever'?'Feasibility':'Addressability'}</span><b>${n.addr}</b></div><div class="track"><div class="fill" data-w="${n.addr}" style="background:${col}"></div></div></div>
       </div>
-      <p class="d-desc">${esc(n.desc)}</p>
-      <div class="q-block"><div class="qlab">${n.cls==='lever'?'Open question':'Decision it forces'}</div><div class="qtext">${esc(n.q)}</div></div>
-      <div class="links"><div class="qlab">${n.cls==='lever'?'Acts on':'Linked challenges'}</div><div id="cmap-linkwrap"></div></div>`;
+      <p class="d-desc"${canEdit?' contenteditable="true" data-field="desc"':''}>${esc(n.desc)}</p>
+      <div class="q-block"><div class="qlab">${n.cls==='lever'?'Open question':'Decision it forces'}</div><div class="qtext"${canEdit?' contenteditable="true" data-field="q"':''}>${esc(n.q)}</div></div>
+      <div class="links"><div class="qlab">${n.cls==='lever'?'Acts on':'Linked challenges'}</div><div id="cmap-linkwrap"></div></div>
+      ${canEdit?`
+        <div class="cmap-edit-actions">
+          <button type="button" id="cmap-toggle-changed">${n.changed?'Clear Δ':'Mark Δ (changed since last review)'}</button>
+          <button type="button" class="danger" id="cmap-delete">Delete ${esc(n.code)}</button>
+        </div>
+        <div class="cmap-note-form">
+          <div class="qlab">Log a note against <b>${esc(n.code)}</b></div>
+          <textarea id="cmap-note-text" placeholder="Why this change? Any decision or open thread?"></textarea>
+          <div class="row"><span class="scope">Scope: ${esc(n.code)}</span><button type="button" id="cmap-note-submit">Log note</button></div>
+        </div>`:''}`;
     requestAnimationFrame(()=>body.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'));
     const lw=document.getElementById('cmap-linkwrap');
     (n.links||[]).forEach(c=>{
@@ -1004,7 +1207,76 @@ function renderChallengeMap(cm){
       lw.appendChild(b);
     });
     if(pin){const u=document.getElementById('cmap-unpin'); if(u)u.addEventListener('click',()=>{cmapPinned=null;cmapClearHover();});}
+    if (canEdit) {
+      // save inline text edits on blur
+      body.querySelectorAll('[contenteditable="true"][data-field]').forEach(el=>{
+        el.addEventListener('blur',()=>{
+          const f = el.dataset.field, v = el.innerText.trim(), old = n[f]||'';
+          if (v === old) return;
+          n[f] = v;
+          cmapLog(cm, n.code, 'edit', `${f} changed`);
+          if(typeof persist==='function') persist();
+        });
+        // Enter in title/q inserts a newline — trap and blur instead
+        el.addEventListener('keydown', ev => {
+          if (ev.key==='Enter' && !ev.shiftKey && (el.dataset.field==='title' || el.dataset.field==='q')) {
+            ev.preventDefault(); el.blur();
+          }
+        });
+      });
+      const tc = document.getElementById('cmap-toggle-changed');
+      if (tc) tc.addEventListener('click',()=>{
+        n.changed = !n.changed;
+        cmapLog(cm, n.code, n.changed?'flag Δ':'clear Δ', n.changed?'marked as changed':'no longer flagged');
+        if(typeof persist==='function') persist();
+        rerender();
+      });
+      const del = document.getElementById('cmap-delete');
+      if (del) del.addEventListener('click',()=>{
+        if (!confirm(`Delete ${n.code} — "${n.title}"? This also removes any edges/links to it.`)) return;
+        const idx = cm.nodes.findIndex(x=>x.code===n.code);
+        if (idx<0) return;
+        cm.nodes.splice(idx,1);
+        cm.edges = (cm.edges||[]).filter(([a,b])=>a!==n.code && b!==n.code);
+        cm.rank  = (cm.rank||[]).filter(c=>c!==n.code);
+        (cm.nodes||[]).forEach(other => { if (Array.isArray(other.links)) other.links = other.links.filter(c=>c!==n.code); });
+        if (Array.isArray(cm.reinf) && cm.reinf.includes(n.code)) cm.reinf = [];
+        cmapLog(cm, n.code, 'delete', `removed node "${n.title}"`);
+        if(typeof persist==='function') persist();
+        cmapPinned = null;
+        rerender();
+      });
+      const ns = document.getElementById('cmap-note-submit');
+      if (ns) ns.addEventListener('click',()=>{
+        const ta=document.getElementById('cmap-note-text');
+        const t=(ta.value||'').trim(); if(!t) return;
+        cmapLog(cm, n.code, 'note', t);
+        if(typeof persist==='function') persist();
+        renderDetail(code, true);
+      });
+    }
   }
+  function addNode(cls){
+    if (!Array.isArray(cm.nodes)) cm.nodes = [];
+    const code = cmapNextCode(cm, cls);
+    const node = {
+      code, cls, addr: 50, impact: 50,
+      title: cls==='lever' ? 'New lever' : 'New challenge',
+      desc: '',
+      q: cls==='lever' ? 'What would we test?' : 'What decision does this force?',
+      links: []
+    };
+    cm.nodes.push(node);
+    cmapLog(cm, code, 'add', `${cls} node created`);
+    if (typeof persist === 'function') persist();
+    cmapPinned = code;
+    rerender();
+  }
+  function rerender(){ renderChallengeMap(cm); if (cmapPinned) { setTimeout(()=>{ litEdges(cmapPinned); renderDetail(cmapPinned, true); }, 0); } }
+
+  // toggle button
+  const tgl = document.getElementById('cmap-toggle');
+  if (tgl) tgl.addEventListener('click',()=>{ cmapEditMode = !cmapEditMode; rerender(); });
 
   renderDefault();
 }
