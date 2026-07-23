@@ -1080,8 +1080,11 @@ function renderChallengeMap(cm){
         cmapLog(cm, code, 'move', `${startAddr},${startImp} → ${node.addr},${node.impact}`);
         if (typeof persist === 'function') persist();
         g._suppressClick = true;
-        // refresh readout without full rerender
-        if (cmapPinned===code) renderDetail(code, true);
+        // Refresh whichever readout state we're in so the new move
+        // entry lands in the changelog immediately (and, if pinned
+        // on this node, the gauges update to the new numbers).
+        if (cmapPinned) renderDetail(cmapPinned, true);
+        else renderDefault();
       }
     };
     document.addEventListener('mousemove', onMove);
@@ -1196,7 +1199,8 @@ function renderChallengeMap(cm){
           <div class="qlab">Log a note against <b>${esc(n.code)}</b></div>
           <textarea id="cmap-note-text" placeholder="Why this change? Any decision or open thread?"></textarea>
           <div class="row"><span class="scope">Scope: ${esc(n.code)}</span><button type="button" id="cmap-note-submit">Log note</button></div>
-        </div>`:''}`;
+        </div>`:''}
+      ${renderChangelogHtml()}`;
     requestAnimationFrame(()=>body.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'));
     const lw=document.getElementById('cmap-linkwrap');
     (n.links||[]).forEach(c=>{
