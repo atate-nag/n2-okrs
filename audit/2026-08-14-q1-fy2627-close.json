@@ -1,0 +1,150 @@
+{
+  "data": {
+    "bus": [
+      {
+        "id": "n2",
+        "name": "N2 Group",
+        "objectives": [
+          {
+            "krs": [
+              {
+                "conf": "55%",
+                "desc": "New Fractional CFO onboarded and owns the monthly close out cycle, new controller onboarded",
+                "prog": "80%",
+                "owner": "Adrian Tate"
+              },
+              {
+                "conf": "50%",
+                "desc": "Proposal for monthly management information package rolled out for all businesses",
+                "prog": "5%",
+                "owner": "Darren Thomas"
+              }
+            ],
+            "text": "Establish Reliable Group Level financial Reporting"
+          }
+        ]
+      },
+      {
+        "id": "bioteam",
+        "name": "BioTeam",
+        "objectives": [
+          {
+            "krs": [
+              {
+                "conf": "25%",
+                "desc": "Close £650k of new business",
+                "prog": "86%",
+                "owner": "Jennifer Wortman"
+              },
+              {
+                "conf": "10%",
+                "desc": "Generate 40 discovery calls across 3 verticals (Pharma, Biotech, Academic Medical Centers) with at least 5 qualified leads from each",
+                "prog": "86%",
+                "owner": "Jennifer Wortman"
+              }
+            ],
+            "text": "Build a Repeatable Lead Generation Engine and Sales Pipeline"
+          }
+        ]
+      },
+      {
+        "id": "bismarck",
+        "name": "Bismarck",
+        "objectives": [
+          {
+            "krs": [
+              {
+                "conf": "0%",
+                "desc": "3900 billable hours for the period",
+                "prog": "84%",
+                "owner": "Deepak Khosla"
+              }
+            ],
+            "text": "Grow Delivered Revenue"
+          },
+          {
+            "krs": [
+              {
+                "conf": "0%",
+                "desc": "1200 delivered billable hours",
+                "prog": "44%",
+                "owner": "Matt Street"
+              }
+            ],
+            "text": "Grow Professional Services Revenue"
+          }
+        ]
+      },
+      {
+        "id": "stac",
+        "name": "STAC",
+        "objectives": [
+          {
+            "krs": [
+              {
+                "conf": "100%",
+                "desc": "Develop and execute proactive retention plans for identified at-risk members and achieve 80% retention.",
+                "prog": "100%",
+                "owner": "Jack Gidding"
+              },
+              {
+                "conf": "100%",
+                "desc": "Launch a “Welcome Back” initiative to re-engage former members and generate renewed participation in the STAC community.",
+                "prog": "100%",
+                "owner": "Jack Gidding"
+              }
+            ],
+            "text": "Net Tech Provider member growth of +2​"
+          }
+        ]
+      },
+      {
+        "id": "nag-product",
+        "name": "nAG-Product",
+        "objectives": [
+          {
+            "krs": [
+              {
+                "conf": "90%",
+                "desc": "Protect £483k forecast revenue",
+                "prog": "91%",
+                "owner": "Ian Wilson"
+              },
+              {
+                "conf": "75%",
+                "desc": "Deliver 1 E1 proposal for decision",
+                "prog": "90%",
+                "owner": "Ian Wilson"
+              }
+            ],
+            "text": "Protect Core Revenue While Advancing E1 Growth"
+          }
+        ]
+      },
+      {
+        "id": "nag-eod",
+        "name": "nAG-EoD",
+        "objectives": [
+          {
+            "krs": [
+              {
+                "conf": "0%",
+                "desc": "Complete a strategic brief defining target segments, value proposition, and revenue models — validated by at least two internal nAG stakeholders (within first 7 weeks)",
+                "prog": "90%",
+                "owner": "James Smith"
+              },
+              {
+                "conf": "5%",
+                "desc": "Define the operational blueprint including core functions, ownership, gaps, and risks",
+                "prog": "10%",
+                "owner": "James Smith"
+              }
+            ],
+            "text": "Establish EOD as a Fundable, Scalable Business Unit"
+          }
+        ]
+      }
+    ]
+  },
+  "updated_at": "2026-08-07T15:08:29.935+00:00"
+}
