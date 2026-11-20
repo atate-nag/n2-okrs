@@ -58,8 +58,22 @@
   .targets-table .target-cell { color:var(--text); min-width:200px; font-size:18px; font-weight:600; line-height:1.35; }
   .targets-table .e1-cell { width:70px; text-align:center; font-size:16px; font-weight:600; color:var(--navy); }
   .targets-table .e1-cell:empty::after { content:"—"; color:#ddd; font-weight:400; }
-  .targets-table .q-cell { width:120px; min-width:100px; color:var(--text); }
-  .targets-table .q-cell:empty::after { content:"—"; color:#ddd; }
+  .targets-table .m-cell { min-width:170px; }
+  .targets-table .m-target { font-size:18px; font-weight:600; color:var(--text); line-height:1.3; }
+  .targets-table .m-row { display:flex; align-items:center; gap:10px; margin-top:8px; }
+  .targets-table .m-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-light); }
+  .targets-table .m-ytd { font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--navy); min-width:48px; }
+  .targets-table .m-ytd:empty::after { content:"—"; color:#ccc; }
+  .targets-table .metric { display:inline-block; width:auto; min-width:56px; padding:0 8px; height:28px; line-height:28px; border-radius:7px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600; }
+  .targets-table .metric.tl-green { background:var(--green-bg); color:var(--green); }
+  .targets-table .metric.tl-amber { background:var(--amber-bg); color:var(--amber); }
+  .targets-table .metric.tl-red { background:var(--red-bg); color:var(--red); }
+  .targets-table .metric.tl-grey { background:var(--grey-bg); color:var(--grey); }
+  .targets-table [contenteditable="true"] { background:#FAFBFF; border:1px dashed #d0d8e8; border-radius:4px; padding:3px 8px; cursor:text; outline:none; }
+  .targets-table [contenteditable="true"]:focus, .ytd-asof [contenteditable="true"]:focus { border-color:var(--blue); background:#fff; box-shadow:0 0 0 2px rgba(59,125,216,0.15); }
+  .ytd-asof { font-size:13px; color:var(--text-mid); margin:-4px 0 12px; }
+  .ytd-asof strong { color:var(--navy); }
+  .ytd-asof [contenteditable="true"] { background:#FAFBFF; border:1px dashed #d0d8e8; border-radius:4px; padding:2px 6px; outline:none; }
 
   .cycle-strip { background:#fff; border-bottom:1px solid #e0e0e0; padding:14px 48px 14px; }
   .cycle-info { display:flex; align-items:baseline; gap:14px; margin-bottom:8px; }
@@ -226,42 +240,92 @@ async function init() {
 
 function renderTargets(d) {
   let h = '<div class="section-label">Group-level Goals</div>';
-  h += buildGroupTable(d.group_goals);
-  h += '<div class="section-label">Business Unit Targets</div>';
-  h += buildBuTable(d.bu_targets);
+  h += buildGroupTable(d.group_goals, d);
+  h += '<div class="section-label">Business Targets</div>';
+  h += asOfLine(d);
+  h += buildBuTable(d.bu_targets, d);
   document.getElementById('tab-targets').innerHTML = h;
 }
 
-function buildGroupTable(rows) {
-  let h = `<table class="targets-table"><thead><tr>
-    <th>Goal</th><th>FY26-27 Target</th>
-    <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead><tbody>`;
-  rows.forEach(r => {
-    h += `<tr><td class="goal-cell">${r.goal}</td>
-      <td class="target-cell">${r.fy2627 || ''}</td>
-      <td class="q-cell">${r.q1 || ''}</td><td class="q-cell">${r.q2 || ''}</td>
-      <td class="q-cell">${r.q3 || ''}</td><td class="q-cell">${r.q4 || ''}</td></tr>`;
-  });
-  h += '</tbody></table>';
-  return h;
+const TGT_EDIT = false;
+// --- Annual targets: each target shows FY target, YtD actual, and progress % (computed) ---
+// Pill colour is judged against pace (ytd_months/12), not the OKR 0-100 scale.
+const TGT_METRICS = [['revenue','Revenue'],['ebitda','EBITDA'],['e1','E1 proposals']];
+function parseAmt(v) {
+  if (v == null) return null;
+  const s = String(v).replace(/[,\s£$€*]/g, '').toLowerCase();
+  const m = s.match(/^(-?\d*\.?\d+)(bn|k|m)?/);
+  if (!m) return null;
+  return { n: parseFloat(m[1]), mult: { k:1e3, m:1e6, bn:1e9 }[m[2]] || null };
+}
+function tgtPct(ytd, target) {
+  const t = parseAmt(target), y = parseAmt(ytd);
+  if (!t || !y || String(ytd).trim() === '') return null;
+  const tv = t.n * (t.mult || 1);
+  const yv = y.n * (y.mult || t.mult || 1);   // "£2.3" against "£4.3M" borrows the M
+  if (!(tv > 0)) return null;
+  return Math.round(yv / tv * 100);
+}
+function paceClass(pct, d) {
+  if (pct == null) return 'tl-grey';
+  const months = parseFloat(d.ytd_months);
+  if (!(months > 0)) return getTLClass(pct);
+  const ratio = pct / (months / 12 * 100);
+  if (ratio >= 0.95) return 'tl-green';
+  if (ratio >= 0.75) return 'tl-amber';
+  return 'tl-red';
+}
+function pill(pct, d, key) {
+  return `<span class="metric ${paceClass(pct, d)}" data-pill="${key}">${pct == null ? '—' : pct + '%'}</span>`;
+}
+function ytdField(section, idx, field, val) {
+  if (!TGT_EDIT) return `<span class="m-ytd">${val || ''}</span>`;
+  return `<span class="m-ytd" contenteditable="true" data-section="${section}" data-idx="${idx}" data-field="${field}" onblur="onTargetEdit(this)">${val || ''}</span>`;
+}
+function asOfLine(d) {
+  const asof = TGT_EDIT
+    ? `<span contenteditable="true" data-section="root" data-field="ytd_asof" onblur="onTargetEdit(this)">${d.ytd_asof || ''}</span>`
+    : `<strong>${d.ytd_asof || '—'}</strong>`;
+  const months = TGT_EDIT
+    ? `<span contenteditable="true" data-section="root" data-field="ytd_months" onblur="onTargetEdit(this)">${d.ytd_months || ''}</span>`
+    : `<strong>${d.ytd_months || '—'}</strong>`;
+  const pace = parseFloat(d.ytd_months) > 0 ? ` · on-pace = ${Math.round(d.ytd_months / 12 * 100)}%` : '';
+  return `<div class="ytd-asof">YtD as at ${asof} · ${months} of 12 months${pace}</div>`;
 }
 
-function buildBuTable(rows) {
+function buildGroupTable(rows, d) {
   let h = `<table class="targets-table"><thead><tr>
-    <th>Business Unit</th><th>Revenue</th><th>EBITDA</th><th>E1</th>
-    <th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead><tbody>`;
-  rows.forEach(r => {
+    <th>Goal</th><th>FY26-27 Target</th><th>YtD</th><th>Progress</th></tr></thead><tbody>`;
+  rows.forEach((r, i) => {
+    const auto = tgtPct(r.ytd, r.fy2627);
+    let prog;
+    if (auto != null) prog = pill(auto, d, `group_goals.${i}`);
+    else if (TGT_EDIT) prog = `<span class="m-ytd" contenteditable="true" data-section="group_goals" data-idx="${i}" data-field="prog" onblur="onTargetEdit(this)">${r.prog || ''}</span>`;
+    else prog = r.prog ? `<span class="metric ${paceClass(parseFloat(r.prog), d)}">${r.prog}</span>` : '<span class="metric tl-grey">—</span>';
+    h += `<tr><td class="goal-cell">${r.goal}</td>
+      <td class="target-cell">${r.fy2627 || ''}</td>
+      <td>${ytdField('group_goals', i, 'ytd', r.ytd)}</td>
+      <td>${prog}</td></tr>`;
+  });
+  return h + '</tbody></table>';
+}
+
+function buildBuTable(rows, d) {
+  let h = `<table class="targets-table"><thead><tr>
+    <th>Business</th>${TGT_METRICS.map(m => `<th>${m[1]}</th>`).join('')}</tr></thead><tbody>`;
+  rows.forEach((r, i) => {
     const tid = r.id.split('-')[0];
     const logo = LOGOS[tid] ? `<img src="${LOGOS[tid]}" alt="${r.bu}">` : '';
-    h += `<tr><td class="goal-cell">${logo}${r.bu}</td>
-      <td class="target-cell">${r.revenue || '0'}</td>
-      <td class="target-cell">${r.ebitda || '0'}</td>
-      <td class="e1-cell">${r.e1 || ''}</td>
-      <td class="q-cell">${r.q1 || ''}</td><td class="q-cell">${r.q2 || ''}</td>
-      <td class="q-cell">${r.q3 || ''}</td><td class="q-cell">${r.q4 || ''}</td></tr>`;
+    h += `<tr><td class="goal-cell">${logo}${r.bu}</td>`;
+    TGT_METRICS.forEach(([k]) => {
+      const tgt = r[k] || (k === 'e1' ? '' : '0');
+      h += `<td class="m-cell"><div class="m-target">${tgt || '—'}</div>
+        <div class="m-row"><span class="m-lbl">YtD</span>${ytdField('bu_targets', i, k + '_ytd', r[k + '_ytd'])}
+        ${pill(tgtPct(r[k + '_ytd'], r[k]), d, `bu_targets.${i}.${k}`)}</div></td>`;
+    });
+    h += '</tr>';
   });
-  h += '</tbody></table>';
-  return h;
+  return h + '</tbody></table>';
 }
 
 function getTLClass(v) {
