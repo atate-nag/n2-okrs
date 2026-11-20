@@ -63,8 +63,9 @@
   .targets-table .e1-cell { width:70px; text-align:center; font-size:16px; font-weight:600; color:var(--navy); }
   .targets-table .e1-cell:empty::after { content:"—"; color:#ddd; font-weight:400; }
   .targets-table .m-cell { min-width:170px; }
-  .targets-table .m-target { font-size:18px; font-weight:600; color:var(--text); line-height:1.3; }
-  .targets-table .m-row { display:flex; align-items:center; gap:10px; margin-top:8px; }
+  .targets-table tr:has(.m-cell) td { vertical-align:middle; }
+  .targets-table .m-target { display:inline-block; vertical-align:middle; min-width:96px; margin-right:6px; font-size:18px; font-weight:600; color:var(--text); line-height:1.3; }
+  .targets-table .m-row { display:inline-flex; vertical-align:middle; align-items:center; gap:8px; margin:4px 0; }
   .targets-table .m-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-light); }
   .targets-table .m-ytd { font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--navy); min-width:48px; }
   .targets-table .m-ytd:empty::after { content:"—"; color:#ccc; }
