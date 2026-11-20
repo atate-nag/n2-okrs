@@ -121,6 +121,59 @@
   .legend-dot.red { background:var(--red); }
   .legend-dot.grey { background:var(--grey); }
   .loading { text-align:center; padding:60px; color:var(--text-light); }
+  /* --- OKR calendar tab --- */
+  .cal-next { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:28px; }
+  .cal-next-card { flex:1 1 260px; background:var(--white); border-radius:12px; padding:16px 20px; box-shadow:0 1px 3px rgba(0,0,0,0.06), 0 6px 16px rgba(27,42,74,0.05); border-left:4px solid var(--blue); }
+  .cal-next-card.later { border-left-color:#BFD4F2; }
+  .cal-next-when { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-light); }
+  .cal-next-date { font-size:20px; font-weight:700; color:var(--navy); margin:4px 0 2px; }
+  .cal-next-what { font-size:14px; color:var(--text-mid); }
+  .cal-card { background:var(--white); border-radius:12px; box-shadow:0 1px 3px rgba(0,0,0,0.06), 0 6px 16px rgba(27,42,74,0.05); margin-bottom:28px; overflow-x:auto; }
+  .cal-tl { min-width:780px; padding:30px 20px 14px; }
+  .cal-row, .cal-axis { display:grid; grid-template-columns:190px 1fr; align-items:center; }
+  .cal-row { height:52px; border-bottom:1px solid #f0f0f0; }
+  .cal-row:last-of-type { border-bottom:none; }
+  .cal-row-label { font-size:14px; font-weight:700; color:var(--navy); line-height:1.25; }
+  .cal-row-label small { display:block; font-size:12px; font-weight:500; color:var(--text-mid); }
+  .cal-row.current .cal-row-label::before { content:"● "; color:var(--blue); }
+  .cal-track { position:relative; height:100%; }
+  .cal-grid { position:absolute; top:0; bottom:0; width:1px; background:#F0F2F5; }
+  .cal-grid.year { background:#D6DCE6; }
+  .cal-bar { position:absolute; top:50%; height:14px; margin-top:-7px; border-radius:4px; display:flex; overflow:hidden; }
+  .cal-bar .wk13 { flex:13; } .cal-bar .wkco { flex:1; opacity:0.45; border-left:2px solid var(--white); }
+  .cal-bar.past .wk13, .cal-bar.past .wkco { background:#C4C9D0; }
+  .cal-bar.current .wk13, .cal-bar.current .wkco { background:var(--blue); }
+  .cal-bar.upcoming .wk13, .cal-bar.upcoming .wkco { background:#9DBCE8; }
+  .cal-mark { position:absolute; top:50%; width:12px; height:12px; margin:-6px 0 0 -6px; border-radius:50%; background:var(--navy); border:2px solid var(--white); box-sizing:content-box; cursor:default; z-index:2; }
+  .cal-mark.close { border-radius:2px; transform:rotate(45deg); background:var(--white); border:2.5px solid var(--navy); width:9px; height:9px; margin:-6px 0 0 -6px; }
+  .cal-mark::after { content:""; position:absolute; inset:-8px; }
+  .cal-today { position:absolute; top:-6px; bottom:0; width:2px; margin-left:-1px; background:var(--red); z-index:3; }
+  .cal-today span { position:absolute; top:-16px; left:4px; font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap; }
+  .cal-axis { height:28px; }
+  .cal-axis .cal-track span { position:absolute; top:8px; font-size:11px; color:var(--text-light); transform:translateX(-50%); white-space:nowrap; }
+  .cal-axis .cal-track span.yr { font-weight:700; color:var(--text-mid); }
+  .cal-legend { display:flex; gap:22px; flex-wrap:wrap; padding:12px 20px 16px 210px; font-size:12px; color:var(--text-mid); border-top:1px solid #f0f0f0; }
+  .cal-legend i { display:inline-block; vertical-align:middle; margin-right:6px; }
+  .cal-legend .lg-bar { width:26px; height:10px; border-radius:3px; background:var(--blue); }
+  .cal-legend .lg-co { width:10px; height:10px; border-radius:2px; background:var(--blue); opacity:0.45; }
+  .cal-legend .lg-dot { width:10px; height:10px; border-radius:50%; background:var(--navy); }
+  .cal-legend .lg-dia { width:8px; height:8px; border:2px solid var(--navy); border-radius:1px; transform:rotate(45deg); }
+  .cal-legend .lg-today { width:2px; height:14px; background:var(--red); }
+  .cal-tip { position:fixed; pointer-events:none; background:var(--navy); color:#fff; font-size:12px; line-height:1.4; padding:7px 10px; border-radius:6px; z-index:50; display:none; max-width:260px; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+  .cal-table { width:100%; border-collapse:separate; border-spacing:0; }
+  .cal-table th { background:#E8EDF5; padding:11px 14px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--navy); text-align:left; border-bottom:2px solid #d0d8e8; white-space:nowrap; }
+  .cal-table th small { display:block; text-transform:none; letter-spacing:0; font-weight:500; color:var(--text-mid); }
+  .cal-table td { padding:12px 14px; font-size:14px; border-bottom:1px solid #f0f0f0; white-space:nowrap; }
+  .cal-table tr:last-child td { border-bottom:none; }
+  .cal-table td:first-child { font-weight:700; color:var(--navy); }
+  .cal-table tr.current td { background:#F1F6FD; }
+  .cal-table tr.past td { color:var(--text-light); }
+  .cal-table tr.past td:first-child { color:var(--text-mid); }
+  .cal-status { display:inline-block; font-size:12px; font-weight:600; padding:3px 10px; border-radius:20px; background:var(--grey-bg); color:var(--text-mid); }
+  .cal-status.current { background:var(--blue); color:#fff; }
+  .cal-status.upcoming { background:#E3ECF9; color:var(--navy); }
+  .cal-note { font-size:13px; color:var(--text-mid); line-height:1.55; max-width:900px; }
+  .cal-note strong { color:var(--navy); }
 </style>
 </head>
 <body>
@@ -155,11 +208,13 @@
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('targets')">Annual Targets</button>
     <button class="tab-btn" onclick="switchTab('okrs')">OKRs</button>
+    <button class="tab-btn" onclick="switchTab('calendar')">OKR Calendar</button>
   </div>
 
   <div class="container">
     <div class="tab-content active" id="tab-targets"><div class="loading">Loading...</div></div>
     <div class="tab-content" id="tab-okrs"><div class="loading">Loading...</div></div>
+    <div class="tab-content" id="tab-calendar"></div>
   </div>
 </div>
 
@@ -198,19 +253,131 @@ function checkPin() {
     document.getElementById('pin-input').focus();
   }
 }
-// --- OKR cycle strip: edit CYCLE each OKR period; week + bar are computed from today ---
-const CYCLE = { start: '2026-08-17', weeks: 13, label: 'OKR Period 2 · FY 2026–27' };
+// --- OKR calendar: fixed schedule (source: "OKR Cycle - Key Dates" slide) ---
+// Each period = 13-week cycle from a Monday (week 1 is the formulation week; OKRs presented at the
+// n² Sync on Friday of week 1), then a close-out week ending with the close-out n² Sync Friday.
+// The next period starts the following Monday. To extend, append rows - nothing else changes.
+const OKR_PERIODS = [
+  { n:2, fy:'2026–27', start:'2026-08-17', present:'2026-08-21', close:'2026-11-20' },
+  { n:3, fy:'2026–27', start:'2026-11-23', present:'2026-11-27', close:'2027-02-26' },
+  { n:4, fy:'2026–27', start:'2027-03-01', present:'2027-03-05', close:'2027-06-04' },
+  { n:1, fy:'2027–28', start:'2027-06-07', present:'2027-06-11', close:'2027-09-10' },
+  { n:2, fy:'2027–28', start:'2027-09-13', present:'2027-09-17', close:'2027-12-17' },
+  { n:3, fy:'2027–28', start:'2027-12-20', present:'2027-12-24', close:'2028-03-24' },
+  { n:4, fy:'2027–28', start:'2028-03-27', present:'2028-03-31', close:'2028-06-30' },
+];
+const DAY = 86400000;
+const pDate = s => new Date(s + 'T00:00:00');
+const addDays = (dt, n) => new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + n);  // calendar days, DST-safe
+const dayDiff = (a, b) => Math.round((a - b) / DAY);
+function todayMidnight() { const t = new Date(); t.setHours(0,0,0,0); return t; }
+function fmtDate(dt, withYear = true) {
+  return dt.toLocaleDateString('en-GB', withYear ? { weekday:'short', day:'numeric', month:'short', year:'numeric' } : { weekday:'short', day:'numeric', month:'short' });
+}
+function periodName(p) { return `OKR Period ${p.n} · FY ${p.fy}`; }
+function periodState(p, today) {
+  const start = pDate(p.start), close = pDate(p.close);
+  if (today > close) return { cls:'past', text:'Closed' };
+  if (today < start) return { cls:'upcoming', text:'Upcoming' };
+  const week = Math.floor(dayDiff(today, start) / 7) + 1;
+  return { cls:'current', week, text: week > 13 ? 'Close-out week' : `Week ${week} of 13` };
+}
+function currentPeriod(today) {
+  let cur = null;
+  OKR_PERIODS.forEach(p => { if (pDate(p.start) <= today) cur = p; });
+  return cur || OKR_PERIODS[0];
+}
+
 function renderCycle() {
-  const start = new Date(CYCLE.start + 'T00:00:00');
-  const dayMs = 86400000;
-  const daysSince = Math.floor((Date.now() - start.getTime()) / dayMs);
-  const week = Math.min(CYCLE.weeks, Math.max(1, Math.floor(daysSince / 7) + 1));
-  document.getElementById('cycle-week').textContent = week;
-  document.getElementById('cycle-total').textContent = CYCLE.weeks;
-  document.getElementById('cycle-meta').textContent = CYCLE.label;
-  document.getElementById('cycle-bar-fill').style.width = (week / CYCLE.weeks * 100).toFixed(1) + '%';
+  const today = todayMidnight();
+  const p = currentPeriod(today);
+  const days = dayDiff(today, pDate(p.start));
+  const week = Math.max(1, Math.floor(days / 7) + 1);
+  const txt = document.querySelector('.cycle-progress-text');
+  if (week > 13) txt.innerHTML = `<strong>Close-out week</strong> · close-out ${fmtDate(pDate(p.close), false)}`;
+  else txt.innerHTML = `End of week <strong>${week}</strong> of <strong>13</strong>`;
+  document.getElementById('cycle-meta').textContent = periodName(p);
+  document.getElementById('cycle-bar-fill').style.width = (Math.min(week, 13) / 13 * 100).toFixed(1) + '%';
 }
 renderCycle();
+
+function renderCalendar() {
+  const today = todayMidnight();
+  // Next key dates
+  const events = [];
+  OKR_PERIODS.forEach(p => {
+    events.push({ d: pDate(p.start), what: `${periodName(p)} starts (formulation week)` });
+    events.push({ d: pDate(p.present), what: `${periodName(p)}: OKRs presented at n² Sync` });
+    events.push({ d: pDate(p.close), what: `${periodName(p)}: close-out at n² Sync` });
+  });
+  const upcoming = events.filter(e => e.d >= today).sort((a, b) => a.d - b.d).slice(0, 3);
+  let h = '<div class="section-label">Coming up</div><div class="cal-next">';
+  upcoming.forEach((e, i) => {
+    const diff = dayDiff(e.d, today);
+    const when = diff === 0 ? 'Today' : diff === 1 ? 'Tomorrow' : `In ${diff} days`;
+    h += `<div class="cal-next-card${i ? ' later' : ''}"><div class="cal-next-when">${when}</div>
+      <div class="cal-next-date">${fmtDate(e.d)}</div><div class="cal-next-what">${e.what}</div></div>`;
+  });
+  h += '</div>';
+
+  // Timeline: one row per period
+  const t0 = pDate('2026-08-01'), t1 = pDate('2028-08-01');
+  const pos = dt => ((dt - t0) / (t1 - t0) * 100).toFixed(3) + '%';
+  let grid = '', axis = '';
+  for (let m = new Date(t0); m <= t1; m = new Date(m.getFullYear(), m.getMonth() + 1, 1)) {
+    const yr = m.getMonth() === 0;
+    grid += `<div class="cal-grid${yr ? ' year' : ''}" style="left:${pos(m)}"></div>`;
+    if (m < t1) {
+      const mid = new Date(m.getFullYear(), m.getMonth(), 15);
+      const lbl = (yr || m.getTime() === t0.getTime()) ? m.toLocaleDateString('en-GB', { month:'short', year:'numeric' }) : m.toLocaleDateString('en-GB', { month:'short' });
+      axis += `<span class="${yr || m.getTime() === t0.getTime() ? 'yr' : ''}" style="left:${pos(mid)}">${lbl}</span>`;
+    }
+  }
+  const showToday = today >= t0 && today <= t1;
+  h += '<div class="section-label">OKR periods at a glance</div><div class="cal-card"><div class="cal-tl">';
+  OKR_PERIODS.forEach((p, i) => {
+    const st = periodState(p, today);
+    const start = pDate(p.start), close = pDate(p.close), end = addDays(close, 3);
+    const tip = (title, d) => `data-tip="<b>${periodName(p)}</b><br>${title}<br>${fmtDate(d)}"`;
+    h += `<div class="cal-row ${st.cls}"><div class="cal-row-label">Period ${p.n} · FY${p.fy.slice(2)}
+        <small>${start.toLocaleDateString('en-GB',{day:'numeric',month:'short'})} → ${close.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</small></div>
+      <div class="cal-track">${grid}
+        <div class="cal-bar ${st.cls}" style="left:${pos(start)};width:calc(${pos(end)} - ${pos(start)})"
+          data-tip="<b>${periodName(p)}</b><br>${fmtDate(start)} → ${fmtDate(close)}<br>${st.text}"><div class="wk13"></div><div class="wkco"></div></div>
+        <div class="cal-mark" style="left:${pos(pDate(p.present))}" ${tip('OKRs presented at n² Sync', pDate(p.present))}></div>
+        <div class="cal-mark close" style="left:${pos(close)}" ${tip('Close-out at n² Sync', close)}></div>
+        ${showToday ? `<div class="cal-today" style="left:${pos(today)}">${i === 0 ? '<span>Today</span>' : ''}</div>` : ''}
+      </div></div>`;
+  });
+  h += `<div class="cal-axis"><div></div><div class="cal-track">${axis}</div></div></div>
+    <div class="cal-legend"><span><i class="lg-bar"></i>13-week cycle</span><span><i class="lg-co"></i>Close-out week</span>
+      <span><i class="lg-dot"></i>OKRs presented (Fri, week 1)</span><span><i class="lg-dia"></i>Close-out (Fri, n² Sync)</span>
+      <span><i class="lg-today"></i>Today</span></div></div>`;
+
+  // Table of dates
+  h += `<div class="section-label">Key dates</div><div class="cal-card"><table class="cal-table"><thead><tr>
+    <th>OKR period</th><th>Cycle starts<small>Monday · week 1</small></th><th>OKRs presented<small>Friday n² Sync · week 1</small></th>
+    <th>Week 13 ends<small>Friday</small></th><th>Close-out<small>Friday n² Sync · following week</small></th><th>Status</th></tr></thead><tbody>`;
+  OKR_PERIODS.forEach(p => {
+    const st = periodState(p, today);
+    const wk13 = addDays(pDate(p.start), 13 * 7 - 3);
+    h += `<tr class="${st.cls}"><td>${periodName(p)}</td><td>${fmtDate(pDate(p.start))}</td><td>${fmtDate(pDate(p.present))}</td>
+      <td>${fmtDate(wk13)}</td><td>${fmtDate(pDate(p.close))}</td><td><span class="cal-status ${st.cls}">${st.text}</span></td></tr>`;
+  });
+  h += `</tbody></table></div>
+    <p class="cal-note"><strong>How the cycle runs:</strong> each OKR period starts on a Monday. Week 1 is the formulation week, and the OKRs are presented to the group at the n² Sync on its Friday. The cycle runs for 13 weeks. The week after is the close-out week, and OKRs are closed out at the n² Sync on its Friday. The next period starts the following Monday, so a new period begins every 14 weeks.</p>`;
+
+  const el = document.getElementById('tab-calendar');
+  el.innerHTML = h;
+  let tipEl = document.querySelector('.cal-tip');
+  if (!tipEl) { tipEl = document.createElement('div'); tipEl.className = 'cal-tip'; document.body.appendChild(tipEl); }
+  el.querySelectorAll('[data-tip]').forEach(m => {
+    m.addEventListener('mouseenter', () => { tipEl.innerHTML = m.dataset.tip; tipEl.style.display = 'block'; });
+    m.addEventListener('mousemove', e => { tipEl.style.left = Math.min(e.clientX + 14, innerWidth - 270) + 'px'; tipEl.style.top = (e.clientY + 14) + 'px'; });
+    m.addEventListener('mouseleave', () => { tipEl.style.display = 'none'; });
+  });
+}
+renderCalendar();
 
 document.getElementById('pin-input').addEventListener('keydown', e => { if (e.key==='Enter') checkPin(); });
 if (sessionStorage.getItem('n2pin')==='1') {
