@@ -412,20 +412,34 @@ function switchTab(tab) {
 }
 
 // --- Supabase ---
+// Each tab remembers the version (updated_at) of each row it loaded. A save only lands if the row is
+// still that version (conditional PATCH), so a stale tab, e.g. one open from before a deploy or
+// another person's edit, can never overwrite newer data. Only rows that actually changed are saved.
+const loaded = {};      // key -> { at: updated_at string from server, json: last synced JSON }
+let saveBlocked = false;
 async function sbFetch(key) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/dashboard_data?key=eq.${encodeURIComponent(key)}&select=data`, { headers: SB_HEADERS });
-  if (!res.ok) return null;
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/dashboard_data?key=eq.${encodeURIComponent(key)}&select=data,updated_at`, { headers: SB_HEADERS });
+  if (!res.ok) throw new Error(`Load failed: ${res.status}`);
   const rows = await res.json();
-  return rows.length ? rows[0].data : null;
+  if (!rows.length) return null;
+  loaded[key] = { at: rows[0].updated_at, json: JSON.stringify(rows[0].data) };
+  return rows[0].data;
 }
 
 async function sbSave(key, data) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/dashboard_data`, {
-    method: 'POST',
-    headers: { ...SB_HEADERS, Prefer: 'resolution=merge-duplicates' },
-    body: JSON.stringify({ key, data, updated_at: new Date().toISOString() })
+  const json = JSON.stringify(data);
+  const base = loaded[key];
+  if (!base) throw Object.assign(new Error('not loaded'), { conflict: true });
+  if (json === base.json) return;   // unchanged, nothing to write
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/dashboard_data?key=eq.${encodeURIComponent(key)}&updated_at=eq.${encodeURIComponent(base.at)}`, {
+    method: 'PATCH',
+    headers: { ...SB_HEADERS, Prefer: 'return=representation' },
+    body: JSON.stringify({ data, updated_at: new Date().toISOString() })
   });
   if (!res.ok) throw new Error(`Save failed: ${res.status}`);
+  const rows = await res.json();
+  if (!rows.length) throw Object.assign(new Error('stale'), { conflict: true });
+  loaded[key] = { at: rows[0].updated_at, json };
 }
 
 function setStatus(msg) { document.getElementById('sync-status').textContent = msg; }
@@ -441,7 +455,8 @@ async function init() {
     console.error(e);
     targetsData = targetsData || getDefaultTargets();
     okrsData = okrsData || getDefaultOkrs();
-    setStatus('⚠ Load error');
+    saveBlocked = true;   // never save fallback/default data over the live rows
+    setStatus('⚠ Load error: editing disabled, reload');
   }
   renderTargets();
   renderOkrs();
@@ -451,13 +466,18 @@ function scheduleSave() {
   clearTimeout(saveTimer);
   setStatus('⏳ Saving...');
   saveTimer = setTimeout(async () => {
+    if (saveBlocked) return;
     try {
       await sbSave('targets', targetsData);
       await sbSave('okrs', okrsData);
       setStatus('☁️ Saved');
     } catch (e) {
       console.error(e);
-      setStatus('✕ Save error');
+      if (e.conflict) {
+        saveBlocked = true;
+        setStatus('⚠ Not saved: reload needed');
+        alert('Not saved: the dashboard data has changed since this page was opened (another tab, another person, or an update).\n\nReload the page to get the latest version, then make your change again.');
+      } else setStatus('✕ Save error');
     }
   }, 1500);
 }
