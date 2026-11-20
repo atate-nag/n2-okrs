@@ -164,16 +164,16 @@
 
   <div class="cycle-strip">
     <div class="cycle-info">
-      <span class="cycle-label">Quarterly OKR cycle</span>
+      <span class="cycle-label">OKR cycle</span>
       <span class="cycle-progress-text">End of week <strong id="cycle-week">1</strong> of <strong id="cycle-total">13</strong></span>
-      <span class="cycle-meta" id="cycle-meta">Q1 · FY 2026–27</span>
+      <span class="cycle-meta" id="cycle-meta">OKR Period 2 · FY 2026–27</span>
     </div>
     <div class="cycle-bar"><div class="cycle-bar-fill" id="cycle-bar-fill" style="width:7.7%"></div></div>
   </div>
 
   <div class="tab-bar">
     <button class="tab-btn active" onclick="switchTab('targets')">Annual Targets</button>
-    <button class="tab-btn" onclick="switchTab('okrs')">Quarterly OKRs</button>
+    <button class="tab-btn" onclick="switchTab('okrs')">OKRs</button>
   </div>
 
   <div class="container">
@@ -214,8 +214,8 @@ function checkPin() {
     document.getElementById('pin-input').focus();
   }
 }
-// --- OKR cycle strip: edit CYCLE each quarter; week + bar are computed from today ---
-const CYCLE = { start: '2026-08-17', weeks: 13, label: 'Q2 · FY 2026–27' };
+// --- OKR cycle strip: edit CYCLE each OKR period; week + bar are computed from today ---
+const CYCLE = { start: '2026-08-17', weeks: 13, label: 'OKR Period 2 · FY 2026–27' };
 function renderCycle() {
   const start = new Date(CYCLE.start + 'T00:00:00');
   const daysSince = Math.floor((Date.now() - start.getTime()) / 86400000);
